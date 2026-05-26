@@ -16,7 +16,9 @@ You write the **final artifacts** for the run: a research report and a model car
 
 ## Outputs
 
-Two markdown files in the run directory:
+You MUST write two physical markdown files to disk in the run directory using the Write tool. Do NOT inline the report content in your return message instead of writing the files — the user-facing UI reads them from disk via the `state.report_path` / `state.model_card_path` pointers, and they will silently 404 if you only included the content in your reply.
+
+Required files:
 
 ### `report.md` — full research report
 
