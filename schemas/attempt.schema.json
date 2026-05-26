@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/anthropics/automl/schemas/attempt.schema.json",
+  "title": "AutoML Attempt",
+  "description": "One training attempt. Created by the planner, filled in by trainer and evaluator.",
+  "type": "object",
+  "required": ["id", "name", "status"],
+  "properties": {
+    "id": {"type": "string"},
+    "name": {"type": "string"},
+    "method_family": {"type": "string"},
+    "rationale": {"type": "string"},
+    "initial_hyperparams": {"type": "object"},
+    "priority": {"type": "integer"},
+    "status": {
+      "type": "string",
+      "enum": ["pending", "training", "completed", "failed", "failed_constraints", "skipped"]
+    },
+    "started_at": {"type": ["string", "null"], "format": "date-time"},
+    "completed_at": {"type": ["string", "null"], "format": "date-time"},
+    "config_path": {"type": ["string", "null"]},
+    "model_path": {"type": ["string", "null"]},
+    "model_size_bytes": {"type": ["integer", "null"]},
+    "final_metrics": {
+      "type": ["object", "null"],
+      "description": "Validation metrics at end of training. Eval metrics go in `eval`.",
+      "properties": {
+        "train_loss": {"type": "number"},
+        "val_loss": {"type": "number"},
+        "val_acc": {"type": "number"},
+        "train_time_s": {"type": "number"}
+      },
+      "additionalProperties": true
+    },
+    "log_path": {
+      "type": ["string", "null"],
+      "description": "Relative path to train_log.jsonl"
+    },
+    "notes": {"type": ["string", "null"]},
+    "failure_note": {"type": ["string", "null"]},
+    "eval": {
+      "type": ["object", "null"],
+      "properties": {
+        "primary_metric": {
+          "type": "object",
+          "properties": {
+            "name": {"type": "string"},
+            "value": {"type": "number"}
+          }
+        },
+        "secondary_metrics": {"type": "object", "additionalProperties": true},
+        "slices": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {"type": "string"},
+              "primary_metric_value": {"type": "number"},
+              "delta_vs_full": {"type": "number"},
+              "n": {"type": "integer"}
+            }
+          }
+        },
+        "latency": {
+          "type": "object",
+          "properties": {
+            "device": {"type": "string"},
+            "n_samples": {"type": "integer"},
+            "p50_ms": {"type": "number"},
+            "p95_ms": {"type": "number"},
+            "p99_ms": {"type": "number"},
+            "warmup_n": {"type": "integer"}
+          }
+        },
+        "model_size_bytes": {"type": "integer"},
+        "meets_constraints": {
+          "type": "object",
+          "properties": {
+            "overall": {"type": "boolean"},
+            "checks": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {"type": "string"},
+                  "target": {"type": "string"},
+                  "actual": {"type": "string"},
+                  "pass": {"type": "boolean"}
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+# Run outputs (created by /automl in the cwd, not in the repo)
+automl_runs/
+*.egg-info/
+__pycache__/
+*.pyc
+.venv/
+.DS_Store
+
+# Smoke test artifacts
+/tmp/automl-ui-smoke.log

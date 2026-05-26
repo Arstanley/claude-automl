@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>AutoML</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="/static/style.css" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.0/marked.min.js"></script>
+</head>
+<body>
+<div id="app">
+  <aside id="sidebar">
+    <header>
+      <h1>AutoML</h1>
+      <button id="refresh-runs" title="Refresh">⟳</button>
+    </header>
+    <ul id="run-list"></ul>
+  </aside>
+  <main id="main">
+    <section id="empty-state" class="panel">
+      <h2>No run selected</h2>
+      <p>Pick a run from the sidebar, or start one with <code>/automl &lt;task description&gt;</code> in Claude Code.</p>
+    </section>
+    <section id="run-view" hidden>
+      <header id="run-header">
+        <div>
+          <h2 id="run-id"></h2>
+          <p id="run-prompt"></p>
+        </div>
+        <div id="run-status-pill"></div>
+      </header>
+      <nav id="tabs">
+        <button data-tab="plan" class="active">Plan</button>
+        <button data-tab="data">Data</button>
+        <button data-tab="attempts">Attempts</button>
+        <button data-tab="thoughts">Thoughts</button>
+        <button data-tab="report">Report</button>
+      </nav>
+      <div id="tab-plan" class="tab-panel active">
+        <div id="gate-banner"></div>
+        <div class="panel">
+          <h3>Constraints</h3>
+          <pre id="constraints-json"></pre>
+        </div>
+        <div class="panel">
+          <h3>Plan</h3>
+          <div id="plan-summary"></div>
+          <h4>Proposed attempts</h4>
+          <table id="plan-attempts-table"></table>
+        </div>
+        <div class="panel" id="research-panel" hidden>
+          <h3>Research notes</h3>
+          <div id="research-content"></div>
+        </div>
+      </div>
+      <div id="tab-data" class="tab-panel">
+        <div class="panel">
+          <h3>Dataset</h3>
+          <div id="dataset-summary"></div>
+          <div id="dataset-card-wrapper">
+            <h4>Dataset card</h4>
+            <div id="dataset-card-content"></div>
+          </div>
+        </div>
+      </div>
+      <div id="tab-attempts" class="tab-panel">
+        <div class="panel">
+          <h3>Attempts</h3>
+          <table id="attempts-table">
+            <thead>
+              <tr>
+                <th>ID</th><th>Name</th><th>Status</th><th>Val metric</th>
+                <th>Eval primary</th><th>Latency p99</th><th>Size</th><th>Constraints</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div id="attempt-detail" class="panel" hidden>
+          <h3 id="attempt-detail-title"></h3>
+          <div id="attempt-detail-meta"></div>
+          <canvas id="training-chart" width="800" height="300"></canvas>
+        </div>
+      </div>
+      <div id="tab-thoughts" class="tab-panel">
+        <div class="panel">
+          <h3>Thoughts (agent decisions)</h3>
+          <ul id="thoughts-list"></ul>
+        </div>
+      </div>
+      <div id="tab-report" class="tab-panel">
+        <div class="panel">
+          <h3>Report</h3>
+          <div id="report-content"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+<script src="/static/app.js"></script>
+</body>
+</html>

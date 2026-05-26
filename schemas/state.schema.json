@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/anthropics/automl/schemas/state.schema.json",
+  "title": "AutoML Run State",
+  "description": "Canonical state file for an AutoML run. Read and written by the orchestrator, subagents, and the Web UI.",
+  "type": "object",
+  "required": ["run_id", "created_at", "prompt", "mode", "status", "phase"],
+  "properties": {
+    "run_id": {
+      "type": "string",
+      "description": "Unique ID for this run, e.g. 20260525-143012-langid-search-tiers"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "prompt": {
+      "type": "string",
+      "description": "Verbatim task description from the user"
+    },
+    "mode": {
+      "type": "string",
+      "enum": ["checkpointed", "yolo"]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "initialized",
+        "planning",
+        "awaiting_plan_approval",
+        "researching",
+        "data_preparing",
+        "data_ready",
+        "awaiting_data_approval",
+        "training_in_progress",
+        "eval_in_progress",
+        "reporting",
+        "done",
+        "failed",
+        "aborted"
+      ]
+    },
+    "phase": {
+      "type": "string",
+      "enum": ["init", "planning", "research_data", "training", "evaluation", "reporting", "done"]
+    },
+    "constraints": {
+      "type": ["object", "null"],
+      "description": "Structured constraints extracted by the planner. See automl-planner.md for fields."
+    },
+    "plan": {
+      "type": ["object", "null"],
+      "description": "Experiment plan: data_sources, attempts, eval_protocol. See automl-planner.md."
+    },
+    "research": {
+      "type": ["object", "null"],
+      "description": "Output of automl-researcher: standard_baselines, sota_approaches, gotchas."
+    },
+    "dataset": {
+      "type": ["object", "null"],
+      "description": "Output of automl-data-engineer: sources_used, splits, slices, paths."
+    },
+    "attempts": {
+      "type": "array",
+      "items": {"$ref": "attempt.schema.json"},
+      "description": "Model variants being trained. One entry per attempt in plan.attempts[]."
+    },
+    "best_attempt_id": {
+      "type": ["string", "null"]
+    },
+    "eval_summary": {
+      "type": ["object", "null"],
+      "properties": {
+        "best_attempt_id": {"type": "string"},
+        "best_meets_constraints": {"type": "boolean"},
+        "ranking": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "attempt_id": {"type": "string"},
+              "primary": {"type": "number"},
+              "meets": {"type": "boolean"},
+              "violations": {"type": "array", "items": {"type": "string"}}
+            }
+          }
+        }
+      }
+    },
+    "gates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "status"],
+        "properties": {
+          "id": {"type": "string", "description": "e.g. 'plan', 'data', 'first_train'"},
+          "status": {"type": "string", "enum": ["pending", "approved", "rejected", "auto_approved", "edit_requested"]},
+          "created_at": {"type": "string", "format": "date-time"},
+          "decided_at": {"type": "string", "format": "date-time"},
+          "summary": {"type": "string"},
+          "user_note": {"type": "string"}
+        }
+      }
+    },
+    "thoughts": {
+      "type": "array",
+      "description": "Append-only narrative log of agent decisions. Bounded to last 200 entries.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ts": {"type": "string", "format": "date-time"},
+          "phase": {"type": "string"},
+          "agent": {"type": "string"},
+          "message": {"type": "string"}
+        }
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ts": {"type": "string", "format": "date-time"},
+          "phase": {"type": "string"},
+          "agent": {"type": "string"},
+          "message": {"type": "string"}
+        }
+      }
+    },
+    "report_path": {"type": ["string", "null"]},
+    "model_card_path": {"type": ["string", "null"]}
+  }
+}
