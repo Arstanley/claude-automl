@@ -4,7 +4,10 @@
 <meta charset="utf-8" />
 <title>AutoML</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="/static/style.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=Fraunces:opsz,wght@9..144,400..600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/static/style.css?v=4" />
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/marked@12.0.0/marked.min.js"></script>
 </head>
@@ -13,23 +16,38 @@
   <aside id="sidebar">
     <header>
       <h1>AutoML</h1>
-      <button id="refresh-runs" title="Refresh">⟳</button>
+      <button id="refresh-runs" title="Refresh runs">↻</button>
     </header>
+    <div class="sidebar-label">Runs</div>
     <ul id="run-list"></ul>
+    <footer class="sidebar-footer">
+      <span class="dot live"></span>
+      <span>live</span>
+      <span class="sep">·</span>
+      <span class="mono" id="server-clock"></span>
+    </footer>
   </aside>
+
   <main id="main">
-    <section id="empty-state" class="panel">
-      <h2>No run selected</h2>
-      <p>Pick a run from the sidebar, or start one with <code>/automl &lt;task description&gt;</code> in Claude Code.</p>
+    <section id="empty-state" class="empty">
+      <div class="empty-inner">
+        <h2>No run selected</h2>
+        <p>Select a run from the sidebar to view its details, or start a new one with <code>/automl &lt;task&gt;</code> in Claude Code.</p>
+      </div>
     </section>
+
     <section id="run-view" hidden>
       <header id="run-header">
-        <div>
-          <h2 id="run-id"></h2>
-          <p id="run-prompt"></p>
+        <div class="run-id-line">
+          <span class="run-id mono" id="run-id"></span>
+          <span id="run-status-pill"></span>
         </div>
-        <div id="run-status-pill"></div>
+        <h1 class="run-prompt" id="run-prompt"></h1>
+        <div class="run-byline" id="run-byline"></div>
       </header>
+
+      <section id="kpi-strip" class="kpi-strip"></section>
+
       <nav id="tabs">
         <button data-tab="plan" class="active">Plan</button>
         <button data-tab="data">Data</button>
@@ -37,67 +55,112 @@
         <button data-tab="thoughts">Thoughts</button>
         <button data-tab="report">Report</button>
       </nav>
+
+      <!-- PLAN -->
       <div id="tab-plan" class="tab-panel active">
         <div id="gate-banner"></div>
-        <div class="panel">
-          <h3>Constraints</h3>
-          <pre id="constraints-json"></pre>
-        </div>
-        <div class="panel">
-          <h3>Plan</h3>
+
+        <section class="panel">
+          <h3>Task</h3>
+          <div id="task-identity"></div>
+        </section>
+
+        <section class="panel">
+          <h3>Labels <span class="h-sub" id="classes-count"></span></h3>
+          <div id="classes-by-tier"></div>
+          <div id="special-classes"></div>
+        </section>
+
+        <section class="panel">
+          <h3>Hard rules <span class="h-sub" id="hard-rules-count"></span></h3>
+          <div id="hard-rules"></div>
+        </section>
+
+        <section class="panel">
+          <h3>Budgets</h3>
+          <div id="budgets-tiles"></div>
+        </section>
+
+        <section class="panel" id="examples-panel" hidden>
+          <h3>Example inputs</h3>
+          <div id="examples-list"></div>
+        </section>
+
+        <section class="panel">
+          <h3>Approach</h3>
           <div id="plan-summary"></div>
-          <h4>Proposed attempts</h4>
-          <table id="plan-attempts-table"></table>
-        </div>
-        <div class="panel" id="research-panel" hidden>
+        </section>
+
+        <section class="panel">
+          <h3>Proposed attempts</h3>
+          <div id="plan-attempts-cards"></div>
+        </section>
+
+        <section class="panel">
+          <h3>Eval protocol</h3>
+          <div id="eval-protocol"></div>
+        </section>
+
+        <section class="panel" id="research-panel" hidden>
           <h3>Research notes</h3>
           <div id="research-content"></div>
-        </div>
+        </section>
       </div>
+
+      <!-- DATA -->
       <div id="tab-data" class="tab-panel">
-        <div class="panel">
-          <h3>Dataset</h3>
+        <section class="panel">
+          <h3>Overview</h3>
           <div id="dataset-summary"></div>
-          <div id="dataset-card-wrapper">
-            <h4>Dataset card</h4>
-            <div id="dataset-card-content"></div>
-          </div>
-        </div>
+        </section>
+        <section class="panel" id="dataset-sources-panel" hidden>
+          <h3>Sources</h3>
+          <div id="dataset-sources"></div>
+        </section>
+        <section class="panel" id="dataset-splits-panel" hidden>
+          <h3>Splits</h3>
+          <div id="dataset-splits"></div>
+        </section>
+        <section class="panel" id="dataset-slices-panel" hidden>
+          <h3>Slices</h3>
+          <div id="dataset-slices"></div>
+        </section>
+        <section class="panel" id="dataset-card-panel" hidden>
+          <h3>Dataset card</h3>
+          <div id="dataset-card-content"></div>
+        </section>
       </div>
+
+      <!-- ATTEMPTS -->
       <div id="tab-attempts" class="tab-panel">
-        <div class="panel">
-          <h3>Attempts</h3>
-          <table id="attempts-table">
-            <thead>
-              <tr>
-                <th>ID</th><th>Name</th><th>Status</th><th>Val metric</th>
-                <th>Eval primary</th><th>Latency p99</th><th>Size</th><th>Constraints</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-        </div>
-        <div id="attempt-detail" class="panel" hidden>
+        <section class="panel">
+          <h3>Leaderboard</h3>
+          <div id="attempts-leaderboard"></div>
+        </section>
+        <section id="attempt-detail" class="panel" hidden>
           <h3 id="attempt-detail-title"></h3>
           <div id="attempt-detail-meta"></div>
-          <canvas id="training-chart" width="800" height="300"></canvas>
-        </div>
+          <div class="chart-wrap"><canvas id="training-chart" width="800" height="300"></canvas></div>
+        </section>
       </div>
+
+      <!-- THOUGHTS -->
       <div id="tab-thoughts" class="tab-panel">
-        <div class="panel">
-          <h3>Thoughts (agent decisions)</h3>
-          <ul id="thoughts-list"></ul>
-        </div>
+        <section class="panel">
+          <h3>Agent timeline</h3>
+          <div id="thoughts-timeline"></div>
+        </section>
       </div>
+
+      <!-- REPORT -->
       <div id="tab-report" class="tab-panel">
-        <div class="panel">
-          <h3>Report</h3>
+        <section class="panel paper">
           <div id="report-content"></div>
-        </div>
+        </section>
       </div>
     </section>
   </main>
 </div>
-<script src="/static/app.js"></script>
+<script src="/static/app.js?v=4"></script>
 </body>
 </html>
