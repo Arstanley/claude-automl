@@ -1,0 +1,70 @@
+{
+  "target_column_chosen": "booking_status",
+  "headline_metric": "roc_auc",
+  "headline_value": 0.894049668176919,
+  "all_metrics": {
+    "cv_auc_linear": 0.8428566531960544,
+    "cv_auc_gbm": 0.894049668176919,
+    "chosen_family": "gbm"
+  },
+  "skills_applied": [
+    "skill_stringify_low_cardinality_int_codes.md",
+    "skill_tune_when_n_train_supports_it.md"
+  ],
+  "interpretation_notes": "Binary AUC task, n_train=33680, no constraint tokens in prompt. Compared LogReg (OHE on stringified low-card int codes + scaled numerics) vs HistGradientBoosting (3-config grid). GBM clearly outperformed, rel_diff=0.0573 >= 0.005, so chose gbm; no NaNs so no missing-indicator skill needed.",
+  "audit": {
+    "family_comparison": {
+      "cv_auc_linear": 0.8428566531960544,
+      "cv_auc_gbm": 0.894049668176919,
+      "rel_diff": 0.05725969910067039,
+      "average_predictions": false,
+      "chosen": "gbm"
+    },
+    "hgb_grid_scores": [
+      {
+        "params": {
+          "max_depth": null,
+          "learning_rate": 0.08,
+          "max_iter": 200,
+          "max_leaf_nodes": 31,
+          "min_samples_leaf": 20,
+          "l2_regularization": 0.0
+        },
+        "cv_auc": 0.8929409496080447
+      },
+      {
+        "params": {
+          "max_depth": null,
+          "learning_rate": 0.05,
+          "max_iter": 250,
+          "max_leaf_nodes": 63,
+          "min_samples_leaf": 20,
+          "l2_regularization": 1.0
+        },
+        "cv_auc": 0.894049668176919
+      },
+      {
+        "params": {
+          "max_depth": null,
+          "learning_rate": 0.05,
+          "max_iter": 250,
+          "max_leaf_nodes": 31,
+          "min_samples_leaf": 30,
+          "l2_regularization": 1.0
+        },
+        "cv_auc": 0.893290322347706
+      }
+    ],
+    "best_hgb_params": {
+      "max_depth": null,
+      "learning_rate": 0.05,
+      "max_iter": 250,
+      "max_leaf_nodes": 63,
+      "min_samples_leaf": 20,
+      "l2_regularization": 1.0
+    },
+    "n_train": 33680,
+    "n_test": 8420,
+    "elapsed_s": 40.35273742675781
+  }
+}

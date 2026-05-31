@@ -1,0 +1,40 @@
+{
+  "target_column_chosen": "yield",
+  "headline_metric": "MAE",
+  "headline_value": 345.3613959532769,
+  "all_metrics": {
+    "ridge_cv_mae": 372.4410495181567,
+    "gbm_cv_mae": 345.3613959532769,
+    "ridge_best_alpha": 0.1,
+    "gbm_best_params": {
+      "learning_rate": 0.1,
+      "max_leaf_nodes": 31,
+      "max_iter": 300
+    },
+    "family_rel_diff": 0.07270856314016397,
+    "chosen": "hgbr({'learning_rate': 0.1, 'max_leaf_nodes': 31, 'max_iter': 300})"
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md"
+  ],
+  "interpretation_notes": "Regression on 12231 rows, 16 all-numeric features, no NaNs. Compared Ridge (linear, scaled) vs HistGradientBoostingRegressor (loss=absolute_error to match MAE) under shared 5-fold CV with small explicit grids. Applied family-comparison rule: average if relative gap <0.5%, else pick winner.",
+  "audit": {
+    "family_comparison": {
+      "ridge": {
+        "mean_cv_mae": 372.4410495181567,
+        "alpha": 0.1
+      },
+      "gbm": {
+        "mean_cv_mae": 345.3613959532769,
+        "params": {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 31,
+          "max_iter": 300
+        }
+      },
+      "rel_diff": 0.07270856314016397,
+      "threshold": 0.005,
+      "decision": "hgbr({'learning_rate': 0.1, 'max_leaf_nodes': 31, 'max_iter': 300})"
+    }
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "target_column_chosen": "outcome",
+  "headline_metric": "micro_f1_5fold_stratified_cv",
+  "headline_value": 0.710470184074245,
+  "all_metrics": {
+    "cv_micro_f1_mean": 0.710470184074245,
+    "cv_micro_f1_std": 0.0278146459822211,
+    "cv_n_splits": 5
+  },
+  "skills_applied": [
+    "skill_stringify_low_cardinality_int_codes.md",
+    "skill_missing_indicator_when_missingness_signals_class.md",
+    "skill_tune_when_n_train_supports_it.md",
+    "skill_probe_group_structure_in_ids.md"
+  ],
+  "interpretation_notes": "3-class horse-survival classification (n_train=988, micro-F1). HistGradientBoosting on OHE-categorical + passthrough-numeric. Stringified lesion_1/2/3 (low-card int codes), added missing-indicators + NA-as-category on the >=5% missing columns (abdomen, rectal_exam_feces, nasogastric_tube, peripheral_pulse), dropped hospital_number (90% train/test overlap = id leak), and selected hyperparams from a 5-config grid by stratified 5-fold CV.",
+  "audit": {
+    "stringified_columns": [
+      "lesion_1",
+      "lesion_2",
+      "lesion_3"
+    ],
+    "missingness_indicators_added": [
+      "nasogastric_tube",
+      "rectal_exam_feces",
+      "abdomen"
+    ],
+    "group_leakage_probe": {
+      "surgery": 1.0,
+      "age": 1.0,
+      "hospital_number": 0.8986,
+      "rectal_temp": 0.9722,
+      "pulse": 0.9737,
+      "respiratory_rate": 1.0,
+      "temp_of_extremities": 1.0,
+      "peripheral_pulse": 1.0,
+      "mucous_membrane": 1.0,
+      "capillary_refill_time": 1.0,
+      "pain": 1.0,
+      "peristalsis": 1.0,
+      "abdominal_distention": 1.0,
+      "nasogastric_tube": 1.0,
+      "nasogastric_reflux": 1.0,
+      "nasogastric_reflux_ph": 0.95,
+      "rectal_exam_feces": 1.0,
+      "abdomen": 1.0,
+      "packed_cell_volume": 0.9545,
+      "total_protein": 0.9643,
+      "abdomo_appearance": 1.0,
+      "abdomo_protein": 0.9722,
+      "surgical_lesion": 1.0,
+      "lesion_1": 0.9737,
+      "lesion_2": 1.0,
+      "lesion_3": 1.0,
+      "cp_data": 1.0
+    },
+    "dropped_columns": [
+      "id",
+      "hospital_number"
+    ],
+    "hyperparameter_grid": [
+      {
+        "params": {
+          "max_iter": 300,
+          "learning_rate": 0.05,
+          "max_depth": null,
+          "max_leaf_nodes": 31,
+          "l2_regularization": 0.0
+        },
+        "mean": 0.710470184074245,
+        "std": 0.0278146459822211
+      },
+      {
+        "params": {
+          "max_iter": 300,
+          "learning_rate": 0.05,
+          "max_depth": null,
+          "max_leaf_nodes": 15,
+          "l2_regularization": 0.0
+        },
+        "mean": 0.705414551607445,
+        "std": 0.029375037315542675
+      },
+      {
+        "params": {
+          "max_iter": 500,
+          "learning_rate": 0.05,
+          "max_depth": null,
+          "max_leaf_nodes": 63,
+          "l2_regularization": 1.0
+        },
+        "mean": 0.7033687125057684,
+        "std": 0.03605074911125389
+      },
+      {
+        "params": {
+          "max_iter": 500,
+          "learning_rate": 0.03,
+          "max_depth": null,
+          "max_leaf_nodes": 31,
+          "l2_regularization": 1.0
+        },
+        "mean": 0.6972978516125725,
+        "std": 0.03629572795407374
+      },
+      {
+        "params": {
+          "max_iter": 400,
+          "learning_rate": 0.04,
+          "max_depth": 6,
+          "max_leaf_nodes": 31,
+          "l2_regularization": 0.5
+        },
+        "mean": 0.6902015074603908,
+        "std": 0.04887265099444915
+      }
+    ],
+    "chosen_config": {
+      "max_iter": 300,
+      "learning_rate": 0.05,
+      "max_depth": null,
+      "max_leaf_nodes": 31,
+      "l2_regularization": 0.0
+    },
+    "n_train": 988,
+    "n_test": 247
+  }
+}

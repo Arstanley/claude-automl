@@ -1,0 +1,74 @@
+{
+  "target_column_chosen": "Hardness",
+  "headline_metric": "MedAE",
+  "headline_value": 0.5320945986519732,
+  "all_metrics": {
+    "cv_medae_best": 0.5317101913066467,
+    "cv_mae_best": 0.8687356427209536,
+    "oof_medae_seed0": 0.5320945986519732,
+    "oof_mae_seed0": 0.8687356427209536
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md",
+    "skill_seed_bag_final_regressor.md"
+  ],
+  "interpretation_notes": "HistGradientBoostingRegressor with absolute_error loss (LAD aligns with MedAE). Picked best of 4 configs via 5-fold CV on MedAE, then seed-bagged (seeds 0,1,2) the full-data refit. All-numeric features, no missingness, n_train=8325 supports tuning.",
+  "audit": {
+    "n_train": 8325,
+    "n_test": 2082,
+    "n_features": 11,
+    "hyperparameter_grid": [
+      {
+        "loss": "absolute_error",
+        "max_iter": 400,
+        "learning_rate": 0.05,
+        "max_depth": null,
+        "max_leaf_nodes": 31,
+        "min_samples_leaf": 20,
+        "l2_regularization": 0.0
+      },
+      {
+        "loss": "absolute_error",
+        "max_iter": 600,
+        "learning_rate": 0.03,
+        "max_depth": null,
+        "max_leaf_nodes": 31,
+        "min_samples_leaf": 30,
+        "l2_regularization": 0.0
+      },
+      {
+        "loss": "absolute_error",
+        "max_iter": 400,
+        "learning_rate": 0.05,
+        "max_depth": null,
+        "max_leaf_nodes": 63,
+        "min_samples_leaf": 20,
+        "l2_regularization": 0.0
+      },
+      {
+        "loss": "absolute_error",
+        "max_iter": 600,
+        "learning_rate": 0.03,
+        "max_depth": null,
+        "max_leaf_nodes": 15,
+        "min_samples_leaf": 20,
+        "l2_regularization": 0.0
+      }
+    ],
+    "chosen_config": {
+      "loss": "absolute_error",
+      "max_iter": 600,
+      "learning_rate": 0.03,
+      "max_depth": null,
+      "max_leaf_nodes": 31,
+      "min_samples_leaf": 30,
+      "l2_regularization": 0.0
+    },
+    "seed_bag": [
+      0,
+      1,
+      2
+    ],
+    "wall_seconds": 51.43
+  }
+}

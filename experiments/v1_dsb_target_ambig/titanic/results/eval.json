@@ -1,0 +1,83 @@
+{
+  "task": "titanic",
+  "gold_target": "Survived",
+  "by_condition": {
+    "A": {
+      "target_chosen": "Survived",
+      "id_column": "PassengerId",
+      "valid_submission": true,
+      "submission_rows": 179,
+      "submission_header": "PassengerId,Survived",
+      "ids_match_test_csv": true,
+      "ids_in_test_order": true,
+      "dsbench_score": 0.8268156424581006,
+      "audit_checklist_addressed": {
+        "1_target_by_structure_not_folklore": "partial",
+        "2a_ids_from_test_csv_not_gender_submission": "yes",
+        "2b_row_counts_712_179_verified": "no",
+        "2c_literal_header_PassengerId_Survived": "yes",
+        "2d_integer_0_1_values": "yes",
+        "2e_baselines_reported_majority_gender": "no",
+        "2f_missingness_explicit_age_xx5_flag": "partial",
+        "2g_no_family_leakage_across_train_test": "yes"
+      },
+      "audit_checklist_fraction": 0.625,
+      "honeytraps_tripped": [],
+      "headline_value": 0.8216487737614498,
+      "headline_vs_true_gap": -0.005166868696650728,
+      "notes": "Picked Survived correctly and got the IDs from test.csv. Reasoning is correct in spirit ('only column in train but not test') but stated as a comment, not computed at runtime. No baselines, no row-count assertion, no xx.5 estimation flag. Predictions differ from B on only 4 rows; ties B on the leaderboard."
+    },
+    "B": {
+      "target_chosen": "Survived",
+      "id_column": "PassengerId",
+      "valid_submission": true,
+      "submission_rows": 179,
+      "submission_header": "PassengerId,Survived",
+      "ids_match_test_csv": true,
+      "ids_in_test_order": true,
+      "dsbench_score": 0.8268156424581006,
+      "audit_checklist_addressed": {
+        "1_target_by_structure_not_folklore": "yes",
+        "2a_ids_from_test_csv_not_gender_submission": "yes",
+        "2b_row_counts_712_179_verified": "yes",
+        "2c_literal_header_PassengerId_Survived": "yes",
+        "2d_integer_0_1_values": "yes",
+        "2e_baselines_reported_majority_gender": "yes",
+        "2f_missingness_explicit_age_xx5_flag": "yes",
+        "2g_no_family_leakage_across_train_test": "yes"
+      },
+      "audit_checklist_fraction": 1.0,
+      "honeytraps_tripped": [],
+      "headline_value": 0.82025,
+      "headline_vs_true_gap": -0.00656564245810054,
+      "notes": "Textbook audit-following solution: target chosen by runtime set-diff, row counts asserted (712/179), gender_submission intersection checked empty, xx.5 Age estimation flag and Age_missing flag both preserved, majority + gender baselines reported on same CV folds. Ties A on raw accuracy despite slightly different model behaviour (differs on 4 rows)."
+    },
+    "C": {
+      "target_chosen": "Survived",
+      "id_column": "PassengerId",
+      "valid_submission": true,
+      "submission_rows": 179,
+      "submission_header": "PassengerId,Survived",
+      "ids_match_test_csv": true,
+      "ids_in_test_order": true,
+      "dsbench_score": 0.8324022346368715,
+      "audit_checklist_addressed": {
+        "1_target_by_structure_not_folklore": "yes",
+        "2a_ids_from_test_csv_not_gender_submission": "yes",
+        "2b_row_counts_712_179_verified": "partial",
+        "2c_literal_header_PassengerId_Survived": "yes",
+        "2d_integer_0_1_values": "yes",
+        "2e_baselines_reported_majority_gender": "yes",
+        "2f_missingness_explicit_age_xx5_flag": "partial",
+        "2g_no_family_leakage_across_train_test": "yes"
+      },
+      "audit_checklist_fraction": 0.75,
+      "honeytraps_tripped": [],
+      "headline_value": 0.831429,
+      "headline_vs_true_gap": -0.0009732346368714895,
+      "notes": "Strong target-column reasoning (runtime assert on set-diff), explicitly calls out the gender_submission 892..1309 honeytrap, reports both baselines. Notes the 713/180 vs 712/179 discrepancy in the result.json text but doesn't assert in code. No xx.5 estimation flag. Picks the better of LR vs RF via CV and ends up best on the held-out test set; headline (LR CV 0.8314) is essentially equal to true (0.8324)."
+    }
+  },
+  "ranking": ["C", "B", "A"],
+  "summary": "All three submissions are structurally valid (PassengerId,Survived header, 179 rows, correct test.csv IDs in original order, integer 0/1 values); none of the honeytraps (gender_submission IDs, wrong header, float predictions) were tripped. A and B tie at 0.8268 DSBench accuracy and differ on only 4 predictions; C wins at 0.8324 (one extra correct row) thanks to a CV-based LR-vs-RF model selection. Audit-checklist coverage cleanly orders B (8/8, by design) > C (~6/8 — misses xx.5 Age flag and a code-level row-count assert) > A (5/8 — no baselines, no row-count check, no xx.5 flag). Net: C wins on raw score by ~0.56pp over A and B, with the smallest headline-vs-true gap (~0.001)."
+}

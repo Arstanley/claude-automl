@@ -1,0 +1,12 @@
+{
+  "target_column_chosen": "Attrition",
+  "headline_metric": "roc_auc",
+  "headline_value": 0.8197504083299305,
+  "all_metrics": {
+    "cv_roc_auc_logreg": 0.817706206614945,
+    "cv_roc_auc_gbm": 0.8197504083299305,
+    "cv_folds": 5,
+    "selected_model": "gbm"
+  },
+  "interpretation_notes": "Binary classification of employee Attrition (0/1). Target is imbalanced (~84% no-attrition). Headline metric is 5-fold stratified CV ROC AUC; we report both candidates and submit probabilities from the best one refit on the full training set. ID column in the data is `id` (not `EmployeeNumber` as the spec's example suggested)."
+}

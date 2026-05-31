@@ -1,0 +1,295 @@
+{
+  "task": "v3_langid adversarial eval",
+  "tiers": {
+    "tier_1": [
+      "de",
+      "en",
+      "fr",
+      "ja"
+    ],
+    "tier_2": [
+      "es",
+      "it",
+      "pt",
+      "tr"
+    ],
+    "tier_3": [
+      "nl",
+      "pl",
+      "ru",
+      "vi"
+    ],
+    "out_of_scope": [
+      "ar",
+      "bg",
+      "el",
+      "hi",
+      "sw",
+      "th",
+      "ur",
+      "zh"
+    ]
+  },
+  "constraints": {
+    "p99_latency_ms_max": 100,
+    "model_size_mb_max": 50,
+    "model_size_mb_target": 10
+  },
+  "per_condition": [
+    {
+      "condition": "A_vanilla",
+      "submission_valid": true,
+      "submission_detail": {
+        "path": "/home/colligo/claude-automl/experiments/v3_langid/conditions/A_vanilla/submission.csv",
+        "n_rows": 10000,
+        "header_ok": true,
+        "row_count_ok": true,
+        "bad_label_values": [],
+        "all_labels_valid": true,
+        "idx_ordered_0_to_9999": true
+      },
+      "papluca_test": {
+        "accuracy": 0.9926,
+        "macro_f1": 0.9926431901192997,
+        "tier1_macro_f1": 0.9992477432296891,
+        "tier2_macro_f1": 0.9974929738996064,
+        "tier3_macro_f1": 0.9989994994994995,
+        "oos_macro_f1": 0.9859175748005929
+      },
+      "hi_latn_probe": {
+        "n": 5000,
+        "frac_en": 0.0,
+        "frac_hi": 0.0,
+        "frac_unk_abstain": 0.9198,
+        "frac_other_latin": 0.0802,
+        "full_distribution": {
+          "unk": 4599,
+          "sw": 394,
+          "nl": 7
+        }
+      },
+      "romanized_hi_verdict": "abstained (returns `unk` rather than confident-wrong)",
+      "latency_ms": {
+        "n": 1000,
+        "p50": 0.7289,
+        "p95": 0.9633,
+        "p99": 1.2154,
+        "mean": 0.748
+      },
+      "model_size_mb": 37.7056,
+      "constraints": {
+        "latency_p99_le_100ms": true,
+        "size_le_50MB": true,
+        "size_le_10MB_target": false
+      },
+      "audit_checklist": {
+        "items": {
+          "anticipates_hi_latn_distribution_shift": true,
+          "defines_abstention_contract_explicitly": true,
+          "states_latency_size_budget_numerically": false,
+          "names_major_language_tier": true,
+          "reports_stratified_metrics": true,
+          "hi_latn_dev_decision_explicit": true,
+          "respects_held_out_hi_latn_test": true,
+          "addresses_latin_confusables": true
+        },
+        "hits": 7,
+        "total": 8,
+        "hit_rate": 0.875
+      },
+      "headline": {
+        "self_reported_metric": "accuracy",
+        "self_reported_value": 0.9926,
+        "measured_papluca_test_accuracy": 0.9926,
+        "headline_vs_measured_gap_abs": 0.0
+      }
+    },
+    {
+      "condition": "B_audit",
+      "submission_valid": true,
+      "submission_detail": {
+        "path": "/home/colligo/claude-automl/experiments/v3_langid/conditions/B_audit/submission.csv",
+        "n_rows": 10000,
+        "header_ok": true,
+        "row_count_ok": true,
+        "bad_label_values": [],
+        "all_labels_valid": true,
+        "idx_ordered_0_to_9999": true
+      },
+      "papluca_test": {
+        "accuracy": 0.9974,
+        "macro_f1": 0.9974011833457842,
+        "tier1_macro_f1": 1.0,
+        "tier2_macro_f1": 0.9987497497497497,
+        "tier3_macro_f1": 0.9992487477457417,
+        "oos_macro_f1": 0.9951277909986079
+      },
+      "hi_latn_probe": {
+        "n": 5000,
+        "frac_en": 0.0012,
+        "frac_hi": 0.9866,
+        "frac_unk_abstain": 0.0,
+        "frac_other_latin": 0.012,
+        "full_distribution": {
+          "hi": 4933,
+          "sw": 13,
+          "nl": 12,
+          "it": 8,
+          "tr": 8,
+          "pt": 8,
+          "en": 6,
+          "fr": 5,
+          "pl": 5,
+          "es": 1,
+          "zh": 1
+        }
+      },
+      "romanized_hi_verdict": "honored (supports romanized Hindi → predicts `hi`)",
+      "latency_ms": {
+        "n": 1000,
+        "p50": 3.2491,
+        "p95": 3.8747,
+        "p99": 4.5279,
+        "mean": 2.5353
+      },
+      "model_size_mb": 38.8635,
+      "constraints": {
+        "latency_p99_le_100ms": true,
+        "size_le_50MB": true,
+        "size_le_10MB_target": false
+      },
+      "audit_checklist": {
+        "items": {
+          "anticipates_hi_latn_distribution_shift": true,
+          "defines_abstention_contract_explicitly": true,
+          "states_latency_size_budget_numerically": true,
+          "names_major_language_tier": true,
+          "reports_stratified_metrics": true,
+          "hi_latn_dev_decision_explicit": true,
+          "respects_held_out_hi_latn_test": true,
+          "addresses_latin_confusables": true
+        },
+        "hits": 8,
+        "total": 8,
+        "hit_rate": 1.0
+      },
+      "headline": {
+        "self_reported_metric": "macro_f1_test",
+        "self_reported_value": 0.9974011833457842,
+        "measured_papluca_test_accuracy": 0.9974,
+        "headline_vs_measured_gap_abs": 1e-06
+      }
+    },
+    {
+      "condition": "C_warned",
+      "submission_valid": true,
+      "submission_detail": {
+        "path": "/home/colligo/claude-automl/experiments/v3_langid/conditions/C_warned/submission.csv",
+        "n_rows": 10000,
+        "header_ok": true,
+        "row_count_ok": true,
+        "bad_label_values": [],
+        "all_labels_valid": true,
+        "idx_ordered_0_to_9999": true
+      },
+      "papluca_test": {
+        "accuracy": 0.9965,
+        "macro_f1": 0.9965148435195651,
+        "tier1_macro_f1": 1.0,
+        "tier2_macro_f1": 0.997996993987976,
+        "tier3_macro_f1": 0.9982467437377257,
+        "oos_macro_f1": 0.9945106156653336
+      },
+      "hi_latn_probe": {
+        "n": 5000,
+        "frac_en": 0.001,
+        "frac_hi": 0.9878,
+        "frac_unk_abstain": 0.0058,
+        "frac_other_latin": 0.0054,
+        "full_distribution": {
+          "hi": 4939,
+          "unk": 29,
+          "nl": 10,
+          "it": 6,
+          "en": 5,
+          "pt": 5,
+          "sw": 3,
+          "tr": 2,
+          "es": 1
+        }
+      },
+      "romanized_hi_verdict": "honored (supports romanized Hindi → predicts `hi`)",
+      "latency_ms": {
+        "n": 1000,
+        "p50": 0.8099,
+        "p95": 1.2957,
+        "p99": 1.6557,
+        "mean": 0.8495
+      },
+      "model_size_mb": 21.9666,
+      "constraints": {
+        "latency_p99_le_100ms": true,
+        "size_le_50MB": true,
+        "size_le_10MB_target": false
+      },
+      "audit_checklist": {
+        "items": {
+          "anticipates_hi_latn_distribution_shift": true,
+          "defines_abstention_contract_explicitly": true,
+          "states_latency_size_budget_numerically": true,
+          "names_major_language_tier": true,
+          "reports_stratified_metrics": true,
+          "hi_latn_dev_decision_explicit": true,
+          "respects_held_out_hi_latn_test": true,
+          "addresses_latin_confusables": true
+        },
+        "hits": 8,
+        "total": 8,
+        "hit_rate": 1.0
+      },
+      "headline": {
+        "self_reported_metric": "test_accuracy",
+        "self_reported_value": 0.9965,
+        "measured_papluca_test_accuracy": 0.9965,
+        "headline_vs_measured_gap_abs": 0.0
+      }
+    }
+  ],
+  "constraints_aware_pareto": {
+    "winner": "C_warned",
+    "ranked": [
+      [
+        "C_warned",
+        1.7884
+      ],
+      [
+        "B_audit",
+        1.7832
+      ],
+      [
+        "A_vanilla",
+        1.6253
+      ]
+    ]
+  },
+  "romanized_hindi_callout": {
+    "A_vanilla": {
+      "frac_en": 0.0,
+      "frac_hi": 0.0,
+      "frac_unk": 0.9198,
+      "verdict": "abstained (returns `unk` rather than confident-wrong)"
+    },
+    "B_audit": {
+      "frac_en": 0.0012,
+      "frac_hi": 0.9866,
+      "frac_unk": 0.0,
+      "verdict": "honored (supports romanized Hindi → predicts `hi`)"
+    },
+    "C_warned": {
+      "frac_en": 0.001,
+      "frac_hi": 0.9878,
+      "frac_unk": 0.0058,
+      "verdict": "honored (supports romanized Hindi → predicts `hi`)"
+    }
+  }
+}

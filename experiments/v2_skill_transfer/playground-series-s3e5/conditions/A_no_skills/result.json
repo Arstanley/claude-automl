@@ -1,0 +1,82 @@
+{
+  "target_column_chosen": "quality",
+  "headline_metric": "quadratic_weighted_kappa",
+  "headline_value": 0.503895,
+  "all_metrics": {
+    "cv_qwk_by_model": {
+      "logreg_cls": 0.467047,
+      "rf_cls": 0.496761,
+      "hgb_cls": 0.483759,
+      "ridge_reg": 0.484554,
+      "rf_reg": 0.503895,
+      "hgb_reg": 0.477465
+    },
+    "best_model": "rf_reg",
+    "best_model_kind": "reg",
+    "oof_qwk_best": 0.503895,
+    "oof_accuracy_best": 0.583333,
+    "oof_confusion_matrix_classes": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "oof_confusion_matrix": [
+      [
+        0,
+        0,
+        6,
+        4,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        34,
+        12,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        470,
+        187,
+        13,
+        0
+      ],
+      [
+        0,
+        0,
+        146,
+        415,
+        59,
+        0
+      ],
+      [
+        0,
+        0,
+        21,
+        169,
+        74,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        19,
+        14,
+        0
+      ]
+    ],
+    "n_train": 1644,
+    "n_test": 412,
+    "n_features": 11,
+    "n_splits": 5
+  },
+  "interpretation_notes": "Target is the ordinal wine 'quality' score (range 3-8). Evaluated by Quadratic Weighted Kappa over 5-fold stratified CV. Tried logistic regression, random forest, gradient boosting, and histogram-GBM as both classifiers and regressors (regressor predictions rounded+clipped to [3,8]). Best model was 'rf_reg' with CV QWK=0.5039. Class distribution is imbalanced (mostly 5-6), so QWK is more informative than accuracy: near-miss predictions (e.g. 5 vs 6) cost much less than far ones (e.g. 5 vs 8). Final submission uses the best model refit on the full training set."
+}

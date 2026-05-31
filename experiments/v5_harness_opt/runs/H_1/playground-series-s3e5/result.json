@@ -1,0 +1,36 @@
+{
+  "target_column_chosen": "quality",
+  "headline_metric": "quadratic_weighted_kappa",
+  "headline_value": 0.5744624074837061,
+  "all_metrics": {
+    "oof_qwk_blend": 0.5744624074837061,
+    "oof_qwk_best_hgb": 0.551166539015091,
+    "oof_qwk_best_et": 0.5680349239450058,
+    "blend_weight_hgb": 0.4,
+    "shipped": "blend",
+    "n_train": 1644,
+    "n_test": 412,
+    "cutpoints": [
+      3.5,
+      4.85,
+      5.693921362499999,
+      6.102735386875,
+      7.5
+    ]
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md",
+    "skill_blend_two_model_families.md"
+  ],
+  "skills_evaluated_not_applied": [
+    "skill_probe_group_structure_in_ids.md: no train/test Id overlap, no compound IDs.",
+    "skill_train_on_listed_auxiliary_files.md: original Wine dataset mentioned but not provided in DATA_DIR.",
+    "skill_verify_split_claim_before_holdout.md: no structural split claim made by prompt.",
+    "skill_stringify_low_cardinality_int_codes.md: all features are float continuous; no int-coded categoricals.",
+    "skill_multi_axis_constraint_budgets.md: prompt has no latency/size/hard-rule constraint axes.",
+    "skill_missing_indicator_when_missingness_signals_class.md: 0% missingness in all columns.",
+    "skill_tune_decision_threshold_for_f1.md: ordinal multi-class task, not binary F1/MCC.",
+    "skill_log_target_for_skewed_nonnegative_regression.md: target is ordinal classes (3..8), skew=0.27 (<1.0), max/median=8/6 (<20)."
+  ],
+  "interpretation_notes": "Treated ordinal quality as regression and tuned cutpoints to maximize QWK on OOF predictions (5-fold StratifiedKFold). Searched a 4-config HGBR grid plus a 2-config ExtraTrees grid, then swept blend weight; final shipped model is 'blend' with HGB weight 0.40."
+}

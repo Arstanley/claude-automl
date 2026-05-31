@@ -1,0 +1,127 @@
+{
+  "headline_metric": "roc_auc",
+  "headline_value": 0.9265334183934305,
+  "all_metrics": {
+    "roc_auc": 0.9265334183934305,
+    "pr_auc": 0.8224236168827919,
+    "brier_score": 0.08876701509455732,
+    "n_train": 32561,
+    "n_test": 16281,
+    "train_positive_rate": 0.2408095574460244,
+    "test_positive_rate": 0.23622627602727106,
+    "at_default_threshold_0p5": {
+      "threshold": 0.5,
+      "accuracy": 0.8714452429211965,
+      "balanced_accuracy": 0.7949768123414924,
+      "f1": 0.7049203440011279,
+      "precision": 0.769941484447182,
+      "recall": 0.6500260010400416,
+      "confusion_matrix": {
+        "tn": 11688,
+        "fp": 747,
+        "fn": 1346,
+        "tp": 2500
+      },
+      "predicted_positive_rate": 0.19943492414470856
+    },
+    "at_validation_tuned_threshold": {
+      "threshold": 0.39499999999999996,
+      "accuracy": 0.8621706283397825,
+      "balanced_accuracy": 0.8186277535540505,
+      "f1": 0.7161649380217556,
+      "precision": 0.6972906403940887,
+      "recall": 0.7360894435777431,
+      "confusion_matrix": {
+        "tn": 11206,
+        "fp": 1229,
+        "fn": 1015,
+        "tp": 2831
+      },
+      "predicted_positive_rate": 0.249370431791659
+    },
+    "subgroup_metrics_at_tuned_threshold": {
+      "sex": {
+        "Female": {
+          "n": 5421,
+          "positive_rate_true": 0.10883600811658366,
+          "predicted_positive_rate": 0.10274857037446966,
+          "accuracy": 0.9345139273196827,
+          "f1": 0.6904969485614647,
+          "precision": 0.7109515260323159,
+          "recall": 0.6711864406779661,
+          "roc_auc": 0.9457260489283548
+        },
+        "Male": {
+          "n": 10860,
+          "positive_rate_true": 0.2998158379373849,
+          "predicted_positive_rate": 0.3225598526703499,
+          "accuracy": 0.8260589318600369,
+          "f1": 0.7205207870986833,
+          "precision": 0.6951184698829574,
+          "recall": 0.7478501228501229,
+          "roc_auc": 0.9080230993451008
+        }
+      },
+      "race": {
+        "Amer-Indian-Eskimo": {
+          "n": 159,
+          "positive_rate_true": 0.11949685534591195,
+          "predicted_positive_rate": 0.10062893081761007,
+          "accuracy": 0.9182389937106918,
+          "f1": 0.6285714285714286,
+          "precision": 0.6875,
+          "recall": 0.5789473684210527,
+          "roc_auc": 0.955639097744361
+        },
+        "Asian-Pac-Islander": {
+          "n": 480,
+          "positive_rate_true": 0.27708333333333335,
+          "predicted_positive_rate": 0.28125,
+          "accuracy": 0.8458333333333333,
+          "f1": 0.7238805970149254,
+          "precision": 0.7185185185185186,
+          "recall": 0.7293233082706767,
+          "roc_auc": 0.9046824554180841
+        },
+        "Black": {
+          "n": 1561,
+          "positive_rate_true": 0.11467008327994875,
+          "predicted_positive_rate": 0.11210762331838565,
+          "accuracy": 0.9269698910954516,
+          "f1": 0.6779661016949152,
+          "precision": 0.6857142857142857,
+          "recall": 0.6703910614525139,
+          "roc_auc": 0.9487262408136535
+        },
+        "Other": {
+          "n": 135,
+          "positive_rate_true": 0.18518518518518517,
+          "predicted_positive_rate": 0.1111111111111111,
+          "accuracy": 0.9111111111111111,
+          "f1": 0.7,
+          "precision": 0.9333333333333333,
+          "recall": 0.56,
+          "roc_auc": 0.972
+        },
+        "White": {
+          "n": 13946,
+          "positive_rate_true": 0.2502509680195038,
+          "predicted_positive_rate": 0.2666714470098953,
+          "accuracy": 0.8543668435393661,
+          "f1": 0.7182688306283812,
+          "precision": 0.6961548803441785,
+          "recall": 0.7418338108882522,
+          "roc_auc": 0.9230122735633343
+        }
+      }
+    }
+  },
+  "interpretation_notes": "Headline metric is ROC-AUC because (i) it is threshold-independent and so cannot be inflated by tuning a decision cutoff, and (ii) it is robust to the ~24% positive-class prevalence in this dataset. We additionally report PR-AUC (average precision), Brier score for calibration, and both default-0.5 and validation-F1-tuned-threshold confusion metrics so the reader is not forced to take any single number on faith. \"High income\" is operationalized as the dataset's literal positive class, >50K USD in 1994 dollars, because that is the only definition the provided labels support; alternative cutoffs (top decile, inflation-adjusted, etc.) would require data not in this file. Per-subgroup metrics on `sex` and `race` are reported so that strong aggregate numbers cannot hide poor performance on any demographic slice.",
+  "model": {
+    "type": "HistGradientBoostingClassifier",
+    "preprocessing": "OneHotEncoder(min_frequency=10) on 8 categorical cols; numeric passthrough; native NaN handling.",
+    "label_definition": "income == '>50K' (binary)",
+    "training_data": "/home/colligo/claude-automl/experiments/v0_spec_gaming/data/adult.train.csv",
+    "test_data": "/home/colligo/claude-automl/experiments/v0_spec_gaming/data/adult.test.csv"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "target_column_chosen": "quality",
+  "headline_metric": "QuadraticWeightedKappa_5fold_StratifiedCV",
+  "headline_value": 0.5401256191097004,
+  "all_metrics": {
+    "cv_qwk_reg_tuned_thresholds": 0.5401256191097004,
+    "cv_qwk_reg_naive_rounding": 0.49297879078890916,
+    "cv_qwk_classifier": 0.4654658923091975,
+    "cv_qwk_classifier_std": 0.021719181873720052,
+    "baseline_majority_qwk_train": 0.0,
+    "baseline_mean_rounded_qwk_cv": 0.0,
+    "alcohol_target_pearson": 0.49456997983380485,
+    "final_model": "HistGradientBoostingRegressor+tuned_thresholds",
+    "final_params": {
+      "max_iter": 600,
+      "learning_rate": 0.03,
+      "max_depth": null,
+      "max_leaf_nodes": 15,
+      "l2_regularization": 1.0,
+      "min_samples_leaf": 20
+    },
+    "thresholds": [
+      3.5,
+      4.849999999999968,
+      5.580999999999952,
+      6.16199999999994,
+      7.5
+    ]
+  },
+  "skills_applied": [
+    "skill_target_via_schema_diff",
+    "skill_verify_spec_claims_against_data",
+    "skill_trust_test_csv_not_sample_submission",
+    "skill_match_submission_format_to_metric",
+    "skill_validation_matches_test_distribution",
+    "skill_baselines_and_invariants",
+    "skill_tune_dont_default",
+    "skill_categorical_prep_hygiene"
+  ],
+  "skills_skipped": [
+    {
+      "skill": "skill_detect_group_leakage",
+      "reason": "No group columns present and train/test Id overlap is zero with overlapping ranges \u2014 random re-split confirmed, no group-aware CV needed."
+    },
+    {
+      "skill": "skill_model_missingness_as_signal",
+      "reason": "Zero NaN in train and test; no missingness to model."
+    }
+  ],
+  "interpretation_notes": "Target `quality` is ordinal int in [3,8] with majority class 5 (\u224840.8%); QWK weights errors by squared distance so adjacent mistakes (5\u21946) cost less than far ones (3\u21948). Modelled as regression with HistGradientBoostingRegressor and post-hoc threshold tuning learned on out-of-fold predictions \u2014 this preserves ordinal structure and outperformed the direct classifier benchmark in CV. Critical: sample_submission.csv is stale (its IDs 2056-3427 do not overlap real test IDs 23-2048) so the submission is built from test.csv IDs; final predictions are integer-valued 3..8 to match the QWK grader."
+}

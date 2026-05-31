@@ -1,0 +1,67 @@
+{
+  "target_column_chosen": "Age",
+  "headline_metric": "rmsle",
+  "headline_value": 0.1619072998041286,
+  "all_metrics": {
+    "cv_rmsle_best": 0.1619072998041286,
+    "cv_rmsle_folds": [
+      0.16077764583678314,
+      0.16227844601747063,
+      0.16403003363299523,
+      0.16202178329086048,
+      0.16042859024253342
+    ],
+    "holdout10_rmsle": 0.1607051799138963,
+    "training_time_s": 2.8988702297210693,
+    "prediction_time_s": 0.24059653282165527,
+    "n_train": 59240,
+    "n_test": 14811,
+    "grid_results": [
+      {
+        "params": {
+          "max_iter": 600,
+          "learning_rate": 0.05,
+          "max_depth": null,
+          "max_leaf_nodes": 31,
+          "min_samples_leaf": 20,
+          "l2_regularization": 0.0
+        },
+        "cv_rmsle": 0.1619072998041286
+      },
+      {
+        "params": {
+          "max_iter": 800,
+          "learning_rate": 0.05,
+          "max_depth": null,
+          "max_leaf_nodes": 63,
+          "min_samples_leaf": 20,
+          "l2_regularization": 0.1
+        },
+        "cv_rmsle": 0.16339811733523205
+      },
+      {
+        "params": {
+          "max_iter": 1200,
+          "learning_rate": 0.03,
+          "max_depth": null,
+          "max_leaf_nodes": 31,
+          "min_samples_leaf": 40,
+          "l2_regularization": 0.1
+        },
+        "cv_rmsle": 0.16191736278014274
+      }
+    ],
+    "best_params": {
+      "max_iter": 600,
+      "learning_rate": 0.05,
+      "max_depth": null,
+      "max_leaf_nodes": 31,
+      "min_samples_leaf": 20,
+      "l2_regularization": 0.0
+    }
+  },
+  "skills_applied": [
+    "skill_multi_axis_constraint_budgets.md"
+  ],
+  "interpretation_notes": "HistGradientBoosting on log1p(Age) (squared_error in log-space == RMSLE). OneHot on Sex, engineered ratio/volume features. Picked best of 3 configs by 5-fold CV. Both constraints (train and predict latency) satisfied with large headroom."
+}

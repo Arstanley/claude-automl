@@ -1,0 +1,22 @@
+{
+  "target_column_chosen": "Age",
+  "headline_metric": "RMSLE",
+  "headline_value": 0.16115326272360797,
+  "all_metrics": {
+    "oof_rmsle_per_config": {
+      "hgb_default": 0.16115326272360797,
+      "hgb_deeper": 0.161216641936074
+    },
+    "chosen_config": "hgb_default",
+    "final_fit_seconds": 4.46,
+    "predict_seconds": 0.11,
+    "n_train": 59240,
+    "n_test": 14811,
+    "n_features": 14
+  },
+  "skills_applied": [
+    "skill_multi_axis_constraint_budgets.md",
+    "skill_verify_split_claim_before_holdout.md"
+  ],
+  "interpretation_notes": "Regression on log1p(Age) with HistGradientBoostingRegressor (squared loss on log-target == direct RMSLE objective). Picked between 2 HGB configs by 5-fold OOF RMSLE; respected latency/train-time budgets explicitly (skill_multi_axis_constraint_budgets). Skipped explicit hyperparameter sweep per skill_tune_when_n_train_supports_it precondition (prompt names latency tokens)."
+}

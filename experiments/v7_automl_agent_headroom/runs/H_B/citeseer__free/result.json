@@ -1,0 +1,22 @@
+{
+  "target_column_chosen": "category",
+  "headline_metric": "accuracy",
+  "headline_value": 0.7120000123977661,
+  "all_metrics": {
+    "test_accuracy": 0.7120000123977661,
+    "val_accuracy": 0.7240000367164612,
+    "per_class_test_accuracy": {
+      "0": 0.4025974025974026,
+      "1": 0.6428571428571429,
+      "2": 0.6961325966850829,
+      "3": 0.7272727272727273,
+      "4": 0.8402366863905325,
+      "5": 0.8
+    },
+    "n_train": 120,
+    "n_val": 500,
+    "n_test": 1000
+  },
+  "skills_applied": [],
+  "interpretation_notes": "Loaded Citeseer via torch_geometric.datasets.Planetoid with NormalizeFeatures, trained a 2-layer GCN (hidden=64, dropout=0.5, Adam lr=0.01 wd=5e-4) on the public 120-node train split, model-selected by val accuracy with early stopping, then predicted labels for the 1000-node test mask. GPU used."
+}

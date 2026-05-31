@@ -1,0 +1,46 @@
+{
+  "target_column_chosen": "failure",
+  "headline_metric": "roc_auc",
+  "headline_value": 0.5854543967442878,
+  "all_metrics": {
+    "best_config": "logreg_C=0.01",
+    "cv_results": {
+      "logreg_C=0.1": {
+        "cv_auc_mean": 0.5853205993402375,
+        "cv_auc_std": 0.007862115050396473
+      },
+      "logreg_C=1.0": {
+        "cv_auc_mean": 0.5853049168975397,
+        "cv_auc_std": 0.00785688947004659
+      },
+      "logreg_C=0.01": {
+        "cv_auc_mean": 0.5854543967442878,
+        "cv_auc_std": 0.007962492043323142
+      }
+    },
+    "audit": {
+      "group_leakage_probe": {
+        "column": "product_code",
+        "overlap_frac": 1.0,
+        "decision": "random StratifiedKFold (full overlap, no group split)"
+      },
+      "high_nan_cols": [
+        "measurement_11",
+        "measurement_12",
+        "measurement_13",
+        "measurement_14",
+        "measurement_15",
+        "measurement_16",
+        "measurement_17"
+      ],
+      "n_train": 21256,
+      "n_test": 5314
+    }
+  },
+  "skills_applied": [
+    "skill_probe_group_structure_in_ids.md",
+    "skill_missing_indicator_when_missingness_signals_class.md",
+    "skill_tune_when_n_train_supports_it.md"
+  ],
+  "interpretation_notes": "Binary classification ROC AUC. Probed product_code (all 5 codes in both splits, so random StratifiedKFold is correct). Added _missing indicators for measurement_* cols with >=5% NaN. Tuned a 3-point logistic-regression C-grid (0.01/0.1/1.0) with median impute + scaling + OHE."
+}

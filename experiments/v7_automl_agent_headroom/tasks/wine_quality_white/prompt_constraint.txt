@@ -1,0 +1,9 @@
+You are solving this data science task of multi-class classification:
+The dataset presented here (the Wine Quality White Dataset, OpenML id 44091) comprises numerical features about white wines. Your task is to predict the `quality` item, which is an ordinal integer class (typically in {3, 4, 5, 6, 7, 8, 9}). The evaluation metric is the macro F1 score.
+
+The data is available at:
+- train: `data/train.csv`
+- valid: `data/valid.csv`
+- test:  `data/test.csv`
+
+Please train a multi-class classification model to get a good performance on this task, ensuring that the model training time does not exceed 5 minutes and the prediction time for each instance is under 5 milliseconds. The target column is `quality`.

@@ -1,0 +1,35 @@
+{
+  "target_column_chosen": "Attrition",
+  "headline_metric": "roc_auc",
+  "headline_value": 0.8216488153197014,
+  "all_metrics": {
+    "cv_roc_auc_best_gbm": 0.7914854484474738,
+    "cv_roc_auc_lr": 0.8159363842908147,
+    "cv_roc_auc_blend": 0.8216488153197014,
+    "blend_weight_gbm": 0.35000000000000003,
+    "best_gbm_cfg": {
+      "learning_rate": 0.05,
+      "max_iter": 600,
+      "max_depth": null,
+      "max_leaf_nodes": 15,
+      "l2_regularization": 1.0,
+      "min_samples_leaf": 30
+    }
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md",
+    "skill_blend_two_model_families.md"
+  ],
+  "skills_evaluated_not_applied": [
+    "skill_probe_group_structure_in_ids.md: train ids and test ids are disjoint integer ranges; no compound IDs.",
+    "skill_train_on_listed_auxiliary_files.md: prompt mentions optional 'original dataset' but no aux file is present in DATA_DIR.",
+    "skill_verify_split_claim_before_holdout.md: no structural train/test split claim in prompt.",
+    "skill_stringify_low_cardinality_int_codes.md: downstream model family is GBM (tree-based), not linear/distance; precondition fails.",
+    "skill_multi_axis_constraint_budgets.md: prompt names no explicit constraint axes besides accuracy.",
+    "skill_missing_indicator_when_missingness_signals_class.md: 0 NaNs in train/test.",
+    "skill_tune_decision_threshold_for_f1.md: metric is ROC-AUC (probability-based), not F1/F-beta.",
+    "skill_log_target_for_skewed_nonnegative_regression.md: task is binary classification."
+  ],
+  "interpretation_notes": "Binary classification with AUC metric on 1341 rows of synthetic HR data. Tuned HistGradientBoostingClassifier with a 4-config CV grid and blended with logistic regression on OOF probabilities; final blend weight was selected on CV. Dropped 3 constant columns (EmployeeCount, Over18, StandardHours).",
+  "runtime_seconds": 3.3
+}

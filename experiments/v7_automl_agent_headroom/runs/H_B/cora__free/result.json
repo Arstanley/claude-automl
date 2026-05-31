@@ -1,0 +1,28 @@
+{
+  "target_column_chosen": "category",
+  "headline_metric": "test_accuracy",
+  "headline_value": 0.823,
+  "all_metrics": {
+    "test_accuracy": 0.823,
+    "val_accuracy_ensemble": 0.806,
+    "train_accuracy": 0.9857142857142858,
+    "per_seed_val_accuracy": [
+      0.8100000619888306,
+      0.8020000457763672,
+      0.8020000457763672,
+      0.7940000295639038,
+      0.8040000200271606
+    ],
+    "per_class_test_accuracy": {
+      "0": 0.8076923076923077,
+      "1": 0.8791208791208791,
+      "2": 0.8888888888888888,
+      "3": 0.8025078369905956,
+      "4": 0.8523489932885906,
+      "5": 0.7475728155339806,
+      "6": 0.78125
+    }
+  },
+  "skills_applied": [],
+  "interpretation_notes": "2-layer GCN (hidden=64, dropout=0.5) on Cora with Planetoid public split. Trained on GPU with Adam (lr=0.01, wd=5e-4), early stopping on val acc, ensembled over 5 seeds. None of the v4 tabular skills applied (this is a graph task with a fixed train/val/test mask)."
+}

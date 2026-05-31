@@ -1,0 +1,37 @@
+{
+  "target_column_chosen": "target",
+  "headline_metric": "f1",
+  "headline_value": 0.759195285511075,
+  "all_metrics": {
+    "f1_oof": 0.759195285511075,
+    "precision_oof": 0.8125271857329274,
+    "recall_oof": 0.7124332570556827,
+    "accuracy_oof": 0.8054187192118226,
+    "cv_grid": {
+      "0.3": {
+        "mean_f1": 0.7527346709451213,
+        "std_f1": 0.006088154063859206
+      },
+      "1.0": {
+        "mean_f1": 0.7592172395279688,
+        "std_f1": 0.005208082607737058
+      },
+      "3.0": {
+        "mean_f1": 0.7571691518293757,
+        "std_f1": 0.003457489374279014
+      },
+      "10.0": {
+        "mean_f1": 0.750719320668911,
+        "std_f1": 0.004757622666503725
+      }
+    }
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md",
+    "skill_missing_indicator_when_missingness_signals_class.md"
+  ],
+  "interpretation_notes": "TF-IDF (word 1-2grams + char_wb 3-5grams) + one-hot keyword + missingness indicators for keyword/location, fed to LogisticRegression. Tuned C via small 4-config 5-fold StratifiedKFold grid on F1; refit on full train. Chose C=1.0. Linear models on TF-IDF are the canonical strong baseline for short-text disaster-tweet classification.",
+  "best_C": 1.0,
+  "n_train": 6090,
+  "n_test": 1523
+}

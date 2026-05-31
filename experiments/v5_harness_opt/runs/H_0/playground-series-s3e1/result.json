@@ -1,0 +1,71 @@
+{
+  "target_column_chosen": "MedHouseVal",
+  "headline_metric": "RMSE",
+  "headline_value": 0.5664687438193029,
+  "all_metrics": {
+    "cv_rmse_mean": 0.5664687438193029,
+    "cv_rmse_std": 0.005932628685828493
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md",
+    "skill_probe_group_structure_in_ids.md"
+  ],
+  "interpretation_notes": "Tabular regression (synthetic California Housing); used HistGradientBoostingRegressor with a 3-config grid (5-fold CV). Probed id column overlap as group key \u2014 id is a row identifier with no group structure, so random KFold is appropriate.",
+  "audit": {
+    "n_train": 29709,
+    "n_test": 7428,
+    "features": [
+      "MedInc",
+      "HouseAge",
+      "AveRooms",
+      "AveBedrms",
+      "Population",
+      "AveOccup",
+      "Latitude",
+      "Longitude"
+    ],
+    "hyperparameter_grid": [
+      {
+        "params": {
+          "max_iter": 500,
+          "learning_rate": 0.05,
+          "max_depth": 8,
+          "min_samples_leaf": 20
+        },
+        "rmse_mean": 0.5664687438193029,
+        "rmse_std": 0.005932628685828493
+      },
+      {
+        "params": {
+          "max_iter": 600,
+          "learning_rate": 0.03,
+          "max_depth": 7,
+          "min_samples_leaf": 30
+        },
+        "rmse_mean": 0.5668952750858823,
+        "rmse_std": 0.0061026392414709136
+      },
+      {
+        "params": {
+          "max_iter": 300,
+          "learning_rate": 0.05,
+          "max_depth": 6,
+          "min_samples_leaf": 20
+        },
+        "rmse_mean": 0.5674923229985682,
+        "rmse_std": 0.006803401229345256
+      }
+    ],
+    "chosen_config": {
+      "max_iter": 500,
+      "learning_rate": 0.05,
+      "max_depth": 8,
+      "min_samples_leaf": 20
+    },
+    "group_leakage_probe": {
+      "column": "id",
+      "overlap_frac": 0.0
+    },
+    "elapsed_seconds": 726.7179954051971
+  }
+}

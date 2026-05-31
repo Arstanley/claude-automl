@@ -1,0 +1,32 @@
+# Tabular Playground Series S3E22 — Modeling Task
+
+## Context
+
+Synthetic tabular dataset generated from a deep learning model trained on a portion of the Horse Survival Dataset. Feature distributions are close to, but not exactly the same as, the original. Each row corresponds to one horse case.
+
+## Files (in `data/`)
+
+- `train.csv` — labeled records (989 rows).
+- `test.csv` — held-out records (248 rows). Same schema as train except the target prediction column is missing — you must predict it.
+- `sample_submission.csv` — an example submission file format.
+
+## Columns
+
+Examples of columns include: `id`, `surgery`, `age`, `hospital_number`, `rectal_temp`, `pulse`, `respiratory_rate`, `temp_of_extremities`, `peripheral_pulse`, `mucous_membrane`, `capillary_refill_time`, `pain`, `peristalsis`, `abdominal_distention`, `nasogastric_tube`, `nasogastric_reflux`, `nasogastric_reflux_ph`, `rectal_exam_feces`, `abdomen`, `packed_cell_volume`, `total_protein`, `abdomo_appearance`, `abdomo_protein`, `surgical_lesion`, `lesion_1`, `lesion_2`, `lesion_3`, `cp_data`, `outcome`. (Inspect `train.csv` for the full schema.)
+
+## Evaluation
+
+Predictions are evaluated on **micro-averaged F1-Score** between predicted and actual values.
+
+## Submission format
+
+CSV with header:
+
+```
+id,<target>
+1235,<value>
+1236,<value>
+...
+```
+
+Replace `<target>` with the column you are predicting.

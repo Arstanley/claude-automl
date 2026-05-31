@@ -1,0 +1,113 @@
+{
+  "target_column_chosen": "price",
+  "headline_metric": "rmse",
+  "headline_value": 151588.00733317347,
+  "all_metrics": {
+    "cv_rmse_mean": 151588.00733317347,
+    "cv_rmse_std": 46471.528254010234,
+    "baseline_linear_cv_rmse": 176478.63693903113
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md",
+    "skill_verify_split_claim_before_holdout.md"
+  ],
+  "interpretation_notes": "HistGradientBoostingRegressor with a small 4-config grid (5-fold CV) on Paris-Housing-style data. Dropped 8 training rows whose squareMeters / floors / made values fell outside the plausible range exhibited by the test set (synthetic-noise outliers). Best CV RMSE 151588; linear-regression baseline 176479.",
+  "audit": {
+    "n_train_full": 18184,
+    "n_train_clean": 18176,
+    "n_outliers_dropped": 8,
+    "hyperparameter_grid": [
+      {
+        "max_iter": 1000,
+        "learning_rate": 0.02,
+        "max_leaf_nodes": 63,
+        "min_samples_leaf": 20
+      },
+      {
+        "max_iter": 500,
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63,
+        "min_samples_leaf": 10
+      },
+      {
+        "max_iter": 800,
+        "learning_rate": 0.03,
+        "max_leaf_nodes": 31,
+        "min_samples_leaf": 20
+      },
+      {
+        "max_iter": 500,
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 31,
+        "min_samples_leaf": 20
+      }
+    ],
+    "cv_results": [
+      {
+        "params": {
+          "max_iter": 1000,
+          "learning_rate": 0.02,
+          "max_leaf_nodes": 63,
+          "min_samples_leaf": 20
+        },
+        "cv_rmse_mean": 151588.00733317347,
+        "cv_rmse_std": 46471.528254010234
+      },
+      {
+        "params": {
+          "max_iter": 500,
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63,
+          "min_samples_leaf": 10
+        },
+        "cv_rmse_mean": 154767.61717543215,
+        "cv_rmse_std": 42592.83834796006
+      },
+      {
+        "params": {
+          "max_iter": 800,
+          "learning_rate": 0.03,
+          "max_leaf_nodes": 31,
+          "min_samples_leaf": 20
+        },
+        "cv_rmse_mean": 156553.98250292314,
+        "cv_rmse_std": 44408.0240250517
+      },
+      {
+        "params": {
+          "max_iter": 500,
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 31,
+          "min_samples_leaf": 20
+        },
+        "cv_rmse_mean": 157107.5494453423,
+        "cv_rmse_std": 43891.489417672274
+      }
+    ],
+    "chosen_config": {
+      "max_iter": 1000,
+      "learning_rate": 0.02,
+      "max_leaf_nodes": 63,
+      "min_samples_leaf": 20
+    },
+    "features": [
+      "squareMeters",
+      "numberOfRooms",
+      "hasYard",
+      "hasPool",
+      "floors",
+      "cityCode",
+      "cityPartRange",
+      "numPrevOwners",
+      "made",
+      "isNewBuilt",
+      "hasStormProtector",
+      "basement",
+      "attic",
+      "garage",
+      "hasStorageRoom",
+      "hasGuestRoom"
+    ],
+    "elapsed_sec": 69.17
+  }
+}

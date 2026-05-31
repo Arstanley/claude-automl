@@ -1,0 +1,68 @@
+{
+  "target_column_chosen": [
+    "Pastry",
+    "Z_Scratch",
+    "K_Scatch",
+    "Stains",
+    "Dirtiness",
+    "Bumps",
+    "Other_Faults"
+  ],
+  "headline_metric": "mean_column_roc_auc",
+  "headline_value": 0.8825922778973244,
+  "all_metrics": {
+    "lr_mean_cv_auc": 0.8587716879141564,
+    "hgbc_mean_cv_auc": 0.8825922778973244,
+    "ensemble_used": false,
+    "rel_gap": 0.02698934783331426
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md"
+  ],
+  "interpretation_notes": "Multi-label 7-target ROC AUC. Compared LogReg(median+scale) vs HistGradientBoosting under same 5-fold StratifiedKFold per target. Applied the family-comparison averaging rule (rel_gap<0.005 => 50/50 ensemble of test probas).",
+  "audit": {
+    "family_comparison": {
+      "logreg": 0.8587716879141564,
+      "hgbc": 0.8825922778973244,
+      "relative_gap": 0.02698934783331426,
+      "chosen": "HistGradientBoosting"
+    },
+    "hyperparameter_grid": [
+      {
+        "params": {
+          "max_iter": 200,
+          "learning_rate": 0.05,
+          "max_depth": null,
+          "max_leaf_nodes": 31
+        },
+        "cv_auc": 0.8816390736940074
+      },
+      {
+        "params": {
+          "max_iter": 300,
+          "learning_rate": 0.05,
+          "max_depth": null,
+          "max_leaf_nodes": 63
+        },
+        "cv_auc": 0.8774080859343808
+      },
+      {
+        "params": {
+          "max_iter": 400,
+          "learning_rate": 0.03,
+          "max_depth": null,
+          "max_leaf_nodes": 31,
+          "l2_regularization": 1.0
+        },
+        "cv_auc": 0.8825922778973244
+      }
+    ],
+    "chosen_config": {
+      "max_iter": 400,
+      "learning_rate": 0.03,
+      "max_depth": null,
+      "max_leaf_nodes": 31,
+      "l2_regularization": 1.0
+    }
+  }
+}

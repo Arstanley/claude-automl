@@ -1,0 +1,47 @@
+{
+  "target_column_chosen": "Exited",
+  "headline_metric": "roc_auc",
+  "headline_value": 0.8902165509567433,
+  "all_metrics": {
+    "cv_results": [
+      {
+        "name": "hgb_default_depthy",
+        "mean_auc": 0.8898066841730042,
+        "fold_aucs": [
+          0.8940624665801125,
+          0.8883137262123809,
+          0.8867250964325929,
+          0.8924408896873818,
+          0.8874912419525534
+        ]
+      },
+      {
+        "name": "hgb_shallow_more_iters",
+        "mean_auc": 0.8902165509567433,
+        "fold_aucs": [
+          0.8945102485106816,
+          0.8889585767431141,
+          0.8870726563389433,
+          0.8921840674308744,
+          0.8883572057601036
+        ]
+      }
+    ],
+    "best_config_name": "hgb_shallow_more_iters",
+    "best_params": {
+      "learning_rate": 0.03,
+      "max_iter": 1000,
+      "max_leaf_nodes": 31,
+      "min_samples_leaf": 80,
+      "l2_regularization": 2.0,
+      "early_stopping": true,
+      "validation_fraction": 0.1,
+      "n_iter_no_change": 30
+    }
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md",
+    "skill_probe_group_structure_in_ids.md"
+  ],
+  "interpretation_notes": "HistGradientBoostingClassifier with native categorical handling on Geography/Gender/Surname/CustomerId. Tuned a small 2-config grid via 5-fold stratified CV, picked best mean AUC, and refit on full train. Surname/CustomerId had high train/test overlap so we kept them as categorical features (no GroupKFold needed: train and test id columns are disjoint and the prompt makes no group-split claim)."
+}

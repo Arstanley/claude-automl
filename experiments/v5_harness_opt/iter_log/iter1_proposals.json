@@ -1,0 +1,56 @@
+{
+  "iteration": 1,
+  "proposals": [
+    {
+      "edit_id": "e1",
+      "type": "add_skill",
+      "filename": "skill_seed_bag_final_regressor.md",
+      "content_path": "iter_log/iter1_candidate_skills/skill_seed_bag_final_regressor.md",
+      "target_failure_pattern": "Regression tasks (RMSE/RMSLE/MAE) on H_0 were single-seed final fits — only s3e9 used seed-bagging. A fixed 3-seed bag at refit time is cheap variance reduction with no OOF-tuned hyperparameter, so it cannot reproduce the F1-threshold overfit failure mode.",
+      "predicted_help_tasks": [
+        "playground-series-s3e6",
+        "playground-series-s3e8",
+        "playground-series-s3e11",
+        "playground-series-s3e16",
+        "bike-sharing-demand"
+      ],
+      "predicted_risk_tasks": [
+        "playground-series-s3e10",
+        "tabular-playground-series-aug-2022"
+      ]
+    },
+    {
+      "edit_id": "e2",
+      "type": "add_skill",
+      "filename": "skill_class_weight_for_imbalanced_binary.md",
+      "content_path": "iter_log/iter1_candidate_skills/skill_class_weight_for_imbalanced_binary.md",
+      "target_failure_pattern": "Imbalanced binary classification: H_0 s3e3 (12% positive) tuned GBC without class_weight in the grid although the existing tune skill mentions it. With a held-out-fold (not OOF) selection between {None, 'balanced'}, this targets the imbalance gap without recreating the F1-threshold-overfit pattern (no threshold tuning, fixed 0.5 for F1).",
+      "predicted_help_tasks": [
+        "playground-series-s3e3",
+        "playground-series-s3e23",
+        "playground-series-s3e10"
+      ],
+      "predicted_risk_tasks": [
+        "playground-series-s3e17",
+        "tabular-playground-series-aug-2022"
+      ]
+    },
+    {
+      "edit_id": "e3",
+      "type": "edit_solver_prompt",
+      "find": "Read `INDEX.md` first to scan skills. Each skill has a precondition you should evaluate against this task; apply only the skills whose preconditions hold.",
+      "replace": "Read `INDEX.md` first to scan skills. Each skill has a precondition you should evaluate against this task; apply only the skills whose preconditions hold.\n\n**Family-comparison rule.** When `n_train >= 500` and the prompt does NOT mention size/latency/production constraints, evaluate at least TWO model families under the same outer CV before committing — typically a linear baseline (`LogisticRegression`/`Ridge` with median-impute + scale + OHE) AND a GBM (`HistGradientBoosting*`). If their mean CV scores differ by `< 0.5%` relative (i.e. `abs(s_a - s_b) / max(|s_a|, |s_b|) < 0.005`), submit the **simple average of their test predictions** (use `predict_proba` for classification AUC/logloss). If they differ by more, pick the winner by mean CV. Persist both per-family CV scores under `result.json.audit.family_comparison`. This is not a hyperparameter tune on OOF — it is a model-selection averaging rule with a fixed threshold (0.005) and no parameter chosen by maximizing the headline metric on the OOF used to evaluate.",
+      "target_failure_pattern": "tabular-playground-series-aug-2022 used LogisticRegression only and scored AUC 0.585; HGB was never evaluated despite n_train=21K. Other AUC tasks (s3e12, s3e23) similarly committed early to a single family. The fixed 0.5% threshold and predict-proba averaging avoid an OOF-driven hyperparameter search.",
+      "predicted_help_tasks": [
+        "tabular-playground-series-aug-2022",
+        "playground-series-s3e12",
+        "playground-series-s3e2"
+      ],
+      "predicted_risk_tasks": [
+        "nlp-getting-started",
+        "playground-series-s3e10"
+      ]
+    }
+  ],
+  "rationale": "Across the 20 H_0 train runs, three distinct under-exploited patterns stood out: (1) regression tasks (RMSE/RMSLE/MAE in s3e6, s3e8, s3e11, s3e16, bike) all did single-seed final fits — only s3e9 seed-bagged; a fixed 3-seed bag is the cheapest known variance reduction and has zero OOF-tuning risk. (2) Imbalanced binary classification (s3e3 at 12% positive, AUC 0.819) ignored class_weight despite the existing tune skill mentioning it; selecting class_weight on held-out folds with a fixed 0.5 F1 threshold targets the imbalance gap without repeating the F1-threshold-on-same-OOF overfit. (3) tab-aug-2022 (AUC 0.585) and s3e12 (n=331, no skills applied) committed to a single model family early; a solver-prompt rule to evaluate linear AND GBM under the same CV and blend when within 0.5% addresses the family-choice failure with a fixed threshold rather than an OOF-tuned hyperparameter. These three target different task-type/failure-mode pairs (regression-variance, classification-imbalance, family-selection) so they are likely independent at the val gate."
+}

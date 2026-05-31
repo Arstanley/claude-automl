@@ -1,0 +1,210 @@
+{
+  "target_column_chosen": "label",
+  "headline_metric": "accuracy",
+  "headline_value": 0.7970000505447388,
+  "all_metrics": {
+    "selected_method": "arith_all",
+    "selected_test_acc": 0.7970000505447388,
+    "selected_val_acc": 0.7549999952316284,
+    "all_methods": {
+      "arith_all": {
+        "val": 0.7549999952316284,
+        "test": 0.7970000505447388
+      },
+      "logsum_all": {
+        "val": 0.7549999952316284,
+        "test": 0.7970000505447388
+      },
+      "arith_topk27": {
+        "val": 0.7549999952316284,
+        "test": 0.7980000376701355
+      },
+      "logsum_topk27": {
+        "val": 0.7549999952316284,
+        "test": 0.7980000376701355
+      },
+      "arith_h64L2_only_n24": {
+        "val": 0.7549999952316284,
+        "test": 0.7970000505447388
+      }
+    },
+    "oracle_best_test": 0.7980000376701355,
+    "oracle_best_method": "arith_topk27",
+    "per_seed": [
+      {
+        "config": "h64_d50_L2",
+        "val": 0.7599999904632568
+      },
+      {
+        "config": "h64_d50_L2",
+        "val": 0.7549999952316284
+      },
+      {
+        "config": "h64_d50_L2",
+        "val": 0.7549999952316284
+      },
+      {
+        "config": "h64_d50_L2",
+        "val": 0.7599999904632568
+      },
+      {
+        "config": "h64_d50_L2",
+        "val": 0.7599999904632568
+      },
+      {
+        "config": "h64_d50_L2",
+        "val": 0.7649999856948853
+      },
+      {
+        "config": "h64_d50_L2",
+        "val": 0.7599999904632568
+      },
+      {
+        "config": "h64_d50_L2",
+        "val": 0.7649999856948853
+      },
+      {
+        "config": "h64_d50_L2",
+        "val": 0.7649999856948853
+      },
+      {
+        "config": "h64_d50_L2",
+        "val": 0.7599999904632568
+      },
+      {
+        "config": "h64_d50_L2",
+        "val": 0.7649999856948853
+      },
+      {
+        "config": "h64_d50_L2",
+        "val": 0.7649999856948853
+      },
+      {
+        "config": "h64_d50_L2",
+        "val": 0.7549999952316284
+      },
+      {
+        "config": "h64_d50_L2",
+        "val": 0.7649999856948853
+      },
+      {
+        "config": "h64_d50_L2",
+        "val": 0.7599999904632568
+      },
+      {
+        "config": "h64_d50_L2",
+        "val": 0.7649999856948853
+      },
+      {
+        "config": "h64_d50_L2",
+        "val": 0.7599999904632568
+      },
+      {
+        "config": "h64_d50_L2",
+        "val": 0.7549999952316284
+      },
+      {
+        "config": "h64_d50_L2",
+        "val": 0.7599999904632568
+      },
+      {
+        "config": "h64_d50_L2",
+        "val": 0.7599999904632568
+      },
+      {
+        "config": "h64_d50_L2",
+        "val": 0.7599999904632568
+      },
+      {
+        "config": "h64_d50_L2",
+        "val": 0.7599999904632568
+      },
+      {
+        "config": "h64_d50_L2",
+        "val": 0.7549999952316284
+      },
+      {
+        "config": "h64_d50_L2",
+        "val": 0.7599999904632568
+      },
+      {
+        "config": "h128_d50_L2",
+        "val": 0.7599999904632568
+      },
+      {
+        "config": "h128_d50_L2",
+        "val": 0.7699999809265137
+      },
+      {
+        "config": "h128_d50_L2",
+        "val": 0.7599999904632568
+      },
+      {
+        "config": "h128_d50_L2",
+        "val": 0.7649999856948853
+      },
+      {
+        "config": "h128_d50_L2",
+        "val": 0.7599999904632568
+      },
+      {
+        "config": "h128_d50_L2",
+        "val": 0.7649999856948853
+      },
+      {
+        "config": "h128_d50_L2",
+        "val": 0.7649999856948853
+      },
+      {
+        "config": "h128_d50_L2",
+        "val": 0.7649999856948853
+      }
+    ],
+    "per_class": {
+      "0": {
+        "n": 77,
+        "accuracy": 0.19480519480519481
+      },
+      "1": {
+        "n": 182,
+        "accuracy": 0.8296703296703297
+      },
+      "2": {
+        "n": 181,
+        "accuracy": 0.8121546961325967
+      },
+      "3": {
+        "n": 231,
+        "accuracy": 0.8528138528138528
+      },
+      "4": {
+        "n": 169,
+        "accuracy": 0.8994082840236687
+      },
+      "5": {
+        "n": 160,
+        "accuracy": 0.84375
+      }
+    },
+    "train_nodes": 2127,
+    "val_nodes_es": 200,
+    "n_test": 1000,
+    "n_models": 32,
+    "runtime_seconds": 31.1,
+    "target_met": false
+  },
+  "constraint_budgets": {
+    "accuracy_floor": 0.8,
+    "algorithm": "GCN",
+    "max_runtime_seconds": 240
+  },
+  "budget_compliance": {
+    "accuracy_floor_met": false,
+    "algorithm_is_gcn": true,
+    "within_time_budget": true
+  },
+  "skills_applied": [
+    "skill_multi_axis_constraint_budgets.md"
+  ],
+  "interpretation_notes": "2-layer Kipf GCN (improved=True) + input feature dropout. Trained on ~test_mask (2127 labeled nodes, 200 held for early-stop). 32-model ensemble across configs: h=64 L=2 (24 seeds), h=128 L=2 (8). Tried 5 ensembling methods (arith/logsum mean, top-half by val, h=64-only); submission picks the one with the highest val accuracy. The 0.80 floor was NOT met (got 0.797): vanilla 2-layer GCN saturates here because 12 of the 1000 test nodes are isolated and 379 have degree<=1, which structurally caps message-passing. Beating 0.80 reliably would require leaving the strict GCN family (APPNP, GCNII, graph rewiring), which is out of spec for the prompt."
+}

@@ -1,0 +1,7 @@
+{
+  "iteration": 1,
+  "edits_proposed": ["e1: seed_bag_final_regressor", "e2: class_weight_imbalanced_binary", "e3: solver_prompt family-comparison"],
+  "edits_accepted": ["e1"],
+  "edits_rejected": ["e2 (mean rel -0.04%, only 2/4 tasks tested wins)", "e3 (median rel -0.38%, 2/5 wins)"],
+  "harness_H_1_path": "harness_H_1_gated/"
+}

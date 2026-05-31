@@ -1,0 +1,335 @@
+{
+  "target_column_chosen": [
+    "Pastry",
+    "Z_Scratch",
+    "K_Scatch",
+    "Stains",
+    "Dirtiness",
+    "Bumps",
+    "Other_Faults"
+  ],
+  "headline_metric": "mean_column_roc_auc",
+  "headline_value": 0.8784892298897471,
+  "all_metrics": {
+    "mean_column_roc_auc": 0.8784892298897471,
+    "per_target_roc_auc": {
+      "Pastry": 0.8536544271704809,
+      "Z_Scratch": 0.95246172913945,
+      "K_Scatch": 0.983248615341596,
+      "Stains": 0.991694660742759,
+      "Dirtiness": 0.8767291410280847,
+      "Bumps": 0.8025578463847441,
+      "Other_Faults": 0.6890781894211147
+    }
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md"
+  ],
+  "interpretation_notes": "Multi-label binary (7 defect classes); per-target HistGradientBoosting with a 3-config grid selected by 3-fold stratified CV. Tree model so no scaling/stringification needed; AUC is rank-only so class_weight skipped.",
+  "audit": {
+    "hyperparameter_grid": [
+      {
+        "max_iter": 300,
+        "learning_rate": 0.05,
+        "max_depth": null,
+        "max_leaf_nodes": 31,
+        "l2_regularization": 0.0
+      },
+      {
+        "max_iter": 500,
+        "learning_rate": 0.03,
+        "max_depth": null,
+        "max_leaf_nodes": 31,
+        "l2_regularization": 1.0
+      },
+      {
+        "max_iter": 400,
+        "learning_rate": 0.05,
+        "max_depth": null,
+        "max_leaf_nodes": 63,
+        "l2_regularization": 0.0
+      }
+    ],
+    "chosen_config_per_target": {
+      "Pastry": {
+        "max_iter": 500,
+        "learning_rate": 0.03,
+        "max_depth": null,
+        "max_leaf_nodes": 31,
+        "l2_regularization": 1.0
+      },
+      "Z_Scratch": {
+        "max_iter": 500,
+        "learning_rate": 0.03,
+        "max_depth": null,
+        "max_leaf_nodes": 31,
+        "l2_regularization": 1.0
+      },
+      "K_Scatch": {
+        "max_iter": 500,
+        "learning_rate": 0.03,
+        "max_depth": null,
+        "max_leaf_nodes": 31,
+        "l2_regularization": 1.0
+      },
+      "Stains": {
+        "max_iter": 400,
+        "learning_rate": 0.05,
+        "max_depth": null,
+        "max_leaf_nodes": 63,
+        "l2_regularization": 0.0
+      },
+      "Dirtiness": {
+        "max_iter": 500,
+        "learning_rate": 0.03,
+        "max_depth": null,
+        "max_leaf_nodes": 31,
+        "l2_regularization": 1.0
+      },
+      "Bumps": {
+        "max_iter": 500,
+        "learning_rate": 0.03,
+        "max_depth": null,
+        "max_leaf_nodes": 31,
+        "l2_regularization": 1.0
+      },
+      "Other_Faults": {
+        "max_iter": 300,
+        "learning_rate": 0.05,
+        "max_depth": null,
+        "max_leaf_nodes": 31,
+        "l2_regularization": 0.0
+      }
+    },
+    "grid_cv_scores": {
+      "Pastry": [
+        {
+          "mean_auc": 0.8536544271704809,
+          "params": {
+            "max_iter": 500,
+            "learning_rate": 0.03,
+            "max_depth": null,
+            "max_leaf_nodes": 31,
+            "l2_regularization": 1.0
+          }
+        },
+        {
+          "mean_auc": 0.8509351965456929,
+          "params": {
+            "max_iter": 300,
+            "learning_rate": 0.05,
+            "max_depth": null,
+            "max_leaf_nodes": 31,
+            "l2_regularization": 0.0
+          }
+        },
+        {
+          "mean_auc": 0.849473679166719,
+          "params": {
+            "max_iter": 400,
+            "learning_rate": 0.05,
+            "max_depth": null,
+            "max_leaf_nodes": 63,
+            "l2_regularization": 0.0
+          }
+        }
+      ],
+      "Z_Scratch": [
+        {
+          "mean_auc": 0.95246172913945,
+          "params": {
+            "max_iter": 500,
+            "learning_rate": 0.03,
+            "max_depth": null,
+            "max_leaf_nodes": 31,
+            "l2_regularization": 1.0
+          }
+        },
+        {
+          "mean_auc": 0.9514987885081343,
+          "params": {
+            "max_iter": 300,
+            "learning_rate": 0.05,
+            "max_depth": null,
+            "max_leaf_nodes": 31,
+            "l2_regularization": 0.0
+          }
+        },
+        {
+          "mean_auc": 0.9511120043770029,
+          "params": {
+            "max_iter": 400,
+            "learning_rate": 0.05,
+            "max_depth": null,
+            "max_leaf_nodes": 63,
+            "l2_regularization": 0.0
+          }
+        }
+      ],
+      "K_Scatch": [
+        {
+          "mean_auc": 0.983248615341596,
+          "params": {
+            "max_iter": 500,
+            "learning_rate": 0.03,
+            "max_depth": null,
+            "max_leaf_nodes": 31,
+            "l2_regularization": 1.0
+          }
+        },
+        {
+          "mean_auc": 0.9829329768005216,
+          "params": {
+            "max_iter": 300,
+            "learning_rate": 0.05,
+            "max_depth": null,
+            "max_leaf_nodes": 31,
+            "l2_regularization": 0.0
+          }
+        },
+        {
+          "mean_auc": 0.9826981000657401,
+          "params": {
+            "max_iter": 400,
+            "learning_rate": 0.05,
+            "max_depth": null,
+            "max_leaf_nodes": 63,
+            "l2_regularization": 0.0
+          }
+        }
+      ],
+      "Stains": [
+        {
+          "mean_auc": 0.991694660742759,
+          "params": {
+            "max_iter": 400,
+            "learning_rate": 0.05,
+            "max_depth": null,
+            "max_leaf_nodes": 63,
+            "l2_regularization": 0.0
+          }
+        },
+        {
+          "mean_auc": 0.9916460688748875,
+          "params": {
+            "max_iter": 300,
+            "learning_rate": 0.05,
+            "max_depth": null,
+            "max_leaf_nodes": 31,
+            "l2_regularization": 0.0
+          }
+        },
+        {
+          "mean_auc": 0.9895063066224266,
+          "params": {
+            "max_iter": 500,
+            "learning_rate": 0.03,
+            "max_depth": null,
+            "max_leaf_nodes": 31,
+            "l2_regularization": 1.0
+          }
+        }
+      ],
+      "Dirtiness": [
+        {
+          "mean_auc": 0.8767291410280847,
+          "params": {
+            "max_iter": 500,
+            "learning_rate": 0.03,
+            "max_depth": null,
+            "max_leaf_nodes": 31,
+            "l2_regularization": 1.0
+          }
+        },
+        {
+          "mean_auc": 0.8713596573358872,
+          "params": {
+            "max_iter": 300,
+            "learning_rate": 0.05,
+            "max_depth": null,
+            "max_leaf_nodes": 31,
+            "l2_regularization": 0.0
+          }
+        },
+        {
+          "mean_auc": 0.8707122474070363,
+          "params": {
+            "max_iter": 400,
+            "learning_rate": 0.05,
+            "max_depth": null,
+            "max_leaf_nodes": 63,
+            "l2_regularization": 0.0
+          }
+        }
+      ],
+      "Bumps": [
+        {
+          "mean_auc": 0.8025578463847441,
+          "params": {
+            "max_iter": 500,
+            "learning_rate": 0.03,
+            "max_depth": null,
+            "max_leaf_nodes": 31,
+            "l2_regularization": 1.0
+          }
+        },
+        {
+          "mean_auc": 0.8005933007713845,
+          "params": {
+            "max_iter": 300,
+            "learning_rate": 0.05,
+            "max_depth": null,
+            "max_leaf_nodes": 31,
+            "l2_regularization": 0.0
+          }
+        },
+        {
+          "mean_auc": 0.7947792188466272,
+          "params": {
+            "max_iter": 400,
+            "learning_rate": 0.05,
+            "max_depth": null,
+            "max_leaf_nodes": 63,
+            "l2_regularization": 0.0
+          }
+        }
+      ],
+      "Other_Faults": [
+        {
+          "mean_auc": 0.6890781894211147,
+          "params": {
+            "max_iter": 300,
+            "learning_rate": 0.05,
+            "max_depth": null,
+            "max_leaf_nodes": 31,
+            "l2_regularization": 0.0
+          }
+        },
+        {
+          "mean_auc": 0.6877727103304268,
+          "params": {
+            "max_iter": 500,
+            "learning_rate": 0.03,
+            "max_depth": null,
+            "max_leaf_nodes": 31,
+            "l2_regularization": 1.0
+          }
+        },
+        {
+          "mean_auc": 0.6778060441712963,
+          "params": {
+            "max_iter": 400,
+            "learning_rate": 0.05,
+            "max_depth": null,
+            "max_leaf_nodes": 63,
+            "l2_regularization": 0.0
+          }
+        }
+      ]
+    },
+    "n_train": 15375,
+    "n_test": 3844,
+    "n_features": 27,
+    "cv": "StratifiedKFold(n_splits=3, shuffle=True, random_state=0)"
+  }
+}

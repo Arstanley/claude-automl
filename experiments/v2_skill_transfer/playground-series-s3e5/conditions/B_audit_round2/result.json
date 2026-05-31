@@ -1,0 +1,57 @@
+{
+  "target_column_chosen": "quality",
+  "target_column_justification": "The only column present in train.csv but absent from test.csv is `quality`; spec uses placeholder `<target>` so we identify the target by schema diff. Target is integer-valued in {3..8} per train; predictions cast to int and clipped to [3,8] (the audit's recommended range) to avoid the IndexError trap in eval.py's (10,10) confusion matrix.",
+  "headline_metric": "quadratic_weighted_kappa_oof",
+  "headline_value": 0.567566411612997,
+  "all_metrics": {
+    "oof_qwk_naive_round": 0.5120946566676006,
+    "oof_qwk_threshold_tuned": 0.567566411612997,
+    "per_model_oof_qwk_naive_round": {
+      "gbr": 0.5060969144311314,
+      "rf": 0.5059410729592029,
+      "et": 0.48740910441250074
+    },
+    "constant_prediction_qwk_sanity": {
+      "const_5": 0.0,
+      "const_6": 0.0,
+      "const_7": 0.0
+    },
+    "tuned_thresholds": [
+      3.7208072585975067,
+      4.766602754564094,
+      5.492492866657219,
+      6.131357403763571,
+      7.981724866834596
+    ],
+    "n_folds": 5,
+    "n_train": 1644,
+    "n_test": 412,
+    "test_prediction_distribution": {
+      "5": 160,
+      "6": 151,
+      "7": 101
+    },
+    "train_class_distribution": {
+      "3": 10,
+      "4": 47,
+      "5": 670,
+      "6": 620,
+      "7": 264,
+      "8": 33
+    }
+  },
+  "audit_items_addressed": [
+    "Target identified as `quality` via schema diff (placeholder `<target>` in spec).",
+    "Submission Ids drawn from test.csv (412 rows, ids 23-2048) \u2014 NOT from sample_submission.csv (1372 rows, ids 2056-3427, disjoint).",
+    "Submission row order matches test.csv row order; no sort/reorder applied.",
+    "Header is exactly `Id,quality` to satisfy the eval's column lookup.",
+    "Predictions are integers, clipped to [3,8] (audit-recommended, also safe under the [0,9] requirement).",
+    "QWK optimized via regression + monotone threshold tuning on OOF (the audited correct recipe), NOT naive multiclass argmax.",
+    "Stratified 5-fold CV: K=5 chosen so class 3 (n=10) places 2 rows per fold.",
+    "Thresholds tuned on OOF only \u2014 no test-set leakage.",
+    "Id excluded from features (audit flags Id-based features as leakage proxy).",
+    "Constant-prediction QWK sanity reported to confirm we beat the QWK=0 chance baseline meaningfully.",
+    "No external data, no internet, no GPU; sklearn/pandas/numpy only."
+  ],
+  "interpretation_notes": "QWK is computed with N=10 to match eval.py exactly (cohen_kappa_score with labels=range(10) and weights='quadratic'). Headline value is OOF QWK after fitting 5 monotone thresholds on OOF continuous predictions of a GBR+RF+ET ensemble. Constant predictors verifiably score ~0.0 QWK on OOF, confirming the baseline. Naive round-and-clip without threshold tuning is reported for comparison; threshold tuning is the standard QWK uplift on this ordinal target and is explicitly endorsed by the audit. Test predictions land in {3..8}; no value is outside the eval matrix's [0,9] range so eval.py cannot IndexError."
+}

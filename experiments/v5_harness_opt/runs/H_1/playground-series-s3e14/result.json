@@ -1,0 +1,30 @@
+{
+  "target_column_chosen": "yield",
+  "headline_metric": "MAE",
+  "headline_value": 347.35470959444166,
+  "all_metrics": {
+    "cv_mae_hgbr_best": 347.7471038652188,
+    "cv_mae_extratrees": 366.0831378597778,
+    "cv_mae_blend": 347.35470959444166,
+    "blend_weight_hgbr": 0.9,
+    "n_folds": 5,
+    "n_train": 12231,
+    "n_test": 3058,
+    "elapsed_seconds": 22.058757781982422
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md",
+    "skill_blend_two_model_families.md"
+  ],
+  "skills_evaluated_not_applied": [
+    "skill_probe_group_structure_in_ids: ids are unique sequential ints, no overlap between train/test, no compound format.",
+    "skill_train_on_listed_auxiliary_files: prompt mentions an 'original' dataset but no auxiliary file is present in DATA_DIR.",
+    "skill_verify_split_claim_before_holdout: prompt makes no structural train/test split claim.",
+    "skill_stringify_low_cardinality_int_codes: no low-cardinality int columns; tree pipeline doesn't need it anyway.",
+    "skill_multi_axis_constraint_budgets: only one (accuracy) axis implied.",
+    "skill_missing_indicator_when_missingness_signals_class: zero NaNs in train and test.",
+    "skill_tune_decision_threshold_for_f1: regression target, not binary classification.",
+    "skill_log_target_for_skewed_nonnegative_regression: y skew=-0.28 (not >=1), max/median=1.47 (not >=20), metric is MAE not RMSLE \u2014 log-transform not warranted."
+  ],
+  "interpretation_notes": "HistGradientBoostingRegressor with loss='absolute_error' (MAE-aligned) tuned over a 4-config grid via 5-fold CV. ExtraTreesRegressor fit on the same folds and OOF-blended; best blend weight on HGBR=0.90. All 17 features used as-is; no scaling needed for tree models, no missingness, target is roughly symmetric so no log-transform."
+}

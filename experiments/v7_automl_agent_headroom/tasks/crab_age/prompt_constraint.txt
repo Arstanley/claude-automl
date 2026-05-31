@@ -1,0 +1,9 @@
+You are solving this data science task of regression:
+The dataset presented here (the Crab Age Dataset) comprises a lot of both categorical and numerical features. Please split the dataset into three parts of train, valid, and test. Your task is to predict the age item. The evaluation metric is the RMSLE (root mean squared log error).
+Now train a regression model to get a good performance on this task, ensuring that the model's training time does not exceed 30 minutes and that it can make predictions on the test set within 5 seconds.
+
+The data is available at:
+- train: `data/train.csv` (contains the target column `Age`)
+- test:  `data/test.csv` (no target column)
+
+Output predictions for `Age` in `submission.csv`.

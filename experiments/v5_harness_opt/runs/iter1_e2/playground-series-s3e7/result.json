@@ -1,0 +1,90 @@
+{
+  "target_column_chosen": "booking_status",
+  "headline_metric": "roc_auc",
+  "headline_value": 0.8950442800152698,
+  "all_metrics": {
+    "cv_roc_auc_mean": 0.8950442800152698,
+    "cv_roc_auc_std": 0.0017559578454188474,
+    "fold_scores": [
+      0.8965814986684704,
+      0.8947493634963579,
+      0.8928231529244982,
+      0.8974772032514555,
+      0.8935901817355675
+    ]
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md"
+  ],
+  "interpretation_notes": "HistGradientBoosting on raw features; 3-config CV grid; n=33680 supports tuning. Class-weight skill skipped (minority=0.39 > 0.20). Stringify-int-codes skill skipped (tree model).",
+  "audit": {
+    "hyperparameter_grid": [
+      {
+        "max_iter": 500,
+        "learning_rate": 0.03,
+        "max_depth": null,
+        "max_leaf_nodes": 31,
+        "l2_regularization": 1.0
+      },
+      {
+        "max_iter": 300,
+        "learning_rate": 0.05,
+        "max_depth": null,
+        "max_leaf_nodes": 63,
+        "l2_regularization": 1.0
+      },
+      {
+        "max_iter": 300,
+        "learning_rate": 0.05,
+        "max_depth": null,
+        "max_leaf_nodes": 31,
+        "l2_regularization": 0.0
+      }
+    ],
+    "chosen_config": {
+      "max_iter": 500,
+      "learning_rate": 0.03,
+      "max_depth": null,
+      "max_leaf_nodes": 31,
+      "l2_regularization": 1.0
+    },
+    "grid_scores": [
+      {
+        "params": {
+          "max_iter": 500,
+          "learning_rate": 0.03,
+          "max_depth": null,
+          "max_leaf_nodes": 31,
+          "l2_regularization": 1.0
+        },
+        "mean": 0.8950442800152698,
+        "std": 0.0017559578454188474
+      },
+      {
+        "params": {
+          "max_iter": 300,
+          "learning_rate": 0.05,
+          "max_depth": null,
+          "max_leaf_nodes": 63,
+          "l2_regularization": 1.0
+        },
+        "mean": 0.8950129987378478,
+        "std": 0.001898890313173247
+      },
+      {
+        "params": {
+          "max_iter": 300,
+          "learning_rate": 0.05,
+          "max_depth": null,
+          "max_leaf_nodes": 31,
+          "l2_regularization": 0.0
+        },
+        "mean": 0.8945485427322971,
+        "std": 0.0019994486350140683
+      }
+    ],
+    "n_train": 33680,
+    "n_test": 8420,
+    "elapsed_sec": 26.142338514328003
+  }
+}

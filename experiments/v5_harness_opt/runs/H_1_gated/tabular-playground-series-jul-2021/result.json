@@ -1,0 +1,171 @@
+{
+  "target_column_chosen": [
+    "target_carbon_monoxide",
+    "target_benzene",
+    "target_nitrogen_oxides"
+  ],
+  "headline_metric": "mean_column_wise_RMSLE",
+  "headline_value": 0.12976653818495443,
+  "all_metrics": {
+    "oof_rmsle_target_carbon_monoxide": 0.10130118411458264,
+    "oof_rmsle_target_benzene": 0.08715574095125037,
+    "oof_rmsle_target_nitrogen_oxides": 0.20084268948903028
+  },
+  "skills_applied": [
+    "skill_verify_split_claim_before_holdout.md",
+    "skill_tune_when_n_train_supports_it.md",
+    "skill_seed_bag_final_regressor.md"
+  ],
+  "interpretation_notes": "Train/test date ranges fully overlap, so random KFold (not temporal). Targets >0, so trained HistGBM on log1p(target) and expm1 the predictions (direct alignment with RMSLE). Per-target small-grid tuned, then averaged 3 seeds for the final fit on full train.",
+  "audit": {
+    "split": {
+      "train_range": [
+        "2010-03-10 18:00:00",
+        "2011-01-01 00:00:00"
+      ],
+      "test_range": [
+        "2010-03-11 02:00:00",
+        "2010-12-31 19:00:00"
+      ],
+      "ranges_overlap": true
+    },
+    "best_params_per_target": {
+      "target_carbon_monoxide": {
+        "max_iter": 500,
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 31,
+        "min_samples_leaf": 20,
+        "l2_regularization": 0.0
+      },
+      "target_benzene": {
+        "max_iter": 500,
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 31,
+        "min_samples_leaf": 20,
+        "l2_regularization": 0.0
+      },
+      "target_nitrogen_oxides": {
+        "max_iter": 500,
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 31,
+        "min_samples_leaf": 20,
+        "l2_regularization": 0.0
+      }
+    },
+    "per_target_oof": {
+      "target_carbon_monoxide": {
+        "best_oof_rmsle": 0.10130118411458264,
+        "all_cfgs": [
+          {
+            "rmsle": 0.10130118411458264,
+            "cfg": {
+              "max_iter": 500,
+              "learning_rate": 0.05,
+              "max_leaf_nodes": 31,
+              "min_samples_leaf": 20,
+              "l2_regularization": 0.0
+            }
+          },
+          {
+            "rmsle": 0.10284806080298545,
+            "cfg": {
+              "max_iter": 500,
+              "learning_rate": 0.03,
+              "max_leaf_nodes": 31,
+              "min_samples_leaf": 10,
+              "l2_regularization": 0.0
+            }
+          },
+          {
+            "rmsle": 0.10421107590370177,
+            "cfg": {
+              "max_iter": 500,
+              "learning_rate": 0.05,
+              "max_leaf_nodes": 63,
+              "min_samples_leaf": 20,
+              "l2_regularization": 1.0
+            }
+          }
+        ]
+      },
+      "target_benzene": {
+        "best_oof_rmsle": 0.08715574095125037,
+        "all_cfgs": [
+          {
+            "rmsle": 0.08715574095125037,
+            "cfg": {
+              "max_iter": 500,
+              "learning_rate": 0.05,
+              "max_leaf_nodes": 31,
+              "min_samples_leaf": 20,
+              "l2_regularization": 0.0
+            }
+          },
+          {
+            "rmsle": 0.08756437090587835,
+            "cfg": {
+              "max_iter": 500,
+              "learning_rate": 0.05,
+              "max_leaf_nodes": 63,
+              "min_samples_leaf": 20,
+              "l2_regularization": 1.0
+            }
+          },
+          {
+            "rmsle": 0.08791869182530401,
+            "cfg": {
+              "max_iter": 500,
+              "learning_rate": 0.03,
+              "max_leaf_nodes": 31,
+              "min_samples_leaf": 10,
+              "l2_regularization": 0.0
+            }
+          }
+        ]
+      },
+      "target_nitrogen_oxides": {
+        "best_oof_rmsle": 0.20084268948903028,
+        "all_cfgs": [
+          {
+            "rmsle": 0.20084268948903028,
+            "cfg": {
+              "max_iter": 500,
+              "learning_rate": 0.05,
+              "max_leaf_nodes": 31,
+              "min_samples_leaf": 20,
+              "l2_regularization": 0.0
+            }
+          },
+          {
+            "rmsle": 0.20232449224958796,
+            "cfg": {
+              "max_iter": 500,
+              "learning_rate": 0.03,
+              "max_leaf_nodes": 31,
+              "min_samples_leaf": 10,
+              "l2_regularization": 0.0
+            }
+          },
+          {
+            "rmsle": 0.2028713015406282,
+            "cfg": {
+              "max_iter": 500,
+              "learning_rate": 0.05,
+              "max_leaf_nodes": 63,
+              "min_samples_leaf": 20,
+              "l2_regularization": 1.0
+            }
+          }
+        ]
+      }
+    },
+    "seed_bag": [
+      0,
+      1,
+      2
+    ],
+    "n_train": 5688,
+    "n_test": 1423,
+    "wall_time_s": 34.47
+  }
+}

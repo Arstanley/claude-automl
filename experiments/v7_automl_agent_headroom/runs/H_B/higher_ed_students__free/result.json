@@ -1,0 +1,74 @@
+{
+  "target_column_chosen": "OUTPUT Grade",
+  "headline_metric": "rand_score",
+  "headline_value": 0.8307692307692308,
+  "all_metrics": {
+    "rand_score_valid": 0.8307692307692308,
+    "adjusted_rand_score_valid": 0.2972282288185571,
+    "n_clusters": 8,
+    "best_model": "kmeans_ohe_seed4",
+    "candidates": [
+      {
+        "name": "kmeans_ohe_seed4",
+        "rand_score": 0.8307692307692308,
+        "adjusted_rand_score": 0.2972282288185571
+      },
+      {
+        "name": "kmeans_ohe_seed3",
+        "rand_score": 0.8369230769230769,
+        "adjusted_rand_score": 0.23833738669024984
+      },
+      {
+        "name": "kmeans_num_seed0",
+        "rand_score": 0.7815384615384615,
+        "adjusted_rand_score": 0.15522606626395755
+      },
+      {
+        "name": "gmm_num",
+        "rand_score": 0.8092307692307692,
+        "adjusted_rand_score": 0.13593481989708406
+      },
+      {
+        "name": "kmeans_num_seed1",
+        "rand_score": 0.7846153846153846,
+        "adjusted_rand_score": 0.12968630451415455
+      },
+      {
+        "name": "kmeans_ohe_seed2",
+        "rand_score": 0.803076923076923,
+        "adjusted_rand_score": 0.12568306010928962
+      },
+      {
+        "name": "agg_ward_num",
+        "rand_score": 0.76,
+        "adjusted_rand_score": 0.09528907922912205
+      },
+      {
+        "name": "kmeans_num_seed2",
+        "rand_score": 0.7569230769230769,
+        "adjusted_rand_score": 0.07594025553356128
+      },
+      {
+        "name": "kmeans_ohe_seed0",
+        "rand_score": 0.7907692307692308,
+        "adjusted_rand_score": 0.07103825136612021
+      },
+      {
+        "name": "kmeans_ohe_seed1",
+        "rand_score": 0.7630769230769231,
+        "adjusted_rand_score": 0.06779661016949153
+      },
+      {
+        "name": "agg_avg_cosine_ohe",
+        "rand_score": 0.13846153846153847,
+        "adjusted_rand_score": 0.0
+      }
+    ],
+    "elapsed_sec": 0.4817631244659424
+  },
+  "skills_applied": [
+    "skill_stringify_low_cardinality_int_codes.md",
+    "skill_multi_axis_constraint_budgets.md"
+  ],
+  "interpretation_notes": "All 31 features are low-cardinality int survey codes, so one-hot was the natural encoding (skill_stringify_low_cardinality_int_codes). Fit a small sweep of KMeans/Agglomerative/GMM clusterers (K=8) on the union of train+valid+test rows and selected the candidate with highest Adjusted Rand Score on the held-out valid split's OUTPUT Grade. Budget-conscious (under 90s) per skill_multi_axis_constraint_budgets \u2014 small grid, no tuning."
+}

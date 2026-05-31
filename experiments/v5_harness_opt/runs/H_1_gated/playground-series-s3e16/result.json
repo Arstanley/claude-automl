@@ -1,0 +1,47 @@
+{
+  "target_column_chosen": "Age",
+  "headline_metric": "MAE",
+  "headline_value": 1.361892326680148,
+  "all_metrics": {
+    "oof_mae_best": 1.361892326680148,
+    "cv_results": [
+      {
+        "config": 0,
+        "oof_mae": 1.369922373632437
+      },
+      {
+        "config": 1,
+        "oof_mae": 1.361892326680148
+      },
+      {
+        "config": 2,
+        "oof_mae": 1.3690220642397806
+      }
+    ]
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md",
+    "skill_seed_bag_final_regressor.md"
+  ],
+  "interpretation_notes": "HistGradientBoostingRegressor with loss='absolute_error' (matches MAE metric). Small 3-config grid via 5-fold CV picks best; final refit uses 3-seed bag averaged. Sex one-hot encoded; predictions clipped to >=1.",
+  "audit": {
+    "seed_bag": [
+      0,
+      1,
+      2
+    ],
+    "n_train": 59240,
+    "n_test": 14811,
+    "n_features_after_ohe": 10,
+    "best_params": {
+      "max_iter": 600,
+      "learning_rate": 0.05,
+      "max_depth": null,
+      "max_leaf_nodes": 63,
+      "min_samples_leaf": 40,
+      "l2_regularization": 0.1,
+      "early_stopping": false
+    },
+    "elapsed_sec": 81.87
+  }
+}

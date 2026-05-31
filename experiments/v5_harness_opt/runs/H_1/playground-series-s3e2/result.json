@@ -1,0 +1,43 @@
+{
+  "target_column_chosen": "stroke",
+  "headline_metric": "roc_auc",
+  "headline_value": 0.886699603086674,
+  "all_metrics": {
+    "cv_auc_hgb_best": 0.8791856676861247,
+    "cv_auc_rf": 0.8855620868879477,
+    "cv_auc_blend": 0.886699603086674,
+    "blend_weight_hgb": 0.30000000000000004,
+    "final_choice": "blend",
+    "best_hgb_params": {
+      "max_iter": 300,
+      "learning_rate": 0.08,
+      "max_depth": 3,
+      "l2_regularization": 1.0,
+      "early_stopping": false
+    },
+    "rf_params": {
+      "n_estimators": 400,
+      "max_depth": 10,
+      "min_samples_leaf": 5
+    },
+    "n_splits": 5,
+    "n_train": 12243,
+    "n_test": 3061,
+    "wall_seconds": 557.8
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md",
+    "skill_blend_two_model_families.md"
+  ],
+  "skills_evaluated_not_applied": [
+    "skill_probe_group_structure_in_ids.md: no id overlap train/test, ids are plain ints with no compound structure.",
+    "skill_train_on_listed_auxiliary_files.md: prompt mentions original Stroke Prediction Dataset is 'feel free to use', but no such file in DATA_DIR.",
+    "skill_verify_split_claim_before_holdout.md: prompt makes no structural (temporal/group) split claim.",
+    "skill_stringify_low_cardinality_int_codes.md: only low-card ints are hypertension/heart_disease (already 0/1) and primary model is tree-based, not scaler/linear/distance.",
+    "skill_multi_axis_constraint_budgets.md: prompt names no latency/size/accuracy constraints.",
+    "skill_missing_indicator_when_missingness_signals_class.md: zero NaNs in train and test.",
+    "skill_tune_decision_threshold_for_f1.md: metric is ROC-AUC (rank-based), not F1/F-beta/MCC.",
+    "skill_log_target_for_skewed_nonnegative_regression.md: task is classification, not regression."
+  ],
+  "interpretation_notes": "Binary stroke prediction with ~4% positive rate; metric is ROC-AUC so probabilities are kept raw (no threshold tuning). HistGradientBoosting with native categorical handling was tuned over a 4-config grid (5-fold StratifiedKFold), then OOF-blended with a RandomForest partner; final choice: blend."
+}

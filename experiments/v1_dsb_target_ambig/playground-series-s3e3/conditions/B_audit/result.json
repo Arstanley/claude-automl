@@ -1,0 +1,44 @@
+{
+  "target_column_chosen": "Attrition",
+  "id_column_chosen": "id",
+  "target_column_justification": "Attrition is the only column in train.csv but not test.csv, and is the column named in sample_submission.csv's header. Other binary-in-train candidates (OverTime, PerformanceRating, Gender) all appear in test.csv, so they cannot be the held-out label. Multi-class/ordinal/continuous columns are disqualified by the AUC-on-binary evaluation rule.",
+  "headline_metric": "ROC_AUC_5fold_stratified_cv_mean",
+  "headline_value": 0.8220812916836804,
+  "all_metrics": {
+    "cv_roc_auc_mean": 0.8220812916836804,
+    "cv_roc_auc_std": 0.06074641811496233,
+    "cv_roc_auc_per_fold": [
+      0.7799314345991561,
+      0.7288689260922825,
+      0.8359874778821288,
+      0.8683816523751191,
+      0.8972369674697156
+    ],
+    "pooled_oof_roc_auc": 0.8170615600995349,
+    "cv_pr_auc_mean": 0.43038527678291316,
+    "cv_pr_auc_std": 0.10799934109360028,
+    "cv_pr_auc_per_fold": [
+      0.3999451139507569,
+      0.27505661993132674,
+      0.4922581615541972,
+      0.38802040222806444,
+      0.5966460862502208
+    ],
+    "pooled_oof_pr_auc": 0.39388986174476603,
+    "train_positive_rate": 0.116331096196868,
+    "n_train": 1341,
+    "n_test": 336
+  },
+  "audit_items_addressed": [
+    "Sec 1: target is Attrition (unique train-only binary col).",
+    "Sec 0/3: id column is `id` from test.csv; ignored prompt's EmployeeNumber/1677/1678 example and sample_submission's disjoint id range (1677..2795).",
+    "Sec 2/4.6: submission is predict_proba()[:,1] floats in [0,1], not hard 0/1 labels.",
+    "Sec 3/4.4: dropped constants EmployeeCount, Over18, StandardHours and dropped `id` from features.",
+    "Sec 3/4.3: stratified 5-fold CV with AUC mean+std reported instead of single holdout on 1341 rows.",
+    "Sec 3: PR-AUC also reported because of class imbalance (positive rate ~11.6%).",
+    "Sec 3/4.7: noted sensitive attributes Gender, Age, MaritalStatus are used as features with no fairness mitigation applied.",
+    "Sec 3: did NOT consult original IBM HR Attrition dataset; treated synthetic data as ground truth.",
+    "Sec 5: did not submit constant sample_submission; did not use OverTime/PerformanceRating; did not feed id as a feature."
+  ],
+  "interpretation_notes": "The prompt header example (`EmployeeNumber,<target>` with ids 1677/1678) is wrong: no EmployeeNumber column exists, and those ids are outside test.csv's id range (15..1665). sample_submission.csv has the correct *header* (id,Attrition) but its id values (1677..2795) are disjoint from test.csv. We follow the audit and use test.csv's actual id column. Submission has exactly 336 rows. Model: GradientBoostingClassifier on one-hot-encoded nominals + passthrough integer ordinals/continuous. Ordinal rating columns (JobSatisfaction, Education, etc.) are kept as integers so their ordering is preserved. Sensitive attributes (Gender, Age, MaritalStatus) are used as features without fairness mitigation \u2014 flagged, not fixed, per the audit's spirit-checklist item 4.7."
+}

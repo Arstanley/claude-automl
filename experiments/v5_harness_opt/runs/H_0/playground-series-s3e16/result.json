@@ -1,0 +1,39 @@
+{
+  "target_column_chosen": "Age",
+  "headline_metric": "MAE",
+  "headline_value": 1.3655099063310943,
+  "all_metrics": {
+    "cv_mae_by_config": [
+      {
+        "cfg_idx": 0,
+        "cv_mae": 1.3655099063310943,
+        "cfg": {
+          "max_iter": 400,
+          "learning_rate": 0.05,
+          "max_depth": 7,
+          "min_samples_leaf": 30,
+          "l2_regularization": 0.0
+        }
+      },
+      {
+        "cfg_idx": 1,
+        "cv_mae": 1.3659766761993009,
+        "cfg": {
+          "max_iter": 600,
+          "learning_rate": 0.05,
+          "max_depth": 8,
+          "min_samples_leaf": 20,
+          "l2_regularization": 1.0
+        }
+      }
+    ],
+    "best_cfg_idx": 0,
+    "n_train": 59240,
+    "n_test": 14811,
+    "wall_seconds": 220.71
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md"
+  ],
+  "interpretation_notes": "HistGradientBoostingRegressor with loss=absolute_error (matches MAE), 5-fold CV, small 2-config grid per harness budget. Light feature engineering (Volume, MeatRatio, ShellRatio) on top of OHE Sex. Used test.csv ids for submission since sample_submission.csv's ids don't match the actual test set."
+}

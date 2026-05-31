@@ -1,0 +1,123 @@
+{
+  "target_column_chosen": "booking_status",
+  "headline_metric": "roc_auc",
+  "headline_value": 0.8937919971014814,
+  "all_metrics": {
+    "oof_auc_hgb": 0.8936634299639721,
+    "oof_auc_extratrees": 0.8780408005453009,
+    "oof_auc_blend": 0.8937919971014814,
+    "blend_weight_hgb": 0.9
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md",
+    "skill_blend_two_model_families.md"
+  ],
+  "skills_evaluated_not_applied": [
+    "skill_probe_group_structure_in_ids.md: no train/test id overlap (0 ids shared) and no compound id format",
+    "skill_train_on_listed_auxiliary_files.md: prompt mentions original Reservation Cancellation Prediction dataset but no aux file present in DATA_DIR",
+    "skill_verify_split_claim_before_holdout.md: prompt makes no structural (temporal/group) split claim",
+    "skill_stringify_low_cardinality_int_codes.md: pipeline is tree-based (HGB+ExtraTrees); no scaler/linear/distance model in use",
+    "skill_multi_axis_constraint_budgets.md: only a single training-time constraint axis, no unquantified axes",
+    "skill_missing_indicator_when_missingness_signals_class.md: zero NaNs in train and test",
+    "skill_tune_decision_threshold_for_f1.md: metric is ROC AUC (rank-based), not F1/F-beta/MCC; threshold tuning irrelevant",
+    "skill_log_target_for_skewed_nonnegative_regression.md: task is binary classification, not regression"
+  ],
+  "best_hgb_params": {
+    "learning_rate": 0.05,
+    "max_iter": 500,
+    "max_leaf_nodes": 31,
+    "min_samples_leaf": 20,
+    "l2_regularization": 0.0
+  },
+  "grid_scores": [
+    {
+      "params": {
+        "learning_rate": 0.05,
+        "max_iter": 500,
+        "max_leaf_nodes": 31,
+        "min_samples_leaf": 20,
+        "l2_regularization": 0.0
+      },
+      "auc": 0.8936634299639721
+    },
+    {
+      "params": {
+        "learning_rate": 0.05,
+        "max_iter": 500,
+        "max_leaf_nodes": 63,
+        "min_samples_leaf": 20,
+        "l2_regularization": 1.0
+      },
+      "auc": 0.893552955284255
+    },
+    {
+      "params": {
+        "learning_rate": 0.03,
+        "max_iter": 800,
+        "max_leaf_nodes": 31,
+        "min_samples_leaf": 30,
+        "l2_regularization": 1.0
+      },
+      "auc": 0.8936042649845428
+    },
+    {
+      "params": {
+        "learning_rate": 0.08,
+        "max_iter": 300,
+        "max_leaf_nodes": 31,
+        "min_samples_leaf": 20,
+        "l2_regularization": 0.0
+      },
+      "auc": 0.8933354688260466
+    }
+  ],
+  "blend_scores": [
+    {
+      "w_hgb": 0.0,
+      "auc": 0.8780408005453009
+    },
+    {
+      "w_hgb": 0.1,
+      "auc": 0.8817909377863222
+    },
+    {
+      "w_hgb": 0.2,
+      "auc": 0.8848939929433094
+    },
+    {
+      "w_hgb": 0.30000000000000004,
+      "auc": 0.8874245163295269
+    },
+    {
+      "w_hgb": 0.4,
+      "auc": 0.8894488796025154
+    },
+    {
+      "w_hgb": 0.5,
+      "auc": 0.8910476719022233
+    },
+    {
+      "w_hgb": 0.6000000000000001,
+      "auc": 0.8922508101821447
+    },
+    {
+      "w_hgb": 0.7000000000000001,
+      "auc": 0.8930963900514964
+    },
+    {
+      "w_hgb": 0.8,
+      "auc": 0.8936042945504016
+    },
+    {
+      "w_hgb": 0.9,
+      "auc": 0.8937919971014814
+    },
+    {
+      "w_hgb": 1.0,
+      "auc": 0.8936634299639721
+    }
+  ],
+  "n_train": 33680,
+  "n_test": 8420,
+  "elapsed_sec": 45.421231746673584
+}

@@ -1,0 +1,35 @@
+{
+  "target_column_chosen": "outcome",
+  "target_column_justification": "Identified via schema diff: set(train.columns) - set(test.columns) == {'outcome'}. 'outcome' is the only column present in train and absent in test, has 3 categorical levels (lived/died/euthanized) compatible with the micro-F1 metric, and the sample submission header confirms but is NOT load-bearing for the decision.",
+  "headline_metric": "micro_f1_cv5_mean",
+  "headline_value": 0.694364969491873,
+  "all_metrics": {
+    "micro_f1_cv5_mean": 0.694364969491873,
+    "micro_f1_cv5_std": 0.019370335064688923,
+    "micro_f1_cv5_folds": [
+      0.702020202020202,
+      0.6717171717171717,
+      0.6767676767676768,
+      0.7258883248730964,
+      0.6954314720812182
+    ],
+    "macro_f1_cv5_mean": 0.6801261610737217,
+    "macro_f1_cv5_std": 0.020688534616543706,
+    "accuracy_cv5_mean": 0.694364969491873,
+    "n_train": 988,
+    "n_test": 247,
+    "n_classes": 3
+  },
+  "audit_items_addressed": [
+    "1_target_from_schema_diff: 'outcome' derived via set(train.cols)-set(test.cols)={'outcome'}; sample_submission used only as a corroborating signal, not as the deciding evidence.",
+    "2_categorical_target_for_micro_f1: predictions emitted as literal strings lived/died/euthanized; micro-F1 reduces to accuracy for single-label multiclass.",
+    "3a_submission_row_count: ignored sample_submission.csv (824 stale rows); submission has exactly 247 rows keyed on test.csv['id'].",
+    "3b_hospital_number_leakage: dropped column. 90% train/test overlap on 241 train uniques makes silent label-encoding a leak; OOF target encoding is unreliable at n=988, so dropping is the conservative choice.",
+    "3c_lesion_1_categorical: cast to string and one-hot encoded; unseen test codes handled via handle_unknown='ignore'. lesion_2/lesion_3 collapsed to binary 'nonzero' indicators given >99% zero rate.",
+    "3d_missingness_modeled: explicit *_missing indicator columns added for abdomen, rectal_exam_feces, nasogastric_tube, peripheral_pulse, abdomo_appearance, pain BEFORE median/mode imputation.",
+    "3e_ordinal_categoricals: one-hot encoded (treated as nominal) \u2014 audit notes domain ordering was not provided; one-hot is defensible, alphabetic label-encoding would be disqualifying.",
+    "3f_synthetic_data: no domain rules from the UCI Horse Colic literature imported; model learns purely from the synthetic distribution.",
+    "3g_cv_not_holdout: reported micro-F1 is mean\u00b1std over 5 StratifiedKFold splits, not a single hold-out."
+  ],
+  "interpretation_notes": "Micro-F1 over single-label multiclass equals accuracy, so the headline number is also the row-level accuracy. Std across 5 folds is meaningful (n=988, ~40 minority-class val rows/fold) \u2014 any improvement smaller than ~1 std is noise. Macro-F1 is reported alongside for visibility into the minority class ('euthanized', 19.9%) behaviour even though it is not the scoring metric. The submission emits strings, not integers."
+}

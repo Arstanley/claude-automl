@@ -1,0 +1,79 @@
+{
+  "target_column_chosen": "defects",
+  "headline_metric": "f1",
+  "headline_value": 0.5514591089227813,
+  "all_metrics": {
+    "val_f1": 0.5514591089227813,
+    "val_f1_at_0.5": 0.4785378940308518,
+    "threshold": 0.26,
+    "configs_tried": [
+      {
+        "config": {
+          "max_depth": null,
+          "max_leaf_nodes": 31,
+          "learning_rate": 0.07,
+          "max_iter": 500,
+          "l2_regularization": 0.0,
+          "min_samples_leaf": 20
+        },
+        "val_f1_at_0.5": 0.4789774638412378,
+        "val_f1_tuned": 0.5502099580083983,
+        "threshold": 0.26,
+        "n_iter": 111,
+        "elapsed": 1.649883508682251
+      },
+      {
+        "config": {
+          "max_depth": null,
+          "max_leaf_nodes": 63,
+          "learning_rate": 0.05,
+          "max_iter": 600,
+          "l2_regularization": 0.0,
+          "min_samples_leaf": 20
+        },
+        "val_f1_at_0.5": 0.4771812080536913,
+        "val_f1_tuned": 0.5483584738243124,
+        "threshold": 0.29,
+        "n_iter": 108,
+        "elapsed": 3.2797892093658447
+      },
+      {
+        "config": {
+          "max_depth": null,
+          "max_leaf_nodes": 31,
+          "learning_rate": 0.05,
+          "max_iter": 700,
+          "l2_regularization": 1.0,
+          "min_samples_leaf": 30
+        },
+        "val_f1_at_0.5": 0.4780701754385965,
+        "val_f1_tuned": 0.5494912118408881,
+        "threshold": 0.24,
+        "n_iter": 130,
+        "elapsed": 4.6464362144470215
+      },
+      {
+        "config": {
+          "max_depth": null,
+          "max_leaf_nodes": 127,
+          "learning_rate": 0.05,
+          "max_iter": 500,
+          "l2_regularization": 0.0,
+          "min_samples_leaf": 40
+        },
+        "val_f1_at_0.5": 0.4785378940308518,
+        "val_f1_tuned": 0.5514591089227813,
+        "threshold": 0.26,
+        "n_iter": 84,
+        "elapsed": 6.358775854110718
+      }
+    ],
+    "best_cfg_idx": 3
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md",
+    "skill_probe_group_structure_in_ids.md"
+  ],
+  "interpretation_notes": "HistGradientBoostingClassifier with a 4-config grid (varying leaves/lr/l2). Selected the config maximizing val F1 after threshold tuning on a 20% stratified holdout; refit on full train and applied tuned threshold to test. F1 is sensitive to the threshold under class imbalance (~23% positive).",
+  "elapsed_sec": 8.199406862258911
+}

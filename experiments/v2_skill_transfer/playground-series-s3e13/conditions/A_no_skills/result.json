@@ -1,0 +1,23 @@
+{
+  "target_column_chosen": "prognosis",
+  "headline_metric": "MAP@3 (== MPA@3 per spec)",
+  "headline_value": 0.44690265486725667,
+  "all_metrics": {
+    "cv_map_at_3_mean": 0.44690265486725667,
+    "cv_map_at_3_std": 0.030613159443350125,
+    "cv_map_at_3_per_fold": [
+      0.4513274336283186,
+      0.4056047197640118,
+      0.4601769911504425,
+      0.42330383480825967,
+      0.4941002949852508
+    ],
+    "cv_hit_at_3_mean": 0.6141592920353982,
+    "cv_top1_accuracy_mean": 0.3256637168141593,
+    "n_train": 565,
+    "n_test": 142,
+    "n_classes": 11,
+    "n_features": 64
+  },
+  "interpretation_notes": "11-class disease classification on 64 binary symptom features (n_train=565, n_test=142). Headline metric MAP@3 is the spec's MPA@3: per-row 1/rank of the true label if it lies in the top-3 predicted labels, else 0; averaged across rows. Submitting 3 labels per row maximises expected MPA@3, so we do that. Model is a soft-vote ensemble of LogisticRegression + RandomForest(600) + BernoulliNB on the binary features; CV is 5-fold stratified on the label. Hit@3 (label in top-3 ignoring rank) and top-1 accuracy are reported alongside for context."
+}

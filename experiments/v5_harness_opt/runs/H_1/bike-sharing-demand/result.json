@@ -1,0 +1,31 @@
+{
+  "target_column_chosen": "count",
+  "headline_metric": "rmsle",
+  "headline_value": 0.26689974221090074,
+  "all_metrics": {
+    "cv_rmsle_hgb_raw_target": 0.3737150452003777,
+    "cv_rmsle_hgb_log_target": 0.2692600368551222,
+    "cv_rmsle_hgb_best": 0.2692600368551222,
+    "cv_rmsle_extratrees": 0.2959915444264404,
+    "cv_rmsle_blend": 0.26689974221090074,
+    "blend_weight_hgb": 0.8,
+    "used_log_target": true,
+    "split_claim_in_prompt_held": false
+  },
+  "skills_applied": [
+    "skill_verify_split_claim_before_holdout.md",
+    "skill_log_target_for_skewed_nonnegative_regression.md",
+    "skill_tune_when_n_train_supports_it.md",
+    "skill_blend_two_model_families.md"
+  ],
+  "skills_evaluated_not_applied": [
+    "skill_probe_group_structure_in_ids.md: no compound IDs, no value overlap (datetime overlap=0)",
+    "skill_train_on_listed_auxiliary_files.md: prompt names no auxiliary file",
+    "skill_stringify_low_cardinality_int_codes.md: model is tree-based (HGB/ET), not scaler/linear/distance",
+    "skill_multi_axis_constraint_budgets.md: only one constraint axis (training time)",
+    "skill_missing_indicator_when_missingness_signals_class.md: zero NaNs in train and test",
+    "skill_tune_decision_threshold_for_f1.md: regression task, not binary classification"
+  ],
+  "interpretation_notes": "Verified the prompt's day-1-19/day-20+ split claim is FALSE on this data \u2014 both train and test contain only days 1-19 with no datetime overlap, so a random 5-fold KFold is correct (not temporal CV). Fit HGB on log1p(count) (skew=1.24, RMSLE metric) with a small 3-config tuning grid, then blended with ExtraTrees on OOF; blend weight chosen by minimizing CV RMSLE.",
+  "runtime_seconds": 74.3
+}

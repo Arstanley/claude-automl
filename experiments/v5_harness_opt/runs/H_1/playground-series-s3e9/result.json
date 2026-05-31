@@ -1,0 +1,43 @@
+{
+  "target_column_chosen": "Strength",
+  "headline_metric": "rmse",
+  "headline_value": 12.373796803715251,
+  "all_metrics": {
+    "cv_rmse_baseline_raw": 12.433817567914028,
+    "cv_rmse_baseline_log": 12.645861902433712,
+    "use_log_target": false,
+    "cv_rmse_gbm_tuned": 12.389715565754562,
+    "cv_rmse_et": 12.950996764380754,
+    "cv_rmse_blend": 12.373796803715251,
+    "blend_weight_gbm": 0.8500000000000001,
+    "best_gbm_params": {
+      "n_estimators": 800,
+      "max_depth": 3,
+      "learning_rate": 0.03,
+      "subsample": 0.9
+    },
+    "et_params": {
+      "n_estimators": 500,
+      "max_depth": null,
+      "min_samples_leaf": 2
+    },
+    "n_train": 4325,
+    "n_test": 1082,
+    "elapsed_sec": 81.34870386123657
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md",
+    "skill_blend_two_model_families.md",
+    "skill_log_target_for_skewed_nonnegative_regression.md"
+  ],
+  "skills_evaluated_not_applied": [
+    "skill_probe_group_structure_in_ids.md: IDs are sequential ints (no compound format); high feature overlap on synthetic tabular features is not a group signal.",
+    "skill_train_on_listed_auxiliary_files.md: original Concrete dataset is mentioned but not provided in DATA_DIR.",
+    "skill_verify_split_claim_before_holdout.md: no structural split claim in prompt.",
+    "skill_stringify_low_cardinality_int_codes.md: AgeInDays has nunique=15 but model family is tree-based (GBM/ET), not scaler/linear/distance.",
+    "skill_multi_axis_constraint_budgets.md: only one constraint axis (RMSE); no latency/size/hard-rule constraints.",
+    "skill_missing_indicator_when_missingness_signals_class.md: zero NaN in train/test.",
+    "skill_tune_decision_threshold_for_f1.md: task is regression, not binary classification."
+  ],
+  "interpretation_notes": "Tabular regression on 8 continuous concrete-mix features (n=4325). A/B tested log-target despite skew=0.38 < precondition; raw target won on CV. Tuned GradientBoosting over a 5-config grid, then blended with ExtraTrees; final blend weight on GBM=0.85, CV RMSE=12.3738."
+}

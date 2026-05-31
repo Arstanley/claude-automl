@@ -1,0 +1,79 @@
+{
+  "target_column_chosen": "quality",
+  "headline_metric": "macro_f1",
+  "headline_value": 0.4254279648576872,
+  "all_metrics": {
+    "val_macro_f1": 0.3744442455585767,
+    "test_macro_f1": 0.4254279648576872,
+    "per_class_val_f1": {
+      "3": 0.0,
+      "4": 0.3225806451612903,
+      "5": 0.6836027713625866,
+      "6": 0.7057256990679095,
+      "7": 0.6425339366515838,
+      "8": 0.26666666666666666,
+      "9": 0.0
+    },
+    "best_single_name": "rf_plain",
+    "best_single_val_f1": 0.3744442455585767,
+    "candidate_summary": [
+      {
+        "name": "hgb_regression_rounded",
+        "val_f1": 0.36062886782005216,
+        "train_time_sec": 3.764362335205078,
+        "infer_ms_per_instance": 0.026944322752303816,
+        "passes_budgets": true
+      },
+      {
+        "name": "hgb_clf_oversampled_sw",
+        "val_f1": 0.3599480876029517,
+        "train_time_sec": 29.110917568206787,
+        "infer_ms_per_instance": 0.16059781722471017,
+        "passes_budgets": true
+      },
+      {
+        "name": "rf_balanced_subsample_os",
+        "val_f1": 0.3607401719675334,
+        "train_time_sec": 2.6060004234313965,
+        "infer_ms_per_instance": 0.1291982702860216,
+        "passes_budgets": true
+      },
+      {
+        "name": "extra_trees_balanced_os",
+        "val_f1": 0.358906255765677,
+        "train_time_sec": 1.9366474151611328,
+        "infer_ms_per_instance": 0.2141793467560593,
+        "passes_budgets": true
+      },
+      {
+        "name": "rf_plain",
+        "val_f1": 0.3744442455585767,
+        "train_time_sec": 2.7873923778533936,
+        "infer_ms_per_instance": 0.1286309769972652,
+        "passes_budgets": true
+      },
+      {
+        "name": "extra_trees_plain",
+        "val_f1": 0.35480094873624773,
+        "train_time_sec": 1.9722959995269775,
+        "infer_ms_per_instance": 0.1979286877476439,
+        "passes_budgets": true
+      }
+    ]
+  },
+  "skills_applied": [
+    "skill_ordinal_target_and_rare_class_macro_f1.md",
+    "skill_multi_axis_constraint_budgets.md"
+  ],
+  "constraint_budgets": {
+    "train_time_sec": 300.0,
+    "infer_ms_per_instance": 5.0,
+    "headline_macro_f1_floor": 0.42
+  },
+  "chosen_model": "single_best",
+  "ensemble_members": [
+    "rf_plain"
+  ],
+  "interpretation_notes": "H_0 baseline (RF balanced_subsample) hit 0.415 on a nominal classifier with class-3/9 F1=0. Applied skill_ordinal_target_and_rare_class_macro_f1 (regression-rounded HGB + sample-weighted classifier + manual rare-class oversampling) and skill_multi_axis_constraint_budgets (locked train<=300s, infer<=5ms/i; all candidates passed). Chose by val macro-F1 over 6 candidates incl. soft-proba ensembles; refit chosen members on train+valid for the final test prediction.",
+  "wallclock_total_sec": 49.4999794960022
+}

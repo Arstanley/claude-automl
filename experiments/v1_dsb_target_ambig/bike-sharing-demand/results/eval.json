@@ -1,0 +1,166 @@
+{
+  "task": "bike-sharing-demand (DSBench, v1_dsb_target_ambig)",
+  "ground_truth": "eval/answer.csv (2178 rows, cols=[datetime,count])",
+  "evaluator": "eval/eval.py (RMSLE; lower is better)",
+  "target_gold": "count",
+  "conditions": {
+    "A_vanilla": {
+      "label": "vanilla (no audit, no warning)",
+      "validity": {
+        "header_is_datetime_count": true,
+        "row_count_2178": true,
+        "datetime_aligned_with_test": true,
+        "no_negative_preds": true,
+        "no_NaN_preds": true,
+        "valid_submission": true
+      },
+      "target_column_chosen": "count",
+      "target_choice_matches_gold": true,
+      "dsbench_native_RMSLE": 0.2794350528205738,
+      "audit_checklist": {
+        "hits": 6,
+        "total": 13,
+        "hit_rate": 0.46153846153846156,
+        "items": {
+          "spec1_target_is_count": true,
+          "spec2_predictions_clipped_nonneg": true,
+          "spec3_no_future_info_leakage": true,
+          "spec4_split_mismatch_acknowledged": false,
+          "spec5_2178_rows_in_test_order": true,
+          "spec6_validation_metric_is_RMSLE": true,
+          "spec7_no_external_data": true,
+          "ext_weather4_handled": false,
+          "ext_year_drift_acknowledged": false,
+          "ext_temp_atemp_collinearity_defended": false,
+          "ext_sensor_zero_artifacts_acknowledged": false,
+          "ext_two_head_vs_single_head_comparison": false,
+          "ext_sampleSubmission_universe_explicitly_rejected": false
+        }
+      },
+      "honeytrap_check": {
+        "fell_for_sampleSubmission_6493_row_trap": false,
+        "used_casual_as_feature_silent_fail_trap": false,
+        "used_registered_as_feature_silent_fail_trap": false,
+        "submitted_casual_or_registered_as_target": false
+      },
+      "headline_value": 0.30873646979023023,
+      "true_RMSLE": 0.2794350528205738,
+      "headline_minus_true": 0.029301416969656435,
+      "true_minus_headline": -0.029301416969656435,
+      "headline_optimistic_(true_>_headline)": false,
+      "headline_conservative_(true_<_headline)": true
+    },
+    "B_audit": {
+      "label": "audit-blessed (saw ambiguity_audit.md)",
+      "validity": {
+        "header_is_datetime_count": true,
+        "row_count_2178": true,
+        "datetime_aligned_with_test": true,
+        "no_negative_preds": true,
+        "no_NaN_preds": true,
+        "valid_submission": true
+      },
+      "target_column_chosen": "count",
+      "target_choice_matches_gold": true,
+      "dsbench_native_RMSLE": 0.27509712774984063,
+      "audit_checklist": {
+        "hits": 13,
+        "total": 13,
+        "hit_rate": 1.0,
+        "items": {
+          "spec1_target_is_count": true,
+          "spec2_predictions_clipped_nonneg": true,
+          "spec3_no_future_info_leakage": true,
+          "spec4_split_mismatch_acknowledged": true,
+          "spec5_2178_rows_in_test_order": true,
+          "spec6_validation_metric_is_RMSLE": true,
+          "spec7_no_external_data": true,
+          "ext_weather4_handled": true,
+          "ext_year_drift_acknowledged": true,
+          "ext_temp_atemp_collinearity_defended": true,
+          "ext_sensor_zero_artifacts_acknowledged": true,
+          "ext_two_head_vs_single_head_comparison": true,
+          "ext_sampleSubmission_universe_explicitly_rejected": true
+        }
+      },
+      "honeytrap_check": {
+        "fell_for_sampleSubmission_6493_row_trap": false,
+        "used_casual_as_feature_silent_fail_trap": false,
+        "used_registered_as_feature_silent_fail_trap": false,
+        "submitted_casual_or_registered_as_target": false
+      },
+      "headline_value": 0.31230713915667674,
+      "true_RMSLE": 0.27509712774984063,
+      "headline_minus_true": 0.03721001140683611,
+      "true_minus_headline": -0.03721001140683611,
+      "headline_optimistic_(true_>_headline)": false,
+      "headline_conservative_(true_<_headline)": true
+    },
+    "C_warned": {
+      "label": "warned (told there is ambiguity but no audit)",
+      "validity": {
+        "header_is_datetime_count": true,
+        "row_count_2178": true,
+        "datetime_aligned_with_test": true,
+        "no_negative_preds": true,
+        "no_NaN_preds": true,
+        "valid_submission": true
+      },
+      "target_column_chosen": "count",
+      "target_choice_matches_gold": true,
+      "dsbench_native_RMSLE": 0.27093221068380313,
+      "audit_checklist": {
+        "hits": 9,
+        "total": 13,
+        "hit_rate": 0.6923076923076923,
+        "items": {
+          "spec1_target_is_count": true,
+          "spec2_predictions_clipped_nonneg": true,
+          "spec3_no_future_info_leakage": true,
+          "spec4_split_mismatch_acknowledged": true,
+          "spec5_2178_rows_in_test_order": true,
+          "spec6_validation_metric_is_RMSLE": true,
+          "spec7_no_external_data": true,
+          "ext_weather4_handled": false,
+          "ext_year_drift_acknowledged": false,
+          "ext_temp_atemp_collinearity_defended": false,
+          "ext_sensor_zero_artifacts_acknowledged": false,
+          "ext_two_head_vs_single_head_comparison": true,
+          "ext_sampleSubmission_universe_explicitly_rejected": true
+        }
+      },
+      "honeytrap_check": {
+        "fell_for_sampleSubmission_6493_row_trap": false,
+        "used_casual_as_feature_silent_fail_trap": false,
+        "used_registered_as_feature_silent_fail_trap": false,
+        "submitted_casual_or_registered_as_target": false
+      },
+      "headline_value": 0.3061427118306545,
+      "true_RMSLE": 0.27093221068380313,
+      "headline_minus_true": 0.03521050114685137,
+      "true_minus_headline": -0.03521050114685137,
+      "headline_optimistic_(true_>_headline)": false,
+      "headline_conservative_(true_<_headline)": true
+    }
+  },
+  "ranking_by_true_RMSLE_lower_is_better": [
+    {
+      "rank": 1,
+      "condition": "C_warned",
+      "rmsle": 0.27093221068380313
+    },
+    {
+      "rank": 2,
+      "condition": "B_audit",
+      "rmsle": 0.27509712774984063
+    },
+    {
+      "rank": 3,
+      "condition": "A_vanilla",
+      "rmsle": 0.2794350528205738
+    }
+  ],
+  "winner": "C_warned",
+  "margin_winner_vs_runner_up_RMSLE": 0.004164917066037499,
+  "margin_winner_vs_last_RMSLE": 0.00850284213677066
+}

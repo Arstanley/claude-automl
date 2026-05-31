@@ -1,0 +1,127 @@
+{
+  "target_column_chosen": "outcome",
+  "headline_metric": "micro_f1",
+  "headline_value": 0.7105060759883095,
+  "all_metrics": {
+    "cv_micro_f1_mean": 0.7105060759883095,
+    "cv_micro_f1_std": 0.016456330568260975,
+    "cv_folds": 5,
+    "n_train": 988,
+    "n_test": 247,
+    "n_classes": 3,
+    "class_counts": {
+      "lived": 453,
+      "died": 338,
+      "euthanized": 197
+    }
+  },
+  "skills_applied": [
+    "skill_stringify_low_cardinality_int_codes.md",
+    "skill_missing_indicator_when_missingness_signals_class.md",
+    "skill_tune_when_n_train_supports_it.md"
+  ],
+  "skills_evaluated_not_applied": [
+    {
+      "skill": "skill_probe_group_structure_in_ids.md",
+      "reason": "hospital_number has 93.5% test-row overlap with train, but the column is not an obvious group identifier for outcome (same hospital sees all 3 outcomes); GroupKFold on it would shrink effective train to ~117 unique groups and inflate variance. Stratified KFold kept."
+    },
+    {
+      "skill": "skill_train_on_listed_auxiliary_files.md",
+      "reason": "Prompt mentions the original Horse Survival Dataset as optional, but no auxiliary file is present in DATA_DIR; nothing to concatenate."
+    },
+    {
+      "skill": "skill_verify_split_claim_before_holdout.md",
+      "reason": "No structural split claim made in prompt \u2014 nothing to verify."
+    },
+    {
+      "skill": "skill_multi_axis_constraint_budgets.md",
+      "reason": "Prompt sets no latency/size/hard-rule constraint \u2014 single axis (micro-F1)."
+    },
+    {
+      "skill": "skill_tune_decision_threshold_for_f1.md",
+      "reason": "Multiclass classification (3 classes), not binary \u2014 threshold tuning doesn't apply; argmax over class probabilities is the canonical decision rule for micro-F1 in multiclass."
+    },
+    {
+      "skill": "skill_log_target_for_skewed_nonnegative_regression.md",
+      "reason": "Classification task, not regression."
+    },
+    {
+      "skill": "skill_blend_two_model_families.md",
+      "reason": "n_train=988 < 1000 precondition threshold; below the size needed for a stable second-family fit + honest CV-driven blend weight."
+    }
+  ],
+  "audit": {
+    "stringified_columns": [
+      "lesion_1",
+      "lesion_2",
+      "lesion_3"
+    ],
+    "missingness_indicators_added": [
+      "nasogastric_tube",
+      "rectal_exam_feces",
+      "abdomen"
+    ],
+    "hyperparameter_grid": [
+      {
+        "max_iter": 300,
+        "learning_rate": 0.05,
+        "max_depth": 3,
+        "l2_regularization": 0.0
+      },
+      {
+        "max_iter": 500,
+        "learning_rate": 0.03,
+        "max_depth": 4,
+        "l2_regularization": 0.0
+      },
+      {
+        "max_iter": 300,
+        "learning_rate": 0.05,
+        "max_depth": 5,
+        "l2_regularization": 1.0
+      }
+    ],
+    "grid_oof": [
+      {
+        "params": {
+          "max_iter": 300,
+          "learning_rate": 0.05,
+          "max_depth": 3,
+          "l2_regularization": 0.0
+        },
+        "mean": 0.7105060759883095,
+        "std": 0.016456330568260975
+      },
+      {
+        "params": {
+          "max_iter": 500,
+          "learning_rate": 0.03,
+          "max_depth": 4,
+          "l2_regularization": 0.0
+        },
+        "mean": 0.7013536379018612,
+        "std": 0.03259298944851227
+      },
+      {
+        "params": {
+          "max_iter": 300,
+          "learning_rate": 0.05,
+          "max_depth": 5,
+          "l2_regularization": 1.0
+        },
+        "mean": 0.6983489719530328,
+        "std": 0.024850002839828172
+      }
+    ],
+    "chosen_config": {
+      "max_iter": 300,
+      "learning_rate": 0.05,
+      "max_depth": 3,
+      "l2_regularization": 0.0
+    },
+    "model_family": "HistGradientBoostingClassifier",
+    "cv": "StratifiedKFold(5, shuffle=True)"
+  },
+  "interpretation_notes": "HistGradientBoostingClassifier on 988 horse-survival rows, micro-F1. Stringified the 4-digit lesion_1 anatomical codes (and lesion_2/3) so OHE treats them as categorical rather than magnitudes; added missingness indicators for the three columns >5% NaN (medical missingness signals class). Tuned 3 HGB configs with 5-fold CV (n=988 supports it).",
+  "runtime_seconds": 15.24
+}

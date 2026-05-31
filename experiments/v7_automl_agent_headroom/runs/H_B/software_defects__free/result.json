@@ -1,0 +1,35 @@
+{
+  "target_column_chosen": "defects",
+  "headline_metric": "f1",
+  "headline_value": 0.5598681621408894,
+  "all_metrics": {
+    "oof_f1_per_config": [
+      {
+        "cfg_idx": 0,
+        "thr": 0.27999999999999997,
+        "oof_f1": 0.5598681621408894
+      },
+      {
+        "cfg_idx": 1,
+        "thr": 0.27999999999999997,
+        "oof_f1": 0.5582913956057445
+      },
+      {
+        "cfg_idx": 2,
+        "thr": 0.29,
+        "oof_f1": 0.5598034545864775
+      }
+    ],
+    "blend_oof_f1": 0.5591444678328615,
+    "blend_thr": 0.27142614942101156,
+    "final_selection": "cfg_0",
+    "final_threshold": 0.27999999999999997,
+    "test_positive_rate": 0.27165528423328256,
+    "train_positive_rate": 0.22768701633705932
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md"
+  ],
+  "interpretation_notes": "GBM with k-fold OOF threshold tuning for F1 on imbalanced binary (~22.8% pos). Small 3-config grid (per tune-when-n-supports-it skill); selected cfg_0 with thr=0.280. Other library skills' preconditions did not hold (no NaNs, no group IDs, no aux files, no ordinal target, single metric).",
+  "elapsed_seconds": 92.72002863883972
+}

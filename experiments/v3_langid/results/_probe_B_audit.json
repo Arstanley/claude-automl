@@ -1,0 +1,53 @@
+{
+  "condition": "B_audit",
+  "cond_dir": "/home/colligo/claude-automl/experiments/v3_langid/conditions/B_audit",
+  "model_size_mb": 38.8635,
+  "model_size_pass_50MB": true,
+  "model_size_pass_10MB": false,
+  "submission": {
+    "path": "/home/colligo/claude-automl/experiments/v3_langid/conditions/B_audit/submission.csv",
+    "n_rows": 10000,
+    "header_ok": true,
+    "row_count_ok": true,
+    "bad_label_values": [],
+    "all_labels_valid": true,
+    "idx_ordered_0_to_9999": true
+  },
+  "papluca_test_accuracy": 0.9974,
+  "papluca_test_macro_f1": 0.9974011833457842,
+  "papluca_test_tier1_macro_f1": 1.0,
+  "papluca_test_tier2_macro_f1": 0.9987497497497497,
+  "papluca_test_tier3_macro_f1": 0.9992487477457417,
+  "papluca_test_oos_macro_f1": 0.9951277909986079,
+  "hi_latn_probe": {
+    "n": 5000,
+    "frac_en": 0.0012,
+    "frac_hi": 0.9866,
+    "frac_unk_abstain": 0.0,
+    "frac_other_latin": 0.012,
+    "full_distribution": {
+      "hi": 4933,
+      "sw": 13,
+      "nl": 12,
+      "it": 8,
+      "tr": 8,
+      "pt": 8,
+      "en": 6,
+      "fr": 5,
+      "pl": 5,
+      "es": 1,
+      "zh": 1
+    }
+  },
+  "latency_ms": {
+    "n": 1000,
+    "p50": 3.2491,
+    "p95": 3.8747,
+    "p99": 4.5279,
+    "mean": 2.5353
+  },
+  "latency_pass_100ms_p99": true,
+  "self_reported_headline_metric": "macro_f1_test",
+  "self_reported_headline_value": 0.9974011833457842,
+  "headline_vs_measured_gap": 1e-06
+}

@@ -1,0 +1,36 @@
+{
+  "target_column_chosen": "cost",
+  "headline_metric": "RMSLE",
+  "headline_value": 0.2973660942572314,
+  "all_metrics": {
+    "holdout_RMSLE_best": 0.2973660942572314,
+    "grid": [
+      {
+        "cfg": {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        "rmsle": 0.29816952591575113,
+        "n_iter": 209
+      },
+      {
+        "cfg": {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 127
+        },
+        "rmsle": 0.2973660942572314,
+        "n_iter": 229
+      }
+    ],
+    "final_n_iter": 229,
+    "id_overlap_train_test": 0,
+    "n_train": 288268,
+    "n_test": 72068,
+    "wall_seconds": 34.3
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md",
+    "skill_probe_group_structure_in_ids.md"
+  ],
+  "interpretation_notes": "HistGradientBoostingRegressor on log1p(cost) to align squared-error training with RMSLE evaluation. Tiny 2-config grid over (learning_rate, max_leaf_nodes) with early stopping on a 15% internal validation slice; chosen config refit on full train using the learned iteration count."
+}

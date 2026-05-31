@@ -1,0 +1,62 @@
+{
+  "target_column_chosen": "Age",
+  "headline_metric": "rmsle",
+  "headline_value": 0.16102883497038067,
+  "all_metrics": {
+    "val_rmsle": 0.16102883497038067,
+    "cv_results": [
+      {
+        "cfg": {
+          "learning_rate": 0.05,
+          "max_iter": 600,
+          "max_leaf_nodes": 31,
+          "min_samples_leaf": 20,
+          "l2_regularization": 0.0
+        },
+        "val_rmsle": 0.16117307074030424
+      },
+      {
+        "cfg": {
+          "learning_rate": 0.05,
+          "max_iter": 800,
+          "max_leaf_nodes": 63,
+          "min_samples_leaf": 20,
+          "l2_regularization": 0.0
+        },
+        "val_rmsle": 0.1612119181248364
+      },
+      {
+        "cfg": {
+          "learning_rate": 0.03,
+          "max_iter": 1200,
+          "max_leaf_nodes": 31,
+          "min_samples_leaf": 40,
+          "l2_regularization": 1.0
+        },
+        "val_rmsle": 0.16102883497038067
+      },
+      {
+        "cfg": {
+          "learning_rate": 0.08,
+          "max_iter": 500,
+          "max_leaf_nodes": 63,
+          "min_samples_leaf": 40,
+          "l2_regularization": 1.0
+        },
+        "val_rmsle": 0.16119395706397013
+      }
+    ]
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md"
+  ],
+  "interpretation_notes": "HistGradientBoostingRegressor on log1p(Age) with one-hot Sex. 4-config grid CV'd with 4-fold KFold; best refit on full train. Log-target training aligns loss with RMSLE.",
+  "best_cfg": {
+    "learning_rate": 0.03,
+    "max_iter": 1200,
+    "max_leaf_nodes": 31,
+    "min_samples_leaf": 40,
+    "l2_regularization": 1.0
+  },
+  "elapsed_sec": 37.3923704624176
+}

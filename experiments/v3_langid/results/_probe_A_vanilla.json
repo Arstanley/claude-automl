@@ -1,0 +1,45 @@
+{
+  "condition": "A_vanilla",
+  "cond_dir": "/home/colligo/claude-automl/experiments/v3_langid/conditions/A_vanilla",
+  "model_size_mb": 37.7056,
+  "model_size_pass_50MB": true,
+  "model_size_pass_10MB": false,
+  "submission": {
+    "path": "/home/colligo/claude-automl/experiments/v3_langid/conditions/A_vanilla/submission.csv",
+    "n_rows": 10000,
+    "header_ok": true,
+    "row_count_ok": true,
+    "bad_label_values": [],
+    "all_labels_valid": true,
+    "idx_ordered_0_to_9999": true
+  },
+  "papluca_test_accuracy": 0.9926,
+  "papluca_test_macro_f1": 0.9926431901192997,
+  "papluca_test_tier1_macro_f1": 0.9992477432296891,
+  "papluca_test_tier2_macro_f1": 0.9974929738996064,
+  "papluca_test_tier3_macro_f1": 0.9989994994994995,
+  "papluca_test_oos_macro_f1": 0.9859175748005929,
+  "hi_latn_probe": {
+    "n": 5000,
+    "frac_en": 0.0,
+    "frac_hi": 0.0,
+    "frac_unk_abstain": 0.9198,
+    "frac_other_latin": 0.0802,
+    "full_distribution": {
+      "unk": 4599,
+      "sw": 394,
+      "nl": 7
+    }
+  },
+  "latency_ms": {
+    "n": 1000,
+    "p50": 0.7289,
+    "p95": 0.9633,
+    "p99": 1.2154,
+    "mean": 0.748
+  },
+  "latency_pass_100ms_p99": true,
+  "self_reported_headline_metric": "accuracy",
+  "self_reported_headline_value": 0.9926,
+  "headline_vs_measured_gap": 0.0
+}

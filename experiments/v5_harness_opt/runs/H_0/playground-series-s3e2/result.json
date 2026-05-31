@@ -1,0 +1,128 @@
+{
+  "target_column_chosen": "stroke",
+  "headline_metric": "roc_auc",
+  "headline_value": 0.8717793281331957,
+  "all_metrics": {
+    "cv_auc_mean": 0.8717793281331957,
+    "cv_auc_std": 0.007314665036294391,
+    "cv_auc_fold_scores": [
+      0.870093656875266,
+      0.8657041172601075,
+      0.8643041476208949,
+      0.8846805792163542,
+      0.874114139693356
+    ],
+    "baseline_cv_auc_mean": 0.8567637204431378,
+    "baseline_cv_auc_std": 0.008410590329874184,
+    "in_sample_auc_after_refit": 0.9625630007013933
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md"
+  ],
+  "interpretation_notes": "Binary stroke prediction, AUC metric, ~4% positive class. Used HistGradientBoosting with native categorical handling (object + binary-int columns cast to category), class_weight='balanced' for imbalance, and a 4-config grid tuned with 5-fold StratifiedKFold on AUC. Best config chosen by CV mean; refit on full train.",
+  "audit": {
+    "n_train": 12243,
+    "n_test": 3061,
+    "cat_cols": [
+      "gender",
+      "ever_married",
+      "work_type",
+      "Residence_type",
+      "smoking_status",
+      "hypertension",
+      "heart_disease"
+    ],
+    "num_cols": [
+      "age",
+      "avg_glucose_level",
+      "bmi"
+    ],
+    "hyperparameter_grid": [
+      {
+        "params": {
+          "max_iter": 600,
+          "learning_rate": 0.02,
+          "max_depth": null,
+          "max_leaf_nodes": 15,
+          "l2_regularization": 1.0,
+          "min_samples_leaf": 50
+        },
+        "cv_auc_mean": 0.8717793281331957,
+        "cv_auc_std": 0.007314665036294391,
+        "fold_scores": [
+          0.870093656875266,
+          0.8657041172601075,
+          0.8643041476208949,
+          0.8846805792163542,
+          0.874114139693356
+        ]
+      },
+      {
+        "params": {
+          "max_iter": 500,
+          "learning_rate": 0.03,
+          "max_depth": null,
+          "max_leaf_nodes": 31,
+          "l2_regularization": 1.0,
+          "min_samples_leaf": 20
+        },
+        "cv_auc_mean": 0.8614852202485125,
+        "cv_auc_std": 0.007883800852396552,
+        "fold_scores": [
+          0.8567816091954022,
+          0.850464688717594,
+          0.8623433467707929,
+          0.8742078364565588,
+          0.8636286201022145
+        ]
+      },
+      {
+        "params": {
+          "max_iter": 300,
+          "learning_rate": 0.05,
+          "max_depth": null,
+          "max_leaf_nodes": 31,
+          "l2_regularization": 0.0,
+          "min_samples_leaf": 20
+        },
+        "cv_auc_mean": 0.8516684434749845,
+        "cv_auc_std": 0.008782384154316411,
+        "fold_scores": [
+          0.8551468710089399,
+          0.8398974480071517,
+          0.8520670636058495,
+          0.8657069846678025,
+          0.8455238500851789
+        ]
+      },
+      {
+        "params": {
+          "max_iter": 400,
+          "learning_rate": 0.05,
+          "max_depth": null,
+          "max_leaf_nodes": 63,
+          "l2_regularization": 1.0,
+          "min_samples_leaf": 40
+        },
+        "cv_auc_mean": 0.8492390683160297,
+        "cv_auc_std": 0.009353829151260503,
+        "fold_scores": [
+          0.8421498510004257,
+          0.8414450048071247,
+          0.851109855448918,
+          0.8666609880749575,
+          0.8448296422487223
+        ]
+      }
+    ],
+    "chosen_config": {
+      "max_iter": 600,
+      "learning_rate": 0.02,
+      "max_depth": null,
+      "max_leaf_nodes": 15,
+      "l2_regularization": 1.0,
+      "min_samples_leaf": 50
+    },
+    "wallclock_s": 164.9
+  }
+}

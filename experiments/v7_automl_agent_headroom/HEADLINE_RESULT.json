@@ -1,0 +1,81 @@
+{
+  "recorded_at": "2026-05-29",
+  "claim": "Claude Opus 4.7 + minimal H_0 harness beats AutoML-Agent (ICML25, GPT-4o) on 5 of 6 comparable settings.",
+  "h0_harness_path": "experiments/v5_harness_opt/harness/",
+  "results": [
+    {
+      "task": "cora",
+      "setting": "free",
+      "metric": "accuracy",
+      "our_h0": 0.82,
+      "automl_agent_nps": 0.831,
+      "delta": -0.011
+    },
+    {
+      "task": "cora",
+      "setting": "constraint",
+      "metric": "accuracy",
+      "our_h0": 0.9037,
+      "automl_agent_nps": 0.843,
+      "delta": 0.061
+    },
+    {
+      "task": "citeseer",
+      "setting": "free",
+      "metric": "accuracy",
+      "our_h0": 0.715,
+      "automl_agent_nps": 0.592,
+      "delta": 0.123
+    },
+    {
+      "task": "citeseer",
+      "setting": "constraint",
+      "metric": "accuracy",
+      "our_h0": 0.795,
+      "automl_agent_nps": 0.632,
+      "delta": 0.163
+    },
+    {
+      "task": "higher_ed_students",
+      "setting": "free",
+      "metric": "rand_score",
+      "our_h0": 0.8,
+      "automl_agent_nps": 0.76,
+      "delta": 0.04
+    },
+    {
+      "task": "higher_ed_students",
+      "setting": "constraint",
+      "metric": "rand_score",
+      "our_h0": 0.8095,
+      "automl_agent_nps": 0.769,
+      "delta": 0.041
+    },
+    {
+      "task": "wine_quality_white",
+      "setting": "free",
+      "metric": "f1_macro",
+      "our_h0": 0.4254,
+      "automl_agent_nps": null,
+      "delta": null,
+      "note": "SELA dataset, not in AutoML-Agent Table 7"
+    },
+    {
+      "task": "wine_quality_white",
+      "setting": "constraint",
+      "metric": "f1_macro",
+      "our_h0": 0.4153,
+      "automl_agent_nps": null,
+      "delta": null,
+      "note": "SELA dataset, not in AutoML-Agent Table 7"
+    }
+  ],
+  "summary": {
+    "n_comparable": 6,
+    "wins": 5,
+    "losses": 1,
+    "mean_delta": 0.0695,
+    "min_delta": -0.011,
+    "max_delta": 0.163
+  }
+}

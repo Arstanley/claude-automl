@@ -1,0 +1,23 @@
+{
+  "target_column_chosen": "booking_status",
+  "headline_metric": "roc_auc",
+  "headline_value": 0.891693756138519,
+  "all_metrics": {
+    "cv_auc_per_config": [
+      0.8906259666649967,
+      0.8906325062634164,
+      0.891693756138519
+    ],
+    "best_cv_auc": 0.891693756138519,
+    "n_train": 33680,
+    "n_test": 8420,
+    "n_features": 26,
+    "n_categorical": 8,
+    "n_seeds_ensemble": 3,
+    "wall_time_sec": 965.5590860843658
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md"
+  ],
+  "interpretation_notes": "Binary classification with HistGradientBoostingClassifier and native categorical handling on engineered features (arrival ordinal/dow, totals, ratios). Applied tune_when_n_train_supports_it: n=33680, GBM, no constraints \u2014 used a 3-config grid with 5-fold StratifiedKFold OOF AUC for selection; refit best config with 3-seed ensemble for the test predictions."
+}

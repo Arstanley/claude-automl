@@ -1,0 +1,22 @@
+{
+  "target_column_chosen": "category",
+  "headline_metric": "accuracy",
+  "headline_value": 0.9037036895751953,
+  "all_metrics": {
+    "test_acc_holdout_20pct": 0.9037036895751953,
+    "val_acc_ensemble": 0.892988920211792,
+    "train_acc_ensemble": 0.938499391078949,
+    "overall_acc_all_nodes": 0.9224519729614258,
+    "per_seed_val_acc_mean": 0.896863478422165,
+    "per_seed_val_acc_std": 0.0025364720768200674,
+    "num_seeds": 10,
+    "num_nodes": 2708,
+    "num_classes": 7,
+    "split": "stratified_60_20_20_seed42",
+    "elapsed_sec": 2.4146859645843506
+  },
+  "skills_applied": [
+    "skill_graph_benchmark_split_and_ensemble.md"
+  ],
+  "interpretation_notes": "Cora-free prompt does not lock the Planetoid split, so used a dense 60/20/20 stratified split per skill_graph_benchmark_split_and_ensemble. Ensembled 10 seeds of an improved GCN (improved=True, input + hidden dropout 0.5, hidden=64) by averaging log-softmax. Reported metric is accuracy on the 20% holdout."
+}

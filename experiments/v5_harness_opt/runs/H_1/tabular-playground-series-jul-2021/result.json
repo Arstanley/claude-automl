@@ -1,0 +1,69 @@
+{
+  "target_column_chosen": [
+    "target_carbon_monoxide",
+    "target_benzene",
+    "target_nitrogen_oxides"
+  ],
+  "headline_metric": "mean_column_rmsle_oof",
+  "headline_value": 0.12805496826508758,
+  "all_metrics": {
+    "per_target": {
+      "target_carbon_monoxide": {
+        "best_gbm_params": {
+          "max_iter": 400,
+          "learning_rate": 0.05,
+          "max_depth": 6,
+          "min_samples_leaf": 20,
+          "l2_regularization": 0.0
+        },
+        "gbm_oof_rmsle": 0.09955152447131033,
+        "ridge_oof_rmsle": 0.15257742493571527,
+        "blend_w_gbm": 1.0,
+        "blend_oof_rmsle": 0.09955152447131033
+      },
+      "target_benzene": {
+        "best_gbm_params": {
+          "max_iter": 400,
+          "learning_rate": 0.05,
+          "max_depth": 6,
+          "min_samples_leaf": 20,
+          "l2_regularization": 0.0
+        },
+        "gbm_oof_rmsle": 0.0861567240110508,
+        "ridge_oof_rmsle": 0.14168743478093848,
+        "blend_w_gbm": 0.9,
+        "blend_oof_rmsle": 0.08583058883748075
+      },
+      "target_nitrogen_oxides": {
+        "best_gbm_params": {
+          "max_iter": 600,
+          "learning_rate": 0.03,
+          "max_depth": 6,
+          "min_samples_leaf": 20,
+          "l2_regularization": 0.1
+        },
+        "gbm_oof_rmsle": 0.19878279148647165,
+        "ridge_oof_rmsle": 0.3326920080986132,
+        "blend_w_gbm": 1.0,
+        "blend_oof_rmsle": 0.19878279148647165
+      }
+    },
+    "mean_column_rmsle_oof": 0.12805496826508758
+  },
+  "skills_applied": [
+    "skill_verify_split_claim_before_holdout.md",
+    "skill_log_target_for_skewed_nonnegative_regression.md",
+    "skill_tune_when_n_train_supports_it.md",
+    "skill_blend_two_model_families.md"
+  ],
+  "skills_evaluated_not_applied": [
+    "skill_probe_group_structure_in_ids.md: no compound IDs or value overlap; date_time is unique timestamp",
+    "skill_train_on_listed_auxiliary_files.md: prompt names only train/test/sample_submission",
+    "skill_stringify_low_cardinality_int_codes.md: all features are float / continuous",
+    "skill_multi_axis_constraint_budgets.md: single accuracy axis (RMSLE)",
+    "skill_missing_indicator_when_missingness_signals_class.md: zero NaNs in train and test",
+    "skill_tune_decision_threshold_for_f1.md: regression task, not classification"
+  ],
+  "interpretation_notes": "Multi-output regression on 5689 rows. Logged each target (skews up to ~2.5; RMSLE metric), fit HistGBM with small tune grid + Ridge baseline in log space, blended by OOF weight per target. Time-features (hour/dow/month sin-cos) added. KFold(5) since train/test date ranges interleave.",
+  "elapsed_sec": 57.66900038719177
+}

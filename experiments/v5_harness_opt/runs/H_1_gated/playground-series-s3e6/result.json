@@ -1,0 +1,73 @@
+{
+  "target_column_chosen": "price",
+  "headline_metric": "RMSE",
+  "headline_value": 169379.40555789732,
+  "all_metrics": {
+    "cv_rmse_best": 169379.40555789732,
+    "cv_rmse_all": [
+      {
+        "cfg": {
+          "max_iter": 400,
+          "learning_rate": 0.08,
+          "max_leaf_nodes": 63,
+          "min_samples_leaf": 40,
+          "l2_regularization": 1.0
+        },
+        "rmse": 169379.40555789732
+      },
+      {
+        "cfg": {
+          "max_iter": 400,
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 31,
+          "min_samples_leaf": 20,
+          "l2_regularization": 0.0
+        },
+        "rmse": 172002.5279983133
+      },
+      {
+        "cfg": {
+          "max_iter": 800,
+          "learning_rate": 0.03,
+          "max_leaf_nodes": 31,
+          "min_samples_leaf": 20,
+          "l2_regularization": 0.0
+        },
+        "rmse": 172433.04500196583
+      },
+      {
+        "cfg": {
+          "max_iter": 600,
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63,
+          "min_samples_leaf": 20,
+          "l2_regularization": 0.0
+        },
+        "rmse": 173452.0609950134
+      }
+    ]
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md",
+    "skill_seed_bag_final_regressor.md"
+  ],
+  "interpretation_notes": "Tabular regression on Paris Housing (n_train=18184, 16 numeric features, no NaNs, no id overlap between train/test). Used HistGradientBoostingRegressor with a 4-config small grid via 5-fold CV; refit best config with 3-seed bag (seeds [0,1,2]) for variance reduction. squareMeters is the dominant feature; the target appears nearly deterministic in train (CV RMSE is small relative to target std).",
+  "audit": {
+    "n_train": 18184,
+    "n_test": 4546,
+    "n_features": 16,
+    "best_cfg": {
+      "max_iter": 400,
+      "learning_rate": 0.08,
+      "max_leaf_nodes": 63,
+      "min_samples_leaf": 40,
+      "l2_regularization": 1.0
+    },
+    "seed_bag": [
+      0,
+      1,
+      2
+    ],
+    "elapsed_sec": 43.851306676864624
+  }
+}

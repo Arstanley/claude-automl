@@ -1,0 +1,71 @@
+{
+  "task": "playground-series-s3e5",
+  "target": "quality",
+  "metric": "quadratic_weighted_kappa (N=10, eval/eval.py)",
+  "n_test_rows": 412,
+  "conditions": {
+    "A_no_skills": {
+      "valid": true,
+      "header_ok": true,
+      "n_rows": 412,
+      "ids_match_test": true,
+      "row_order_matches_test": true,
+      "integer_predictions": true,
+      "prediction_range": [5, 7],
+      "unique_classes_predicted": [5, 6, 7],
+      "dsbench_qwk": 0.4664947336483031,
+      "reported_headline": 0.503895,
+      "headline_vs_true_gap": 0.0374,
+      "audit_hits": "6.5/7",
+      "audit_missed": ["no threshold tuning (round-clip only on regressor); leaves QWK on the table"],
+      "honeytraps_hit": [],
+      "approach": "rf_reg with round+clip to [3,8]"
+    },
+    "A_with_skills": {
+      "valid": true,
+      "header_ok": true,
+      "n_rows": 412,
+      "ids_match_test": true,
+      "row_order_matches_test": true,
+      "integer_predictions": true,
+      "prediction_range": [4, 7],
+      "unique_classes_predicted": [4, 5, 6, 7],
+      "dsbench_qwk": 0.4816253462136054,
+      "reported_headline": 0.5401256191097004,
+      "headline_vs_true_gap": 0.0585,
+      "audit_hits": "7/7",
+      "audit_missed": [],
+      "honeytraps_hit": [],
+      "approach": "HistGradientBoostingRegressor + tuned monotone thresholds on OOF; cites 8 skills applied"
+    },
+    "B_audit_round2": {
+      "valid": true,
+      "header_ok": true,
+      "n_rows": 412,
+      "ids_match_test": true,
+      "row_order_matches_test": true,
+      "integer_predictions": true,
+      "prediction_range": [5, 7],
+      "unique_classes_predicted": [5, 6, 7],
+      "dsbench_qwk": 0.48106644673145194,
+      "reported_headline": 0.567566411612997,
+      "headline_vs_true_gap": 0.0865,
+      "audit_hits": "7/7",
+      "audit_missed": [],
+      "honeytraps_hit": [],
+      "approach": "GBR+RF+ET ensemble regression + tuned monotone thresholds + constant-baseline sanity"
+    }
+  },
+  "deltas": {
+    "transfer_signal_A_with_minus_A_no": 0.0151306125653023,
+    "ceiling_gap_B_minus_A_with": -0.0005589007821535
+  },
+  "honeytrap_summary": {
+    "sample_submission_1372_ids_used": "none",
+    "float_predictions": "none",
+    "out_of_range_indices": "none",
+    "naive_argmax_only": "none"
+  },
+  "ranking_by_true_qwk": ["A_with_skills", "B_audit_round2", "A_no_skills"],
+  "notes": "All three submissions are valid: correct header, 412 rows, Ids match test.csv in order, integer predictions in safe range. The skill library gave A_with_skills a real lift over vanilla via threshold tuning. B_audit_round2 has the highest reported CV headline (0.568) but its test QWK (0.481) is statistically tied with A_with_skills (0.482). A_no_skills lost ~0.015 by skipping ordinal threshold tuning."
+}

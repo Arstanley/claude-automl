@@ -1,0 +1,34 @@
+{
+  "target_column_chosen": "EC1,EC2",
+  "headline_metric": "mean_roc_auc",
+  "headline_value": 0.6432754210625341,
+  "all_metrics": {
+    "EC1_hgb_oof_auc": 0.6989808486068821,
+    "EC1_et_oof_auc": 0.7030428950106621,
+    "EC1_blend_oof_auc": 0.7043011752383332,
+    "EC1_blend_weight": 0.30000000000000004,
+    "EC1_shipped": "blend",
+    "EC1_final_oof_auc": 0.7043011752383332,
+    "EC2_hgb_oof_auc": 0.5689062388802577,
+    "EC2_et_oof_auc": 0.5819060100530682,
+    "EC2_blend_oof_auc": 0.582249666886735,
+    "EC2_blend_weight": 0.15000000000000002,
+    "EC2_shipped": "blend",
+    "EC2_final_oof_auc": 0.582249666886735
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md",
+    "skill_blend_two_model_families.md"
+  ],
+  "skills_evaluated_not_applied": [
+    "skill_probe_group_structure_in_ids.md: ids are sequential ints with no train/test overlap (synthetic playground)",
+    "skill_train_on_listed_auxiliary_files.md: prompt mentions an original dataset but no file is provided in DATA_DIR",
+    "skill_verify_split_claim_before_holdout.md: prompt makes no structural split claim",
+    "skill_stringify_low_cardinality_int_codes.md: fr_COO/fr_COO2 are tiny ints but the model is tree-based (HGB/ET), not linear/distance",
+    "skill_multi_axis_constraint_budgets.md: prompt lists no constraint axes",
+    "skill_missing_indicator_when_missingness_signals_class.md: max NaN rate=0.0000 < 0.05 threshold",
+    "skill_tune_decision_threshold_for_f1.md: metric is ROC-AUC (rank metric), no threshold applies",
+    "skill_log_target_for_skewed_nonnegative_regression.md: task is classification, not regression"
+  ],
+  "interpretation_notes": "Multi-label binary on 33 numeric molecular features. Predicted EC1 and EC2 independently with a HistGradientBoostingClassifier tuned over a 3-config grid (5-fold StratifiedKFold), then blended with an ExtraTrees model; blend weight chosen to maximize OOF AUC per target. Mean OOF AUC = 0.6433."
+}

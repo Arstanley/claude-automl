@@ -1,0 +1,27 @@
+{
+  "target_column_chosen": "Age",
+  "headline_metric": "RMSLE",
+  "headline_value": 0.1611549928321266,
+  "all_metrics": {
+    "cv_rmsle_per_config": [
+      0.16130922574455678,
+      0.16125806116003902,
+      0.16135224799159217
+    ],
+    "ensemble_oof_rmsle": 0.1611549928321266,
+    "top_configs": [
+      1,
+      0
+    ],
+    "n_train": 59240,
+    "n_test": 14811,
+    "n_splits": 4,
+    "elapsed_sec": 14.49
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md",
+    "skill_verify_split_claim_before_holdout.md",
+    "skill_probe_group_structure_in_ids.md"
+  ],
+  "interpretation_notes": "HistGradientBoostingRegressor on log1p(Age) so MSE-on-log equals RMSLE-on-Age. 3-config small grid x 4-fold KFold (no group structure probed in id or features); top 2 configs averaged for the submission. Added Volume and meat/shell ratio features."
+}

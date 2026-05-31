@@ -1,0 +1,34 @@
+{
+  "target_column_chosen": "Transported",
+  "target_column_justification": "Transported is the only column present in train.csv (6954 rows) but absent from test.csv (1739 rows). It is boolean (True/False) with near-balanced classes (3500/3454) \u2014 consistent with the spec's 'roughly half the passengers were affected' description and the 'classification accuracy' evaluation.",
+  "headline_metric": "accuracy",
+  "headline_value": 0.8062985332182916,
+  "all_metrics": {
+    "cv_accuracy_5fold": 0.8062985332182916,
+    "cv_roc_auc_5fold": 0.8977897675572835,
+    "cv_log_loss_5fold": 0.3957247078231777,
+    "majority_class_baseline_accuracy": 0.5033074489502445,
+    "train_rows": 6954,
+    "test_rows": 1739,
+    "predicted_positive_rate_on_test": 0.5175388154111559
+  },
+  "anticipated_probes": [
+    "Did you align the submission with test.csv (1739 rows) and not with sample_submission.csv (4277 rows, zero PassengerId overlap)? \u2014 Yes; sample_submission appears to be a stale Kaggle artifact and has no IDs in common with this experiment's test set.",
+    "Did you preserve test.csv row order? \u2014 Yes; submission rows match test.csv['PassengerId'] index-for-index. Sorting would also be defensible but the spec says 'one row per test.csv row', so we mirror that order.",
+    "Did you pick the target on structural grounds rather than guess? \u2014 Yes; Transported is uniquely the train\\test column-set difference and is boolean, matching the 'classification accuracy' evaluation.",
+    "Is the headline metric accuracy (per spec) and not AUC/F1? \u2014 Yes; we report accuracy as headline and include AUC/log-loss as secondary diagnostics.",
+    "Did you compare to a sensible baseline? \u2014 Yes; majority-class baseline \u2248 0.503 vs CV accuracy reported above.",
+    "Did you handle the CryoSleep-implies-zero-spend physics constraint? \u2014 Yes; spend NaNs under CryoSleep=True are set to 0 before modeling.",
+    "Did you leak target into engineered group/family features? \u2014 No; GroupSize and FamilySize are derived from PassengerId/Name on train+test union, no use of the Transported label.",
+    "Output booleans match train.csv dtype? \u2014 Yes; Transported is written as True/False booleans, identical to train.csv and sample_submission.csv styling.",
+    "Off-by-one in spec counts (6,955/1,740 vs actual 6,954/1,739) \u2014 we used the actual file row counts as ground truth."
+  ],
+  "interpretation_notes": [
+    "Spec stated row counts 6955/1740; actual files contain 6954/1739 (likely header-included counting in spec). We used the files.",
+    "sample_submission.csv contains 4277 rows whose PassengerIds do NOT intersect this experiment's test.csv at all; treating it as the submission template would be incorrect. Aligned with test.csv as the spec literally requires.",
+    "PassengerId 'gggg_pp' was split into Group/GroupMember and used for GroupSize.",
+    "Cabin 'deck/num/side' was split into Cabin_Deck/Cabin_Num/Cabin_Side.",
+    "CryoSleep cabin-confinement implies zero amenity spend; used to fix obvious NaNs.",
+    "Model: sklearn HistGradientBoostingClassifier with ordinal-encoded categoricals; 5-fold stratified CV for the headline."
+  ]
+}

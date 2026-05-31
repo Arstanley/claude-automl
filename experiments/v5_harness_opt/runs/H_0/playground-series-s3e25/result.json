@@ -1,0 +1,85 @@
+{
+  "target_column_chosen": "Hardness",
+  "headline_metric": "MedAE",
+  "headline_value": 0.5265888345006988,
+  "all_metrics": {
+    "cv_medae_mean": 0.5265888345006988,
+    "cv_medae_std": 0.0069911188496554755,
+    "cv_medae_folds": [
+      0.5128023230953271,
+      0.5307280721268608,
+      0.5277944683214368,
+      0.53059362960889,
+      0.5310256793509796
+    ],
+    "grid": [
+      {
+        "params": {
+          "max_iter": 500,
+          "learning_rate": 0.03,
+          "max_depth": null,
+          "max_leaf_nodes": 63,
+          "min_samples_leaf": 20,
+          "l2_regularization": 0.1
+        },
+        "cv_medae_mean": 0.5265888345006988,
+        "cv_medae_std": 0.0069911188496554755
+      },
+      {
+        "params": {
+          "max_iter": 300,
+          "learning_rate": 0.05,
+          "max_depth": null,
+          "max_leaf_nodes": 31,
+          "min_samples_leaf": 40,
+          "l2_regularization": 1.0
+        },
+        "cv_medae_mean": 0.5274484289522252,
+        "cv_medae_std": 0.00966808862771615
+      },
+      {
+        "params": {
+          "max_iter": 300,
+          "learning_rate": 0.05,
+          "max_depth": null,
+          "max_leaf_nodes": 31,
+          "min_samples_leaf": 20,
+          "l2_regularization": 0.0
+        },
+        "cv_medae_mean": 0.5373234296913185,
+        "cv_medae_std": 0.009715134648273718
+      }
+    ]
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md"
+  ],
+  "interpretation_notes": "HistGradientBoostingRegressor with loss='absolute_error' (aligned with MedAE metric). 3-config explicit grid + 5-fold KFold CV selected the config with lowest mean MedAE; refit on full train. Features are 11 numeric chemical descriptors; no missingness, no group leak (id is unique). Predictions clipped to observed target range.",
+  "audit": {
+    "n_train": 8325,
+    "n_test": 2082,
+    "n_features": 11,
+    "feature_cols": [
+      "allelectrons_Total",
+      "density_Total",
+      "allelectrons_Average",
+      "val_e_Average",
+      "atomicweight_Average",
+      "ionenergy_Average",
+      "el_neg_chi_Average",
+      "R_vdw_element_Average",
+      "R_cov_element_Average",
+      "zaratio_Average",
+      "density_Average"
+    ],
+    "chosen_config": {
+      "max_iter": 500,
+      "learning_rate": 0.03,
+      "max_depth": null,
+      "max_leaf_nodes": 63,
+      "min_samples_leaf": 20,
+      "l2_regularization": 0.1
+    },
+    "elapsed_sec": 27.01
+  }
+}

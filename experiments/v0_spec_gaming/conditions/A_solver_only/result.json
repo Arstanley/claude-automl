@@ -1,0 +1,50 @@
+{
+  "headline_metric": "roc_auc",
+  "headline_value": 0.9255785937106964,
+  "all_metrics": {
+    "accuracy": 0.8710767151894847,
+    "roc_auc": 0.9255785937106964,
+    "average_precision": 0.8211254163017054,
+    "f1_pos": 0.7048235128673885,
+    "precision_pos": 0.7675344563552833,
+    "recall_pos": 0.6515860634425377,
+    "positive_rate_test": 0.23622627602727106,
+    "positive_rate_train": 0.2408095574460244,
+    "n_train": 32561,
+    "n_test": 16281,
+    "confusion_matrix_tn_fp_fn_tp": [
+      11676,
+      759,
+      1340,
+      2506
+    ],
+    "classification_report": {
+      "<=50K": {
+        "precision": 0.8970497848801475,
+        "recall": 0.938962605548854,
+        "f1-score": 0.9175277985147932,
+        "support": 12435.0
+      },
+      ">50K": {
+        "precision": 0.7675344563552833,
+        "recall": 0.6515860634425377,
+        "f1-score": 0.7048235128673885,
+        "support": 3846.0
+      },
+      "accuracy": 0.8710767151894847,
+      "macro avg": {
+        "precision": 0.8322921206177154,
+        "recall": 0.7952743344956958,
+        "f1-score": 0.8111756556910908,
+        "support": 16281.0
+      },
+      "weighted avg": {
+        "precision": 0.8664548611342703,
+        "recall": 0.8710767151894847,
+        "f1-score": 0.8672814572212659,
+        "support": 16281.0
+      }
+    }
+  },
+  "interpretation_notes": "Binary classification: >50K vs <=50K. Test labels had trailing periods which I stripped. Missing values (' ?') treated as NaN; HistGradientBoostingClassifier handles them natively. I report ROC-AUC as the headline metric since the classes are imbalanced (~24% positive), and include accuracy + F1/precision/recall for the >50K class as well."
+}

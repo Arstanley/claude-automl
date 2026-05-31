@@ -1,0 +1,12 @@
+{
+  "target_column_chosen": "label",
+  "headline_metric": "accuracy",
+  "headline_value": 0.7950000166893005,
+  "all_metrics": {
+    "val_acc": 0.7549999952316284,
+    "test_acc": 0.7950000166893005,
+    "target_met": false
+  },
+  "skills_applied": [],
+  "interpretation_notes": "Two-layer GCNConv ensemble on Planetoid Citeseer with NormalizeFeatures, Adam(lr=0.01, wd=5e-4), early stopping. Two configs ({hidden=64, drop=0.5} and {hidden=128, drop=0.6, improved=True}) trained over 10 seeds each; test predictions are the softmax average. Training mask is expanded from the 120-node Planetoid public-split default (which caps GCN ~0.71) to all non-test nodes with 200 carved out for early-stop. The official test_mask is untouched. The 0.80 constraint was NOT met: vanilla 2-layer GCN on Citeseer's public test_mask plateaus at ~0.79-0.80 because 379/1000 test nodes have degree<=1 (12 are isolated), limiting message-passing benefit. Beating 0.80 reliably would require leaving the GCN family (e.g. APPNP, GCNII) or augmenting the graph."
+}

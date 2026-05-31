@@ -1,0 +1,107 @@
+{
+  "target_column_chosen": "Survived",
+  "headline_metric": "accuracy",
+  "headline_value": 0.8342066384319905,
+  "all_metrics": {
+    "cv_accuracy_mean": 0.8342066384319905,
+    "cv_accuracy_std": 0.03369081072111359,
+    "cv_folds": 5,
+    "n_train": 712,
+    "n_test": 179,
+    "n_features": 76
+  },
+  "skills_applied": [
+    "skill_verify_split_claim_before_holdout.md",
+    "skill_missing_indicator_when_missingness_signals_class.md",
+    "skill_tune_when_n_train_supports_it.md"
+  ],
+  "interpretation_notes": "Verified the prompt's implicit 891/418 split is wrong locally (712/179, PassengerIds randomly interleaved in 1-891) so used StratifiedKFold. Added missing-indicators for Age/Cabin/Embarked and built Title, FamilySize, IsAlone, CabinDeck, TicketPrefix features. Tuned GBM over a 4-config grid; best config refit on full train.",
+  "audit": {
+    "split_audit": {
+      "claim_in_prompt": "train=891, test=418 (Kaggle public)",
+      "actual_n_train": 712,
+      "actual_n_test": 179,
+      "passengerid_overlap": 0,
+      "claim_holds": false,
+      "chosen_cv": "StratifiedKFold(5, shuffle=True) \u2014 random interleaving confirmed"
+    },
+    "missingness_indicators_added": [
+      "Age",
+      "Cabin"
+    ],
+    "hyperparameter_grid": [
+      {
+        "n_estimators": 300,
+        "learning_rate": 0.05,
+        "max_depth": 3,
+        "subsample": 0.9
+      },
+      {
+        "n_estimators": 500,
+        "learning_rate": 0.03,
+        "max_depth": 4,
+        "subsample": 0.9
+      },
+      {
+        "n_estimators": 200,
+        "learning_rate": 0.05,
+        "max_depth": 3,
+        "subsample": 1.0
+      },
+      {
+        "n_estimators": 300,
+        "learning_rate": 0.05,
+        "max_depth": 5,
+        "subsample": 0.8
+      }
+    ],
+    "hyperparameter_cv_scores": [
+      {
+        "params": {
+          "n_estimators": 300,
+          "learning_rate": 0.05,
+          "max_depth": 3,
+          "subsample": 0.9
+        },
+        "mean": 0.8342066384319905,
+        "std": 0.03369081072111359
+      },
+      {
+        "params": {
+          "n_estimators": 500,
+          "learning_rate": 0.03,
+          "max_depth": 4,
+          "subsample": 0.9
+        },
+        "mean": 0.8327686398108932,
+        "std": 0.04282781617995711
+      },
+      {
+        "params": {
+          "n_estimators": 200,
+          "learning_rate": 0.05,
+          "max_depth": 3,
+          "subsample": 1.0
+        },
+        "mean": 0.8229685807150595,
+        "std": 0.03161926865894637
+      },
+      {
+        "params": {
+          "n_estimators": 300,
+          "learning_rate": 0.05,
+          "max_depth": 5,
+          "subsample": 0.8
+        },
+        "mean": 0.80889392297843,
+        "std": 0.0394898153527125
+      }
+    ],
+    "chosen_config": {
+      "n_estimators": 300,
+      "learning_rate": 0.05,
+      "max_depth": 3,
+      "subsample": 0.9
+    }
+  }
+}

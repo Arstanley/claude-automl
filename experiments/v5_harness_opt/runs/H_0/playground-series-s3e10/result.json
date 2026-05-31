@@ -1,0 +1,68 @@
+{
+  "target_column_chosen": "Class",
+  "headline_metric": "log_loss",
+  "headline_value": 0.030273197489451606,
+  "all_metrics": {
+    "holdout_log_loss": 0.030273197489451606
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md"
+  ],
+  "interpretation_notes": "Binary pulsar detection, 94K rows, 8 numeric features, 0 NaNs, ~9.3% positives. HistGradientBoostingClassifier with a 2-config grid evaluated on a 20% stratified hold-out (single-fold to fit the 3-min budget); chosen config refit on full train with early stopping. Probabilities clipped to [1e-6, 1-1e-6] for log-loss safety.",
+  "audit": {
+    "hyperparameter_grid": [
+      {
+        "max_iter": 300,
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63,
+        "l2_regularization": 1.0,
+        "min_samples_leaf": 40
+      },
+      {
+        "max_iter": 300,
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 31,
+        "l2_regularization": 0.0,
+        "min_samples_leaf": 20
+      }
+    ],
+    "cv_results": [
+      {
+        "config_idx": 1,
+        "params": {
+          "max_iter": 300,
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63,
+          "l2_regularization": 1.0,
+          "min_samples_leaf": 40
+        },
+        "holdout_log_loss": 0.030273197489451606,
+        "n_iter": 148
+      },
+      {
+        "config_idx": 0,
+        "params": {
+          "max_iter": 300,
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 31,
+          "l2_regularization": 0.0,
+          "min_samples_leaf": 20
+        },
+        "holdout_log_loss": 0.030434996439937568,
+        "n_iter": 199
+      }
+    ],
+    "chosen_config": {
+      "max_iter": 300,
+      "learning_rate": 0.05,
+      "max_leaf_nodes": 63,
+      "l2_regularization": 1.0,
+      "min_samples_leaf": 40
+    },
+    "n_train": 94051,
+    "n_test": 23513,
+    "n_features": 8,
+    "class_balance": 0.09326854578898683,
+    "wall_seconds": 9.481738328933716
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "model_summary": "char_wb (2,5) TF-IDF + CalibratedSigmoid(LinearSVC) over 20 langs, plus Unicode-block hard-routing and hi_latn_dev augmentation for romanized Hindi.",
+  "headline_metric": "macro_f1_test",
+  "headline_value": 0.9974011833457842,
+  "all_metrics": {
+    "test": {
+      "accuracy": 0.9974,
+      "macro_f1": 0.9974011833457842,
+      "weighted_f1": 0.9974011833457844
+    },
+    "valid": {
+      "accuracy": 0.9977,
+      "macro_f1": 0.9976997863976829,
+      "weighted_f1": 0.9976997863976829
+    },
+    "test_per_language_f1": {
+      "ar": 0.998998998998999,
+      "bg": 0.999000999000999,
+      "de": 1.0,
+      "el": 1.0,
+      "en": 0.999000999000999,
+      "es": 0.998,
+      "fr": 1.0,
+      "hi": 0.9813542688910697,
+      "it": 0.998998998998999,
+      "ja": 1.0,
+      "nl": 1.0,
+      "pl": 0.9979959919839679,
+      "pt": 0.997002997002997,
+      "ru": 0.998998998998999,
+      "sw": 0.998,
+      "th": 1.0,
+      "tr": 1.0,
+      "ur": 0.9806714140386572,
+      "vi": 1.0,
+      "zh": 1.0
+    },
+    "test_tier1_macro_f1": 0.9992998996998997,
+    "test_tier2_macro_f1": 0.9975666405021624,
+    "latin_only_test": {
+      "n": 5506,
+      "accuracy": 0.9954594987286597,
+      "macro_f1": 0.8297464262413657
+    },
+    "short_text_test_le20": {
+      "n": 125,
+      "accuracy": 0.992,
+      "macro_f1": 0.9666666666666667
+    },
+    "hi_latn_held_in_500": {
+      "accuracy_as_hi": 0.994,
+      "top_confusions": {
+        "pt": 2,
+        "en": 1
+      }
+    },
+    "latency_ms_single_thread": {
+      "n": 500,
+      "p50_ms": 3.357594832777977,
+      "p95_ms": 3.95340658724308,
+      "p99_ms": 4.692483693361282,
+      "mean_ms": 2.6437016800045967
+    },
+    "model_size_mb": 38.86353588104248
+  },
+  "constraint_choices": "Target budget assumed: p99<=50ms single-thread, model.pkl<=50MB. Achieved p99=4.69ms, size=38.86MB. char_wb (2,5) TF-IDF with max_features=200k + LinearSVC(CalibratedSigmoid). No external resources, no internet.",
+  "audit_items_addressed": [
+    "(1) Romanized Hindi mapped to 'hi' via hi_latn_dev.txt augmentation (strategy c+d); held-in 500-line probe reports romanized-Hindi accuracy.",
+    "(2) 'Must not be confidently wrong': Unicode-block hard-routing for ar/el/th/hi-Devanagari/ja/zh; calibrated SVM provides confidence; predict_strict('unk') sentinel exposed for abstention.",
+    "(3) Latency/size budget declared explicitly: target <=50ms p99 single-thread, <=50MB on disk. Measured below.",
+    "(4) Tier-1 = {en,es,fr,de,zh,ja,hi,ar,ru,pt}; Tier-2 = the other 10. Reported per-tier macro-F1 separately.",
+    "(5) Stratified reporting: per-language F1, Latin-only subset F1, short-text (<=20 char) F1, romanized-Hindi probe accuracy.",
+    "(6) Train deduped against valid/test text to avoid memorization leakage.",
+    "(7) hi_latn_test.txt NEVER read.",
+    "(8) submission.csv emits one of the 20 in-vocab labels for every row (abstention applies only to predict_strict, not the submission)."
+  ],
+  "interpretation_notes": "Romanized Hindi resolved by strategy (c)+(d): mapped to 'hi' (audit §5) and downweighted with a per-class cap of 3500 to avoid pollution of Devanagari-hi. Abstention sentinel 'unk' available via predict_strict(text, tau=0.40); submission.csv uses the unrestricted argmax to satisfy the 20-class schema. Tier-1 reflects UN6 + Adobe-likely user languages; we did not weight the training loss by tier because the test set is class-balanced — instead we report per-tier metrics so the headline cannot hide Tier-1 regressions."
+}

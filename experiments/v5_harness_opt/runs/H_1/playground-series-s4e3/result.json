@@ -1,0 +1,134 @@
+{
+  "target_column_chosen": [
+    "Pastry",
+    "Z_Scratch",
+    "K_Scatch",
+    "Stains",
+    "Dirtiness",
+    "Bumps",
+    "Other_Faults"
+  ],
+  "headline_metric": "mean_roc_auc",
+  "headline_value": 0.8829884808392002,
+  "all_metrics": {
+    "mean_auc_hgb_only": 0.8792588651457027,
+    "mean_auc_et_only": 0.8741782300795459,
+    "mean_auc_blend": 0.8829884808392002,
+    "per_target": {
+      "Pastry": {
+        "auc_hgb": 0.8558171873159506,
+        "auc_et": 0.8570530334377349,
+        "auc_blend": 0.8627572917579048,
+        "blend_w_hgb": 0.5,
+        "best_hgb_cfg": {
+          "max_iter": 300,
+          "learning_rate": 0.06,
+          "max_leaf_nodes": 31,
+          "min_samples_leaf": 20,
+          "l2_regularization": 0.0
+        },
+        "pos_rate": 0.07577235772357724
+      },
+      "Z_Scratch": {
+        "auc_hgb": 0.9540074513263137,
+        "auc_et": 0.9366237526844501,
+        "auc_blend": 0.9555586819861767,
+        "blend_w_hgb": 0.9,
+        "best_hgb_cfg": {
+          "max_iter": 300,
+          "learning_rate": 0.06,
+          "max_leaf_nodes": 31,
+          "min_samples_leaf": 20,
+          "l2_regularization": 0.0
+        },
+        "pos_rate": 0.06048780487804878
+      },
+      "K_Scatch": {
+        "auc_hgb": 0.9829985526552655,
+        "auc_et": 0.9824807344734473,
+        "auc_blend": 0.9837215625562556,
+        "blend_w_hgb": 0.7000000000000001,
+        "best_hgb_cfg": {
+          "max_iter": 300,
+          "learning_rate": 0.06,
+          "max_leaf_nodes": 31,
+          "min_samples_leaf": 20,
+          "l2_regularization": 0.0
+        },
+        "pos_rate": 0.17886178861788618
+      },
+      "Stains": {
+        "auc_hgb": 0.9883761515125975,
+        "auc_et": 0.991562143982148,
+        "auc_blend": 0.9922915236861705,
+        "blend_w_hgb": 0.6000000000000001,
+        "best_hgb_cfg": {
+          "max_iter": 300,
+          "learning_rate": 0.06,
+          "max_leaf_nodes": 63,
+          "min_samples_leaf": 20,
+          "l2_regularization": 0.1
+        },
+        "pos_rate": 0.0304390243902439
+      },
+      "Dirtiness": {
+        "auc_hgb": 0.8735469115191987,
+        "auc_et": 0.8716308013355593,
+        "auc_blend": 0.8815534223706176,
+        "blend_w_hgb": 0.7000000000000001,
+        "best_hgb_cfg": {
+          "max_iter": 300,
+          "learning_rate": 0.06,
+          "max_leaf_nodes": 31,
+          "min_samples_leaf": 20,
+          "l2_regularization": 0.0
+        },
+        "pos_rate": 0.026016260162601626
+      },
+      "Bumps": {
+        "auc_hgb": 0.8034998560918893,
+        "auc_et": 0.7942413083544453,
+        "auc_blend": 0.805757571281046,
+        "blend_w_hgb": 0.65,
+        "best_hgb_cfg": {
+          "max_iter": 300,
+          "learning_rate": 0.06,
+          "max_leaf_nodes": 31,
+          "min_samples_leaf": 20,
+          "l2_regularization": 0.0
+        },
+        "pos_rate": 0.2495609756097561
+      },
+      "Other_Faults": {
+        "auc_hgb": 0.6965659455987038,
+        "auc_et": 0.685655836289036,
+        "auc_blend": 0.6992793122362297,
+        "blend_w_hgb": 0.65,
+        "best_hgb_cfg": {
+          "max_iter": 300,
+          "learning_rate": 0.06,
+          "max_leaf_nodes": 31,
+          "min_samples_leaf": 20,
+          "l2_regularization": 0.0
+        },
+        "pos_rate": 0.33879674796747966
+      }
+    }
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md",
+    "skill_blend_two_model_families.md"
+  ],
+  "skills_evaluated_not_applied": [
+    "skill_probe_group_structure_in_ids.md: id is a plain integer, no compound format and no obvious group overlap structure.",
+    "skill_train_on_listed_auxiliary_files.md: prompt mentions UCI original, but no auxiliary file is provided in DATA_DIR.",
+    "skill_verify_split_claim_before_holdout.md: prompt makes no temporal/group split claim.",
+    "skill_stringify_low_cardinality_int_codes.md: downstream models are tree ensembles (HGB/ET), not linear/distance.",
+    "skill_multi_axis_constraint_budgets.md: only one constraint (3-min train budget); no multi-axis Pareto.",
+    "skill_missing_indicator_when_missingness_signals_class.md: train.isna().sum() == 0, no missingness to encode.",
+    "skill_tune_decision_threshold_for_f1.md: metric is ROC-AUC (rank metric), not F1/F-beta/MCC; threshold tuning irrelevant.",
+    "skill_log_target_for_skewed_nonnegative_regression.md: task is multi-label classification, not regression."
+  ],
+  "interpretation_notes": "Per-target HGB tuned over 3 configs (5-fold CV), blended with ExtraTrees by OOF-AUC-optimal weight, then refit on full train for test. AUC is rank-based so no threshold tuning needed; n_train=15375 supports modest tuning + blending within the 3-min budget. No NaNs in features.",
+  "elapsed_sec": 87.44606232643127
+}

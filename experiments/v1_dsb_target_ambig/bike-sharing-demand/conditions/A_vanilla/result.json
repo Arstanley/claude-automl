@@ -1,0 +1,15 @@
+{
+  "target_column_chosen": "count",
+  "headline_metric": "RMSLE",
+  "headline_value": 0.30873646979023023,
+  "all_metrics": {
+    "val_RMSLE": 0.30873646979023023,
+    "val_RMSE": 47.362688111704706,
+    "val_MAE": 27.76081530401619,
+    "train_RMSLE_full_fit": 0.20767670491753445,
+    "n_train_rows": 8708,
+    "n_val_rows": 1820,
+    "n_test_rows": 2178
+  },
+  "interpretation_notes": "Predicted `count` (total hourly rentals) since the sample submission expects `datetime,count` and test.csv lacks casual/registered/count (so they cannot be used as features). Model: GradientBoostingRegressor on log1p(count) with engineered datetime features (year, month, day, dayofweek, hour) plus the weather and calendar columns. Validation is a time-aware holdout using days 16-19 of each training month to mirror the train-vs-test day split. Headline RMSLE reflects that holdout."
+}

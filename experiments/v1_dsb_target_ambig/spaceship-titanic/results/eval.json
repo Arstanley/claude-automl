@@ -1,0 +1,153 @@
+{
+  "task": "spaceship-titanic",
+  "gold_target": "Transported",
+  "test_n_rows": 1739,
+  "sample_submission_n_rows": 4277,
+  "sample_submission_passenger_id_overlap_with_test": 0,
+  "answer_file": "eval/answer.csv",
+  "evaluator": "eval/eval.py (positional row-wise equality on the 'Transported' column)",
+  "evaluator_note": "eval.py compares predictions[value] == answers[value] positionally; it does NOT join on PassengerId. We verified each submission's PassengerId order matches eval/answer.csv exactly, so positional and id-aligned accuracy agree.",
+  "audit_checklist_items": [
+    "1. Target column committed (Transported) and justified by schema diff, NOT by sample_submission header",
+    "2. Submission keyed on the 1,739 test.csv PassengerIds, header PassengerId,Transported, boolean values; not sample_submission ids",
+    "3. CV split is group-aware (GroupKFold on gggg prefix); per-row and group-aware CV both reported",
+    "4. No groupmate-label leakage feature; if used, declared and ablated",
+    "5. Per-column missingness policy declared (not sklearn default)",
+    "6. CryoSleep => zero-spend invariant exploited (impute CryoSleep when NA) or explicitly waived",
+    "7. Cabin split into Deck/Num/Side; rare Deck='T' (5 train rows) handled"
+  ],
+  "conditions": {
+    "A_vanilla": {
+      "submission_path": "conditions/A_vanilla/submission.csv",
+      "validity": {
+        "header_ok": true,
+        "header": ["PassengerId", "Transported"],
+        "n_rows": 1739,
+        "passenger_ids_unique": true,
+        "id_set_equals_test_csv": true,
+        "row_order_matches_test_csv": true,
+        "transported_values_boolean": true,
+        "valid": true
+      },
+      "target_chosen": "Transported",
+      "target_correct": true,
+      "headline_metric": "accuracy_cv5_mean",
+      "headline_value_reported": 0.8057239499557796,
+      "dsbench_native_score": 0.7947096032202415,
+      "id_aligned_test_accuracy": 0.7947096032202415,
+      "headline_vs_true_gap": 0.011014346735538094,
+      "predicted_true_rate": 0.5446,
+      "honeytraps": {
+        "submitted_sample_submission_ids": false,
+        "group_aware_cv_used": false,
+        "group_leakage_overestimate_risk": "high (per-row 5-fold KFold; ignores the 40.8% group leakage between train and test)"
+      },
+      "audit_checklist": {
+        "1_target_committed_and_justified": "partial — target Transported committed, justified as 'only column missing from test'. Good. But uses cross_val_score per-row, not group-aware (item 3 weakens this).",
+        "2_submission_keyed_on_test_csv": "yes — 1739 rows, correct header, booleans, ids match test.csv exactly",
+        "3_group_aware_cv": "no — uses cross_val_score(cv=5) per-row only; ignores 40.8% group leakage",
+        "4_no_groupmate_label_leakage_features": "yes — only structural Group/GroupSize features, no label-derived",
+        "5_missingness_policy_declared": "weak — uses SimpleImputer(median) and SimpleImputer(most_frequent); no NA-as-category, no CryoSleep imputation from invariant, no per-column rationale",
+        "6_cryosleep_zero_spend_invariant": "partial — adds TotalSpend and NoSpend indicator but does NOT use the invariant to impute CryoSleep when NA",
+        "7_cabin_split_and_rare_deck_t": "partial — splits into Deck/CabinNum/Side, but Deck='T' (5 train rows) not specially handled"
+      },
+      "audit_items_addressed_count": 2.5,
+      "audit_items_total": 7,
+      "audit_hit_rate": 0.357
+    },
+    "B_audit": {
+      "submission_path": "conditions/B_audit/submission.csv",
+      "validity": {
+        "header_ok": true,
+        "header": ["PassengerId", "Transported"],
+        "n_rows": 1739,
+        "passenger_ids_unique": true,
+        "id_set_equals_test_csv": true,
+        "row_order_matches_test_csv": true,
+        "transported_values_boolean": true,
+        "valid": true
+      },
+      "target_chosen": "Transported",
+      "target_correct": true,
+      "headline_metric": "cv_group_accuracy",
+      "headline_value_reported": 0.8024158757549612,
+      "dsbench_native_score": 0.80448533640023,
+      "id_aligned_test_accuracy": 0.80448533640023,
+      "headline_vs_true_gap": -0.002069460645268776,
+      "predicted_true_rate": 0.4968,
+      "honeytraps": {
+        "submitted_sample_submission_ids": false,
+        "group_aware_cv_used": true,
+        "group_leakage_overestimate_risk": "low — explicitly reports per-row=0.8106 vs group=0.8024 and uses the group number as headline"
+      },
+      "audit_checklist": {
+        "1_target_committed_and_justified": "yes — asserts set(train.cols)-set(test.cols)=={'Transported'} programmatically; explicitly disavows sample_submission justification (Gap A)",
+        "2_submission_keyed_on_test_csv": "yes — 1739 rows, header correct, booleans, asserts row count and PID uniqueness; verifies zero overlap with sample_submission",
+        "3_group_aware_cv": "yes — GroupKFold on gggg prefix; reports BOTH per-row (0.8106) and group (0.8024) CV with the gap surfaced as the leakage",
+        "4_no_groupmate_label_leakage_features": "yes — only label-free group features (GroupSize, PaxInGroup); explicit comment 'no groupmate_transported_mean'",
+        "5_missingness_policy_declared": "yes — NA-as-category for HomePlanet/CryoSleep/Destination/VIP/Deck/Side; NA->0 + was_missing flag per spend column; median + Age_isna flag for Age; -1 sentinel + CabinNum_isna for cabin number",
+        "6_cryosleep_zero_spend_invariant": "yes — CryoSleep NA imputed True iff TotalSpend==0 else False",
+        "7_cabin_split_and_rare_deck_t": "yes — split into Deck/Num/Side; Deck='T' (5 rows) folded into '__rare__' bucket"
+      },
+      "audit_items_addressed_count": 7,
+      "audit_items_total": 7,
+      "audit_hit_rate": 1.0
+    },
+    "C_warned": {
+      "submission_path": "conditions/C_warned/submission.csv",
+      "validity": {
+        "header_ok": true,
+        "header": ["PassengerId", "Transported"],
+        "n_rows": 1739,
+        "passenger_ids_unique": true,
+        "id_set_equals_test_csv": true,
+        "row_order_matches_test_csv": true,
+        "transported_values_boolean": true,
+        "valid": true
+      },
+      "target_chosen": "Transported",
+      "target_correct": true,
+      "headline_metric": "accuracy",
+      "headline_value_reported": 0.8062985332182916,
+      "dsbench_native_score": 0.80448533640023,
+      "id_aligned_test_accuracy": 0.80448533640023,
+      "headline_vs_true_gap": 0.0018131968180616,
+      "predicted_true_rate": 0.5175,
+      "honeytraps": {
+        "submitted_sample_submission_ids": false,
+        "group_aware_cv_used": false,
+        "group_leakage_overestimate_risk": "moderate — StratifiedKFold per-row, ignores the 40.8% group leakage. Empirically the gap is small here (0.806 vs 0.804 true) because the group-leak signal is mild and StratifiedKFold preserves class balance."
+      },
+      "audit_checklist": {
+        "1_target_committed_and_justified": "yes — Transported committed, justified by schema diff and class balance ~50/50, anticipates the spec/file row-count off-by-one (6955→6954, 1740→1739)",
+        "2_submission_keyed_on_test_csv": "yes — 1739 rows, correct header, booleans, asserts PIDs == test.csv PIDs row-for-row; calls out sample_submission as a stale Kaggle artifact",
+        "3_group_aware_cv": "no — StratifiedKFold per-row; does NOT split by group. Trap from Gap B not avoided in CV.",
+        "4_no_groupmate_label_leakage_features": "yes — GroupSize/FamilySize derived from PassengerId/Name on train+test union; no label-derived features",
+        "5_missingness_policy_declared": "partial — declares the intent (CryoSleep physics, etc.) but the pipeline itself uses SimpleImputer(most_frequent) for categoricals and SimpleImputer(median) for numerics. No NA-as-category, no was_missing flags.",
+        "6_cryosleep_zero_spend_invariant": "partial — fills spend NaNs to 0 when CryoSleep==True (one direction), but does NOT impute CryoSleep when NA from spend (the more valuable direction per Gap D)",
+        "7_cabin_split_and_rare_deck_t": "partial — splits into Cabin_Deck/Cabin_Num/Cabin_Side; rare Deck='T' (5 train rows) not specially handled"
+      },
+      "audit_items_addressed_count": 4.5,
+      "audit_items_total": 7,
+      "audit_hit_rate": 0.643
+    }
+  },
+  "ranking_by_dsbench_score": [
+    {"condition": "B_audit",   "score": 0.80448533640023},
+    {"condition": "C_warned",  "score": 0.80448533640023},
+    {"condition": "A_vanilla", "score": 0.7947096032202415}
+  ],
+  "ranking_by_audit_hit_rate": [
+    {"condition": "B_audit",   "hit_rate": 1.0},
+    {"condition": "C_warned",  "hit_rate": 0.643},
+    {"condition": "A_vanilla", "hit_rate": 0.357}
+  ],
+  "winner": "B_audit",
+  "winning_margin": {
+    "vs_A_vanilla_accuracy_delta": 0.009775733180,
+    "vs_C_warned_accuracy_delta": 0.0,
+    "vs_A_vanilla_audit_hit_rate_delta": 0.643,
+    "vs_C_warned_audit_hit_rate_delta": 0.357,
+    "interpretation": "B_audit and C_warned tie exactly on DSBench native accuracy (0.80449); B_audit wins overall because (a) its headline metric (group-aware CV, 0.8024) is closest to truth — gap -0.002 vs C's +0.002 and A's +0.011, (b) it is the only condition that ticks all 7 audit items, and (c) B's reported headline is the honest group-aware number that the audit specifically demands. A_vanilla loses on accuracy by ~0.98 percentage points and on audit hit rate by 64 points."
+  }
+}

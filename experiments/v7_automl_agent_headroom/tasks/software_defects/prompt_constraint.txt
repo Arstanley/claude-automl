@@ -1,0 +1,9 @@
+You are solving this data science task of binary classification:
+The dataset presented here (the Software Defects Dataset) comprises a lot of numerical features. Please split the dataset into three parts of train, valid, and test. Your task is to predict the defects item, which is a binary label with 0 and 1. The evaluation metric is the F1 score.
+Please train a binary classification model to get a good performance on this task, ensuring that the model training time does not exceed 30 minutes and the prediction time for each instance is under 5 milliseconds.
+
+The data is available at:
+- train: `data/train.csv` (contains the target column `defects`)
+- test:  `data/test.csv` (no target column)
+
+For the F1 score evaluation, output binary predictions (0 or 1) for the test set in `submission.csv`.

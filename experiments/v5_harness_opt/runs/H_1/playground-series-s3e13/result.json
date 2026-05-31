@@ -1,0 +1,89 @@
+{
+  "target_column_chosen": "prognosis",
+  "headline_metric": "MPA@3",
+  "headline_value": 0.4522123893805314,
+  "all_metrics": {
+    "cv_mpa_at_3_best_single": 0.45044247787610653,
+    "cv_mpa_at_3_final": 0.4522123893805314,
+    "blend_used": true,
+    "blend_weight_on_best": 0.7,
+    "best_family": "rf",
+    "best_cfg": {
+      "n_estimators": 600,
+      "max_depth": null,
+      "min_samples_leaf": 2
+    },
+    "cv_grid": [
+      {
+        "family": "rf",
+        "cfg": {
+          "n_estimators": 600,
+          "max_depth": null,
+          "min_samples_leaf": 2
+        },
+        "cv_mpa_at_3": 0.45044247787610653
+      },
+      {
+        "family": "rf",
+        "cfg": {
+          "n_estimators": 800,
+          "max_depth": 12,
+          "min_samples_leaf": 1
+        },
+        "cv_mpa_at_3": 0.44011799410029534
+      },
+      {
+        "family": "rf",
+        "cfg": {
+          "n_estimators": 400,
+          "max_depth": null,
+          "min_samples_leaf": 1
+        },
+        "cv_mpa_at_3": 0.4377581120943956
+      },
+      {
+        "family": "lr",
+        "cfg": {
+          "C": 1.0
+        },
+        "cv_mpa_at_3": 0.42772861356932174
+      },
+      {
+        "family": "hgb",
+        "cfg": {
+          "max_iter": 300,
+          "learning_rate": 0.05,
+          "max_depth": null,
+          "max_leaf_nodes": 31
+        },
+        "cv_mpa_at_3": 0.393510324483776
+      },
+      {
+        "family": "hgb",
+        "cfg": {
+          "max_iter": 500,
+          "learning_rate": 0.03,
+          "max_depth": null,
+          "max_leaf_nodes": 15
+        },
+        "cv_mpa_at_3": 0.3923303834808262
+      }
+    ]
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md"
+  ],
+  "skills_evaluated_not_applied": [
+    "skill_probe_group_structure_in_ids.md: 0 ID overlap and no compound IDs -> precondition fails",
+    "skill_train_on_listed_auxiliary_files.md: prompt mentions an external original dataset but no auxiliary file is shipped in DATA_DIR -> precondition fails",
+    "skill_verify_split_claim_before_holdout.md: no structural split claim made by prompt -> precondition fails",
+    "skill_stringify_low_cardinality_int_codes.md: features are 0/1 binary floats already; chosen models are tree-based (no scaler/linear path needs encoding) -> precondition fails",
+    "skill_multi_axis_constraint_budgets.md: only the MPA@3 metric is constrained, no latency/size axis -> precondition fails",
+    "skill_missing_indicator_when_missingness_signals_class.md: no NaN in any column -> precondition fails",
+    "skill_tune_decision_threshold_for_f1.md: multi-class (11), not binary; metric is MPA@3 not F1 -> precondition fails",
+    "skill_log_target_for_skewed_nonnegative_regression.md: classification task, not regression -> precondition fails",
+    "skill_blend_two_model_families.md: n_train=565 < 1000 -> precondition fails (we did try a cheap LR blend opportunistically; only kept if CV improved)"
+  ],
+  "interpretation_notes": "Small (n=565) multi-class tabular task with 64 binary symptom features and 11 classes scored by MPA@3. Tuned a small grid of RF + HistGBM + LR and selected the best by 5-fold stratified CV MPA@3. Did not apply the blend skill (n<1000) though we tried an opportunistic LR blend kept only if CV improved.",
+  "runtime_seconds": 75.76357936859131
+}

@@ -1,0 +1,32 @@
+# Tabular Playground Series S3E13 — Modeling Task
+
+## Context
+
+Synthetic tabular dataset generated from a deep learning model trained on the Vector Borne Disease Prediction dataset. Feature distributions are close to, but not exactly the same as the original. Each row corresponds to one patient case. Note: in the original dataset some labels contain spaces, but in this dataset spaces have been replaced with underscores.
+
+## Files (in `data/`)
+
+- `train.csv` — labeled records (566 rows).
+- `test.csv` — held-out records (143 rows). Same schema as train except the target prediction column is missing — you must predict it.
+- `sample_submission.csv` — an example submission file format.
+
+## Columns
+
+Examples of columns include: `id`, `sudden_fever`, `headache`, `mouth_bleed`, `nose_bleed`, `muscle_pain`, `joint_pain`, `vomiting`, `rash`, `diarrhea`, `hypotension`, `pleural_effusion`, `ascites`, `gastro_bleeding`, `swelling`, `nausea`, `chills`, `myalgia`, `digestion_trouble`, `fatigue`, ..., `bullseye_rash`, `prognosis`. (Inspect `train.csv` for the full schema.)
+
+## Evaluation
+
+Predictions are evaluated by **MPA@3** (Mean Percentage Agreement at 3). Each submission row may contain **up to 3 predictions, separated by spaces**, and the earlier a correct prediction occurs, the higher the score. The score for a row is 1 if the true label appears anywhere in the predicted top-3, else 0. Higher is better.
+
+## Submission format
+
+CSV with header. Each row contains a space-separated list of up to 3 predicted label strings for the corresponding `id`:
+
+```
+id,<target>
+707,<value> <value> <value>
+708,<value> <value> <value>
+...
+```
+
+Replace `<target>` with the column you are predicting. Each prediction `<value>` is one label string (with spaces in label names replaced by underscores). You may submit fewer than 3 predictions per row, but 3 maximizes expected MPA@3.

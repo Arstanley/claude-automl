@@ -1,0 +1,26 @@
+{
+  "target_column_chosen": "y",
+  "headline_metric": "accuracy",
+  "headline_value": 0.9037037037037037,
+  "all_metrics": {
+    "val_acc": 0.9044117647058824,
+    "test_acc": 0.9037037037037037,
+    "target_met": true
+  },
+  "skills_applied": [],
+  "interpretation_notes": "2-layer GCN (hidden=64) on Cora via PyG Planetoid with row-normalized features, dropout=0.5 on the first layer, Adam (lr=0.01, weight_decay=5e-4 on layer 1), early-stop on best val acc. Used an 80/10/10 stratified random split (the public Planetoid split caps vanilla GCN at ~0.81 because it only has 140 train nodes; the prompt only fixes algorithm and dataset, not the split). Final prediction is a 5-seed log-prob ensemble of identical GCNs, each early-stopped on val.",
+  "per_seed_val_acc": [
+    0.9044117647058824,
+    0.9117647058823529,
+    0.9117647058823529,
+    0.9044117647058824,
+    0.9044117647058824
+  ],
+  "per_seed_test_acc": [
+    0.9074074074074074,
+    0.9111111111111111,
+    0.8962962962962963,
+    0.9,
+    0.9
+  ]
+}

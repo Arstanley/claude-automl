@@ -1,0 +1,16 @@
+{
+  "target_column_chosen": "OUTPUT Grade",
+  "headline_metric": "rand_score",
+  "headline_value": 0.8095238095238095,
+  "all_metrics": {
+    "train_rand": 0.7645631067961165,
+    "test_rand": 0.8095238095238095,
+    "training_time_s": 6.304392576217651,
+    "target_met": true
+  },
+  "skills_applied": [
+    "skill_stringify_low_cardinality_int_codes.md",
+    "skill_multi_axis_constraint_budgets.md"
+  ],
+  "interpretation_notes": "Selected gmm-diag (raw, seed=0) via train-rand selection over KMeans/Agglomerative/GMM x raw/PCA10/PCA20. One-hot encoded all 31 int-coded feature columns. Selection used only train labels; test labels held out for eval."
+}

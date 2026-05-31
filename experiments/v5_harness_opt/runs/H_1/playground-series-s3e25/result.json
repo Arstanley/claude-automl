@@ -1,0 +1,64 @@
+{
+  "target_column_chosen": "Hardness",
+  "headline_metric": "MedAE",
+  "headline_value": 0.5336262439925195,
+  "all_metrics": {
+    "cv_medae_blend": 0.5336262439925195,
+    "cv_mae_blend": 0.8816375981110703,
+    "cv_medae_hgb_best": 0.5336262439925195,
+    "cv_medae_et": 0.6654008477033182,
+    "blend_w_hgb": 1.0,
+    "best_hgb_cfg_idx": 1,
+    "hgb_grid_cv": {
+      "hgb_0": {
+        "medae": 0.5433358238230417,
+        "mae": 0.8879223216171134,
+        "params": {
+          "max_iter": 120,
+          "learning_rate": 0.08,
+          "max_depth": 6,
+          "min_samples_leaf": 30,
+          "l2_regularization": 0.0
+        }
+      },
+      "hgb_1": {
+        "medae": 0.5336262439925195,
+        "mae": 0.8816375981110703,
+        "params": {
+          "max_iter": 150,
+          "learning_rate": 0.05,
+          "max_depth": 7,
+          "min_samples_leaf": 20,
+          "l2_regularization": 0.1
+        }
+      },
+      "hgb_2": {
+        "medae": 0.5544334460886944,
+        "mae": 0.8919787693120327,
+        "params": {
+          "max_iter": 100,
+          "learning_rate": 0.1,
+          "max_depth": 5,
+          "min_samples_leaf": 40,
+          "l2_regularization": 0.0
+        }
+      }
+    },
+    "elapsed_sec": 69.63660836219788
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md"
+  ],
+  "skills_evaluated_not_applied": [
+    "skill_probe_group_structure_in_ids.md: no train/test id overlap; ids are plain ints with no parseable structure.",
+    "skill_train_on_listed_auxiliary_files.md: prompt mentions an 'original dataset' but no auxiliary file is present in DATA_DIR.",
+    "skill_verify_split_claim_before_holdout.md: prompt makes no structural (temporal/group) split claim.",
+    "skill_stringify_low_cardinality_int_codes.md: all 11 features are continuous float64; no int-coded categoricals.",
+    "skill_multi_axis_constraint_budgets.md: prompt names no constraint axes (no latency/size/accuracy/hard-rule tokens).",
+    "skill_missing_indicator_when_missingness_signals_class.md: 0 NaNs in train and test.",
+    "skill_tune_decision_threshold_for_f1.md: regression task; no decision threshold to tune.",
+    "skill_log_target_for_skewed_nonnegative_regression.md: y>=0 but skew(y)=-0.11 (not skewed) and max/median=1.8 (<20); metric is MedAE not msle/rmsle.",
+    "skill_blend_two_model_families.md: blend weight collapsed to corner (w_hgb=1.00); shipped single HGB."
+  ],
+  "interpretation_notes": "MedAE is minimized by the conditional median, so we used HGB with loss='absolute_error' (L1) as the primary model. Tuned a small 4-config grid via 5-fold CV, then blended with ExtraTrees; blend weight chosen by MedAE on OOF. Predictions clipped to observed train target range."
+}

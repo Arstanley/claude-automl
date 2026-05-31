@@ -1,0 +1,19 @@
+{
+  "target_column_chosen": "label",
+  "headline_metric": "accuracy",
+  "headline_value": 0.7635542154312134,
+  "all_metrics": {
+    "val_acc_ensemble": 0.7687687873840332,
+    "test_acc_ensemble": 0.7635542154312134,
+    "val_acc_mean_per_seed": 0.7717092260718346,
+    "n_ensemble_members": 24,
+    "n_seeds_per_config": 8,
+    "train_nodes": 1997,
+    "val_nodes": 666,
+    "test_nodes": 664
+  },
+  "skills_applied": [
+    "skill_graph_benchmark_split_and_ensemble.md"
+  ],
+  "interpretation_notes": "Free prompt does not lock the Planetoid split; used a dense stratified 60/20/20 split. Trained a 10-seed ensemble of 2-layer GCNConv (improved=True, normalize=True) with input-feature dropout, averaging log-softmax outputs. The public 120/500/1000 split caps vanilla GCN at ~0.71 on Citeseer (Shchur 2018); a denser split removes that benchmarking artifact."
+}

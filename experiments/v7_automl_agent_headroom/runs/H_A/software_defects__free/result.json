@@ -1,0 +1,52 @@
+{
+  "target_column_chosen": "defects",
+  "headline_metric": "f1",
+  "headline_value": 0.5609348914858097,
+  "all_metrics": {
+    "oof_f1_best": 0.5609348914858097,
+    "oof_threshold": 0.26945390281889897,
+    "n_seeds_ensembled": 3,
+    "configs_tried": [
+      {
+        "cfg": {
+          "learning_rate": 0.06,
+          "max_iter": 400,
+          "max_leaf_nodes": 31,
+          "min_samples_leaf": 40,
+          "l2_regularization": 0.0
+        },
+        "auc": 0.7910617478731912,
+        "f1": 0.5603573808524817,
+        "thr": 0.2802962114674946
+      },
+      {
+        "cfg": {
+          "learning_rate": 0.06,
+          "max_iter": 400,
+          "max_leaf_nodes": 63,
+          "min_samples_leaf": 20,
+          "l2_regularization": 0.1
+        },
+        "auc": 0.7899705602331668,
+        "f1": 0.5592505630360822,
+        "thr": 0.26507084876078485
+      },
+      {
+        "cfg": {
+          "learning_rate": 0.04,
+          "max_iter": 500,
+          "max_leaf_nodes": 31,
+          "min_samples_leaf": 40,
+          "l2_regularization": 0.0
+        },
+        "auc": 0.791662047351377,
+        "f1": 0.5609348914858097,
+        "thr": 0.26945390281889897
+      }
+    ]
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md"
+  ],
+  "interpretation_notes": "Tabular binary classification, 81k rows, 21 numeric features, no NaNs, 22.8% positive class. HistGradientBoosting with a 4-config grid via 5-fold stratified CV; selected best by OOF F1, tuned the decision threshold on OOF probabilities, then refit a 3-seed ensemble on full data."
+}

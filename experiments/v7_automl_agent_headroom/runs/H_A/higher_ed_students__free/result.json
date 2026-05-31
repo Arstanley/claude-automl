@@ -1,0 +1,71 @@
+{
+  "target_column_chosen": "OUTPUT Grade",
+  "headline_metric": "rand_score",
+  "headline_value": 0.819047619047619,
+  "all_metrics": {
+    "selected_model": "kmeans",
+    "test_rand_score": 0.819047619047619,
+    "test_adjusted_rand_score": -0.0030165912518853697,
+    "per_candidate": {
+      "kmeans": {
+        "rand_score": 0.819047619047619,
+        "adjusted_rand_score": -0.0030165912518853697,
+        "silhouette": 0.037957584544454546
+      },
+      "agglomerative_ward": {
+        "rand_score": 0.780952380952381,
+        "adjusted_rand_score": -0.03337612323491656,
+        "silhouette": 0.03152099639176111
+      },
+      "gmm_diag": {
+        "rand_score": 0.8571428571428571,
+        "adjusted_rand_score": 0.04021937842778794,
+        "silhouette": 0.01718008382091496
+      }
+    }
+  },
+  "skills_applied": [
+    "skill_stringify_low_cardinality_int_codes.md"
+  ],
+  "interpretation_notes": "All 31 features are integer ordinal codes with <=11 unique values; stringified+one-hot before KMeans/Ward/GMM so Euclidean distance respects category identity rather than ordinal magnitude. Model selected unsupervised by silhouette; rand_score reported on test rows vs OUTPUT Grade.",
+  "audit": {
+    "stringified_columns": [
+      "Student Age",
+      "Sex",
+      "Graduated high-school type",
+      "Scholarship type",
+      "Additional work",
+      "Regular artistic or sports activity",
+      "Do you have a partner",
+      "Total salary if available",
+      "Transportation to the university",
+      "Accomodation type in Cyprus",
+      "Mother's education",
+      "Father's education",
+      "Number of sisters/brothers (if available)",
+      "Parental status",
+      "Mother's occupation",
+      "Father's occupation",
+      "Weekly study hours",
+      "Reading frequency (non-scientific books/journals)",
+      "Reading frequency (scientific books/journals)",
+      "Attendance to the seminars/conferences related to the department",
+      "Impact of your projects/activities on your success",
+      "Attendance to classes",
+      "Preparation to midterm exams 1",
+      "Preparation to midterm exams 2",
+      "Taking notes in classes",
+      "Listening in classes",
+      "Discussion improves my interest and success in the course",
+      "Flip-classroom",
+      "Cumulative grade point average in the last semester (/4.00)",
+      "Expected Cumulative grade point average in the graduation (/4.00)",
+      "Course ID"
+    ],
+    "n_train": 104,
+    "n_valid": 26,
+    "n_test": 15,
+    "n_clusters": 8,
+    "runtime_s": 0.23
+  }
+}

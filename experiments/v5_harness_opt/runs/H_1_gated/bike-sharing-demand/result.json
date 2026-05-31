@@ -1,0 +1,89 @@
+{
+  "target_column_chosen": "count",
+  "headline_metric": "RMSLE",
+  "headline_value": 0.2751839987143098,
+  "all_metrics": {
+    "oof_rmsle": 0.2751839987143098
+  },
+  "skills_applied": [
+    "skill_verify_split_claim_before_holdout.md",
+    "skill_tune_when_n_train_supports_it.md",
+    "skill_seed_bag_final_regressor.md"
+  ],
+  "interpretation_notes": "Verified the prompt's 'days 20+' claim against data \u2014 both train and test span days 1-19, so used random KFold(5) instead of a strict temporal holdout. Two-head approach (casual+registered, log1p targets), HistGradientBoosting tuned over a 3-config grid, then 3-seed bag on the final fit.",
+  "audit": {
+    "train_date_range": [
+      "2011-01-01 01:00:00",
+      "2012-12-19 21:00:00"
+    ],
+    "test_date_range": [
+      "2011-01-01 00:00:00",
+      "2012-12-19 23:00:00"
+    ],
+    "train_day_max": 19,
+    "test_day_max": 19,
+    "ranges_overlap": true,
+    "cv_choice": "KFold(5, shuffle=True, random_state=0)",
+    "should_tune": true,
+    "n_train": 8708,
+    "hyperparameter_grid": [
+      {
+        "params": {
+          "max_iter": 400,
+          "learning_rate": 0.05,
+          "max_depth": 8,
+          "min_samples_leaf": 10,
+          "l2_regularization": 1.0
+        },
+        "rmsle_oof": 0.2751839987143098
+      },
+      {
+        "params": {
+          "max_iter": 600,
+          "learning_rate": 0.03,
+          "max_depth": 8,
+          "min_samples_leaf": 20,
+          "l2_regularization": 0.0
+        },
+        "rmsle_oof": 0.2762748743015312
+      },
+      {
+        "params": {
+          "max_iter": 400,
+          "learning_rate": 0.05,
+          "max_depth": 6,
+          "min_samples_leaf": 20,
+          "l2_regularization": 0.0
+        },
+        "rmsle_oof": 0.2765477619016165
+      }
+    ],
+    "chosen_config": {
+      "max_iter": 400,
+      "learning_rate": 0.05,
+      "max_depth": 8,
+      "min_samples_leaf": 10,
+      "l2_regularization": 1.0
+    },
+    "oof_rmsle_chosen": 0.2751839987143098,
+    "seed_bag": [
+      0,
+      1,
+      2
+    ],
+    "two_head": true
+  },
+  "split_claim": "test = days 20+ of each month",
+  "claim_verified": false,
+  "actual_distribution": {
+    "train_day_range": [
+      1,
+      19
+    ],
+    "test_day_range": [
+      1,
+      19
+    ],
+    "ranges_overlap": true
+  }
+}

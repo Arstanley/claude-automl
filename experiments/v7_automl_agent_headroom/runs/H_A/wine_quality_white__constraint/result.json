@@ -1,0 +1,69 @@
+{
+  "target_column_chosen": "quality",
+  "headline_metric": "macro_f1",
+  "headline_value": 0.41180142687759913,
+  "all_metrics": {
+    "valid_macro_f1": 0.3732037339924498,
+    "test_macro_f1": 0.41180142687759913,
+    "test_accuracy": 0.6783673469387755
+  },
+  "leaderboard": [
+    {
+      "name": "rf_100",
+      "valid_macro_f1": 0.3732037339924498,
+      "fit_s": 0.4858250617980957,
+      "latency_ms_per_instance": 4.569026206930478
+    },
+    {
+      "name": "rf_120",
+      "valid_macro_f1": 0.3784052809935163,
+      "fit_s": 0.5096502304077148,
+      "latency_ms_per_instance": 5.154280923306942
+    },
+    {
+      "name": "hgbm_ref",
+      "valid_macro_f1": 0.3574064604052336,
+      "fit_s": 10.17179799079895,
+      "latency_ms_per_instance": 45.2493409315745
+    }
+  ],
+  "selected_model": "rf_100",
+  "selected_model_params": {
+    "bootstrap": true,
+    "ccp_alpha": 0.0,
+    "class_weight": "balanced_subsample",
+    "criterion": "gini",
+    "max_depth": null,
+    "max_features": "sqrt",
+    "max_leaf_nodes": null,
+    "max_samples": null,
+    "min_impurity_decrease": 0.0,
+    "min_samples_leaf": 1,
+    "min_samples_split": 2,
+    "min_weight_fraction_leaf": 0.0,
+    "monotonic_cst": null,
+    "n_estimators": 100,
+    "n_jobs": 1,
+    "oob_score": false,
+    "random_state": 0,
+    "verbose": 0,
+    "warm_start": false
+  },
+  "final_single_row_latency_ms": 4.4296472643812494,
+  "final_bulk_latency_ms_per_instance": 0.018527170225065583,
+  "latency_budget_ms": 5.0,
+  "latency_budget_met": true,
+  "train_budget_s": 300,
+  "wall_clock_s": 14.046086311340332,
+  "n_train": 2938,
+  "n_valid": 735,
+  "n_test": 1225,
+  "skills_applied": [
+    "skill_multi_axis_constraint_budgets.md"
+  ],
+  "skills_considered_and_skipped": {
+    "skill_train_on_listed_auxiliary_files.md": "winequality-white.csv is the union of train+valid+test (would leak); prompt does not name it",
+    "skill_tune_when_n_train_supports_it.md": "prompt contains latency/time tokens (ms, minutes) -> v2 misfire suppressor active"
+  },
+  "interpretation_notes": "Pareto-aware model selection across HGBM and RF under explicit train-time (300s) and per-instance latency (5ms) budgets; selected the model with highest valid macro-F1 that clears the latency budget, then refit on train+valid for test."
+}

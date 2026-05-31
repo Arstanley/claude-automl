@@ -1,0 +1,121 @@
+{
+  "target_column_chosen": "Transported",
+  "headline_metric": "accuracy",
+  "headline_value": 0.8146625722850604,
+  "all_metrics": {
+    "cv_accuracy_group_mean": 0.8146625722850604,
+    "cv_accuracy_group_std": 0.008692870056727245,
+    "cv_accuracy_plain_stratified_mean": 0.8035664006537401,
+    "cv_optimism_gap_plain_minus_group": -0.011096171631320373
+  },
+  "skills_applied": [
+    "skill_probe_group_structure_in_ids.md",
+    "skill_missing_indicator_when_missingness_signals_class.md",
+    "skill_tune_when_n_train_supports_it.md"
+  ],
+  "interpretation_notes": "PassengerId is compound `gggg_pp`; ~16% of test groups appear in train, so CV uses StratifiedGroupKFold keyed on the group prefix to avoid the ~0.011 optimism reported in v1. Per-column NaN rates are ~2% but ~24% of rows have at least one NaN, so we add *_missing indicators (rate>=1%) and treat NaN as its own category for categoricals. HistGradientBoosting is tuned over a 4-config grid; n_train=6954 \u226b 500 with no size/latency tokens in the prompt.",
+  "audit": {
+    "group_leakage_probe": {
+      "group_col": "Group (PassengerId.split('_')[0])",
+      "test_groups_seen_in_train_frac": 0.3713927227101631,
+      "passenger_id_compound_match_frac": 1.0,
+      "n_train_groups": 5215,
+      "n_test_groups": 1594
+    },
+    "missingness_indicators_added": [
+      "Cabin",
+      "Age",
+      "RoomService",
+      "FoodCourt",
+      "ShoppingMall",
+      "Spa",
+      "VRDeck",
+      "Name",
+      "CabinNum"
+    ],
+    "hyperparameter_grid": [
+      {
+        "params": {
+          "max_iter": 600,
+          "learning_rate": 0.03,
+          "max_depth": null,
+          "max_leaf_nodes": 31,
+          "l2_regularization": 0.0
+        },
+        "mean": 0.8146625722850604,
+        "std": 0.008692870056727245
+      },
+      {
+        "params": {
+          "max_iter": 500,
+          "learning_rate": 0.04,
+          "max_depth": 8,
+          "max_leaf_nodes": 31,
+          "l2_regularization": 0.0
+        },
+        "mean": 0.8114240953816848,
+        "std": 0.013224087534569709
+      },
+      {
+        "params": {
+          "max_iter": 300,
+          "learning_rate": 0.05,
+          "max_depth": null,
+          "max_leaf_nodes": 31,
+          "l2_regularization": 0.0
+        },
+        "mean": 0.8094127447266631,
+        "std": 0.011797730411654713
+      },
+      {
+        "params": {
+          "max_iter": 400,
+          "learning_rate": 0.05,
+          "max_depth": null,
+          "max_leaf_nodes": 63,
+          "l2_regularization": 0.1
+        },
+        "mean": 0.8071696532472368,
+        "std": 0.009574213236674055
+      }
+    ],
+    "chosen_config": {
+      "max_iter": 600,
+      "learning_rate": 0.03,
+      "max_depth": null,
+      "max_leaf_nodes": 31,
+      "l2_regularization": 0.0
+    },
+    "n_train": 6954,
+    "n_test": 1739,
+    "features_numeric": [
+      "Age",
+      "RoomService",
+      "FoodCourt",
+      "ShoppingMall",
+      "Spa",
+      "VRDeck",
+      "CabinNum",
+      "GroupNum",
+      "TotalSpend",
+      "NoSpend",
+      "Cabin_missing",
+      "Age_missing",
+      "RoomService_missing",
+      "FoodCourt_missing",
+      "ShoppingMall_missing",
+      "Spa_missing",
+      "VRDeck_missing",
+      "Name_missing",
+      "CabinNum_missing"
+    ],
+    "features_categorical": [
+      "HomePlanet",
+      "CryoSleep",
+      "Destination",
+      "VIP",
+      "Deck",
+      "Side"
+    ]
+  }
+}

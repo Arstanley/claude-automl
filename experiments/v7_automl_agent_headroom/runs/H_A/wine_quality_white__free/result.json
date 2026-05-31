@@ -1,0 +1,44 @@
+{
+  "target_column_chosen": "quality",
+  "headline_metric": "macro_f1",
+  "headline_value": 0.4254279648576872,
+  "all_metrics": {
+    "valid_macro_f1_best": 0.3744442455585767,
+    "test_macro_f1": 0.4254279648576872,
+    "test_accuracy": 0.6816326530612244,
+    "grid_results": [
+      {
+        "name": "rf_600_balanced",
+        "valid_macro_f1": 0.3744442455585767,
+        "fit_s": 2.9942843914031982
+      },
+      {
+        "name": "rf_400",
+        "valid_macro_f1": 0.36163359083713065,
+        "fit_s": 1.5869081020355225
+      },
+      {
+        "name": "hgb_lr1_d6",
+        "valid_macro_f1": 0.3549710785813595,
+        "fit_s": 5.20685338973999
+      },
+      {
+        "name": "hgb_lr05_d8_l2_1",
+        "valid_macro_f1": 0.34701103290553487,
+        "fit_s": 12.886500597000122
+      },
+      {
+        "name": "hgb_lr05_d6",
+        "valid_macro_f1": 0.3410603041784942,
+        "fit_s": 58.0172758102417
+      }
+    ],
+    "best_config": "rf_600_balanced"
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md",
+    "skill_train_on_listed_auxiliary_files.md"
+  ],
+  "interpretation_notes": "Tabular 11-feature ordinal-coded multi-class. Ran a 5-config GBM/RF grid scored on the held-out valid.csv, then refit the winner on train+valid before predicting test. No missing values, no scaling needed (tree models). Class 3/9 are tiny so macro-F1 is dominated by minority-class recall.",
+  "elapsed_s": 84.20844006538391
+}

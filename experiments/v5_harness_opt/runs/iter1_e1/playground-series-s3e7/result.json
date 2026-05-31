@@ -1,0 +1,27 @@
+{
+  "target_column_chosen": "booking_status",
+  "headline_metric": "roc_auc",
+  "headline_value": 0.8945764957541726,
+  "all_metrics": {
+    "cv_auc_per_cfg": [
+      0.8940212581630043,
+      0.8945764957541726,
+      0.8935544483601303
+    ],
+    "best_cfg_index": 1,
+    "best_cfg": {
+      "max_iter": 600,
+      "learning_rate": 0.05,
+      "max_depth": null,
+      "max_leaf_nodes": 63,
+      "l2_regularization": 1.0
+    },
+    "n_train": 33680,
+    "n_test": 8420
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md",
+    "skill_seed_bag_final_regressor.md"
+  ],
+  "interpretation_notes": "HistGradientBoostingClassifier on 33.7k rows of synthetic reservation data. Tuned via a 3-config grid with 5-fold StratifiedKFold; best OOF AUC=0.8946. Final test predictions are a 3-seed bag of the best config refit on full train. sample_submission.csv ID range doesn't match test.csv -> submitted using test.csv IDs as the spec instructs."
+}

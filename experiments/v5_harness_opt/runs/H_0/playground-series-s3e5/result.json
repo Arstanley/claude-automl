@@ -1,0 +1,125 @@
+{
+  "target_column_chosen": "quality",
+  "headline_metric": "quadratic_weighted_kappa",
+  "headline_value": 0.49307375562443123,
+  "all_metrics": {
+    "cv_qwk_mean_best": 0.4805109367139643,
+    "cv_qwk_std_best": 0.0337092569018199,
+    "oof_bagged_qwk": 0.49307375562443123
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md"
+  ],
+  "interpretation_notes": "Ordinal target {3..8} with QWK; modeled as regression with HistGradientBoostingRegressor then round+clip to int range (a well-known QWK-friendly trick on wine quality). Ran a 4-config stratified-5-fold tune and bagged 5 seeds on the winner for lower-variance test predictions.",
+  "audit": {
+    "n_train": 1644,
+    "n_test": 412,
+    "features": [
+      "fixed acidity",
+      "volatile acidity",
+      "citric acid",
+      "residual sugar",
+      "chlorides",
+      "free sulfur dioxide",
+      "total sulfur dioxide",
+      "density",
+      "pH",
+      "sulphates",
+      "alcohol"
+    ],
+    "hyperparameter_grid": [
+      {
+        "max_iter": 800,
+        "learning_rate": 0.02,
+        "max_depth": null,
+        "max_leaf_nodes": 31,
+        "min_samples_leaf": 20,
+        "l2_regularization": 1.0
+      },
+      {
+        "max_iter": 600,
+        "learning_rate": 0.03,
+        "max_depth": null,
+        "max_leaf_nodes": 31,
+        "min_samples_leaf": 20,
+        "l2_regularization": 1.0
+      },
+      {
+        "max_iter": 400,
+        "learning_rate": 0.05,
+        "max_depth": null,
+        "max_leaf_nodes": 31,
+        "min_samples_leaf": 20,
+        "l2_regularization": 0.0
+      },
+      {
+        "max_iter": 500,
+        "learning_rate": 0.05,
+        "max_depth": null,
+        "max_leaf_nodes": 15,
+        "min_samples_leaf": 30,
+        "l2_regularization": 0.0
+      }
+    ],
+    "cv_results": [
+      {
+        "config": {
+          "max_iter": 800,
+          "learning_rate": 0.02,
+          "max_depth": null,
+          "max_leaf_nodes": 31,
+          "min_samples_leaf": 20,
+          "l2_regularization": 1.0
+        },
+        "mean_qwk": 0.4805109367139643,
+        "std_qwk": 0.0337092569018199
+      },
+      {
+        "config": {
+          "max_iter": 600,
+          "learning_rate": 0.03,
+          "max_depth": null,
+          "max_leaf_nodes": 31,
+          "min_samples_leaf": 20,
+          "l2_regularization": 1.0
+        },
+        "mean_qwk": 0.4800282733499115,
+        "std_qwk": 0.041953095522355245
+      },
+      {
+        "config": {
+          "max_iter": 400,
+          "learning_rate": 0.05,
+          "max_depth": null,
+          "max_leaf_nodes": 31,
+          "min_samples_leaf": 20,
+          "l2_regularization": 0.0
+        },
+        "mean_qwk": 0.47682667032449955,
+        "std_qwk": 0.0420361587429634
+      },
+      {
+        "config": {
+          "max_iter": 500,
+          "learning_rate": 0.05,
+          "max_depth": null,
+          "max_leaf_nodes": 15,
+          "min_samples_leaf": 30,
+          "l2_regularization": 0.0
+        },
+        "mean_qwk": 0.4698141340271233,
+        "std_qwk": 0.036912195318587505
+      }
+    ],
+    "chosen_config": {
+      "max_iter": 800,
+      "learning_rate": 0.02,
+      "max_depth": null,
+      "max_leaf_nodes": 31,
+      "min_samples_leaf": 20,
+      "l2_regularization": 1.0
+    },
+    "n_bag_seeds": 5,
+    "wall_seconds": 60.61
+  }
+}

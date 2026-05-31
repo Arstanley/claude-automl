@@ -1,0 +1,35 @@
+{
+  "target_column_chosen": "quality",
+  "headline_metric": "f1_macro",
+  "headline_value": 0.41527211117162127,
+  "all_metrics": {
+    "val_f1": 0.3623154011588961,
+    "test_f1": 0.41527211117162127,
+    "inference_ms_per_instance": 0.06954954138823918,
+    "training_time_s": 21.87692518159747
+  },
+  "selected_model": "hgb",
+  "candidate_val_f1": {
+    "rf_300": 0.3535163993028271,
+    "rf_500": 0.35974960711802817,
+    "et_500": 0.3585100593449469,
+    "hgb": 0.3623154011588961
+  },
+  "candidate_train_s": {
+    "rf_300": 1.1285246163606644,
+    "rf_500": 1.8911281134933233,
+    "et_500": 1.196681946516037,
+    "hgb": 58.55981999449432
+  },
+  "candidate_infer_ms": {
+    "rf_300": 0.07248699766438023,
+    "rf_500": 0.12833573126874,
+    "et_500": 0.14373958110809326,
+    "hgb": 0.13487929237537644
+  },
+  "skills_applied": [
+    "skill_multi_axis_constraint_budgets.md",
+    "skill_tune_when_n_train_supports_it.md"
+  ],
+  "interpretation_notes": "Two explicit constraints (train <=5min, predict <5ms/inst): committed to numeric budgets, screened a 4-model Pareto set on (val_f1, latency), picked the constraint-feasible argmax, then refit on train+valid for test."
+}

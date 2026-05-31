@@ -1,0 +1,14 @@
+{
+  "target_column_chosen": "y",
+  "headline_metric": "accuracy",
+  "headline_value": 0.82,
+  "all_metrics": {
+    "val_acc": 0.798,
+    "test_acc": 0.82,
+    "mean_val_acc_per_seed": 0.7990000367164611,
+    "mean_test_acc_per_seed": 0.8170000374317169,
+    "std_test_acc_per_seed": 0.00669329466711791
+  },
+  "skills_applied": [],
+  "interpretation_notes": "2-layer GCN (hidden=16, dropout=0.5, Adam lr=0.01, wd=5e-4) on standard Planetoid Cora public split with row-normalized features; early-stop on val accuracy; ensembled best-val logits over 10 seeds."
+}

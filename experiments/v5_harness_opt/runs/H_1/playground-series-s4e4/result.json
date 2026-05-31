@@ -1,0 +1,102 @@
+{
+  "target_column_chosen": "Rings",
+  "headline_metric": "rmsle",
+  "headline_value": 0.14911954434247734,
+  "all_metrics": {
+    "rmsle_histgb_best": 0.14932265163382016,
+    "rmsle_extratrees": 0.15059656636595947,
+    "rmsle_blend": 0.14911954434247734,
+    "blend_weight_et": 0.25,
+    "histgb_best_cfg": {
+      "max_iter": 800,
+      "learning_rate": 0.04,
+      "max_leaf_nodes": 63,
+      "min_samples_leaf": 60,
+      "l2_regularization": 0.5,
+      "early_stopping": true,
+      "validation_fraction": 0.1,
+      "n_iter_no_change": 30
+    },
+    "histgb_grid": [
+      {
+        "cfg": {
+          "max_iter": 800,
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 31,
+          "min_samples_leaf": 40,
+          "l2_regularization": 0.0,
+          "early_stopping": true,
+          "validation_fraction": 0.1,
+          "n_iter_no_change": 30
+        },
+        "rmsle": 0.14933209647412835
+      },
+      {
+        "cfg": {
+          "max_iter": 800,
+          "learning_rate": 0.04,
+          "max_leaf_nodes": 63,
+          "min_samples_leaf": 60,
+          "l2_regularization": 0.5,
+          "early_stopping": true,
+          "validation_fraction": 0.1,
+          "n_iter_no_change": 30
+        },
+        "rmsle": 0.14932265163382016
+      },
+      {
+        "cfg": {
+          "max_iter": 1200,
+          "learning_rate": 0.03,
+          "max_leaf_nodes": 47,
+          "min_samples_leaf": 50,
+          "l2_regularization": 0.1,
+          "early_stopping": true,
+          "validation_fraction": 0.1,
+          "n_iter_no_change": 30
+        },
+        "rmsle": 0.14934209980040655
+      }
+    ],
+    "n_train": 72492,
+    "n_test": 18123,
+    "n_splits": 5,
+    "wall_seconds": 122.18
+  },
+  "skills_applied": [
+    "skill_log_target_for_skewed_nonnegative_regression.md",
+    "skill_tune_when_n_train_supports_it.md",
+    "skill_blend_two_model_families.md"
+  ],
+  "skills_evaluated_not_applied": [
+    {
+      "skill": "skill_probe_group_structure_in_ids.md",
+      "reason": "id overlap train/test = 0; ids are non-compound integers."
+    },
+    {
+      "skill": "skill_train_on_listed_auxiliary_files.md",
+      "reason": "Prompt mentions original Abalone but no auxiliary file is present in DATA_DIR."
+    },
+    {
+      "skill": "skill_verify_split_claim_before_holdout.md",
+      "reason": "Prompt makes no structural train/test split claim."
+    },
+    {
+      "skill": "skill_stringify_low_cardinality_int_codes.md",
+      "reason": "No low-cardinality int feature columns (only id is int, dropped)."
+    },
+    {
+      "skill": "skill_multi_axis_constraint_budgets.md",
+      "reason": "Prompt names no constraint axes (no latency/size/hard-rule)."
+    },
+    {
+      "skill": "skill_missing_indicator_when_missingness_signals_class.md",
+      "reason": "No NaNs in train or test."
+    },
+    {
+      "skill": "skill_tune_decision_threshold_for_f1.md",
+      "reason": "Regression task; no threshold to tune."
+    }
+  ],
+  "interpretation_notes": "Trained on log1p(Rings) since metric is RMSLE and target is skewed (skew=1.20). Tuned HistGradientBoostingRegressor across 3 configs via 5-fold CV, then blended with ExtraTrees (CV-chosen weight=0.25). Preprocessing: one-hot Sex, raw numerics. No NaNs to impute."
+}

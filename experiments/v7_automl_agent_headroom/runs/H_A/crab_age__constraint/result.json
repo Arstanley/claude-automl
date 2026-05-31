@@ -1,0 +1,88 @@
+{
+  "target_column_chosen": "Age",
+  "headline_metric": "RMSLE",
+  "headline_value": 0.1610936673146382,
+  "all_metrics": {
+    "cv_rmsle_mean": 0.1610936673146382,
+    "cv_rmsle_std": 0.0016838500882831733,
+    "predict_seconds": 0.13414573669433594
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md"
+  ],
+  "interpretation_notes": "HistGradientBoostingRegressor on log1p(Age) (RMSLE-aware); 3-config small explicit grid with 5-fold CV per skill_tune_when_n_train_supports_it (n_train=59240, no sub-100ms/MB/latency constraints). Best config refit on full train.",
+  "audit": {
+    "hyperparameter_grid": [
+      {
+        "max_iter": 600,
+        "learning_rate": 0.03,
+        "max_depth": null,
+        "max_leaf_nodes": 63,
+        "l2_regularization": 0.1,
+        "min_samples_leaf": 20
+      },
+      {
+        "max_iter": 400,
+        "learning_rate": 0.05,
+        "max_depth": null,
+        "max_leaf_nodes": 31,
+        "l2_regularization": 0.0,
+        "min_samples_leaf": 20
+      },
+      {
+        "max_iter": 400,
+        "learning_rate": 0.05,
+        "max_depth": null,
+        "max_leaf_nodes": 15,
+        "l2_regularization": 0.0,
+        "min_samples_leaf": 40
+      }
+    ],
+    "cv_results": [
+      {
+        "params": {
+          "max_iter": 600,
+          "learning_rate": 0.03,
+          "max_depth": null,
+          "max_leaf_nodes": 63,
+          "l2_regularization": 0.1,
+          "min_samples_leaf": 20
+        },
+        "mean": 0.1610936673146382,
+        "std": 0.0016838500882831733
+      },
+      {
+        "params": {
+          "max_iter": 400,
+          "learning_rate": 0.05,
+          "max_depth": null,
+          "max_leaf_nodes": 31,
+          "l2_regularization": 0.0,
+          "min_samples_leaf": 20
+        },
+        "mean": 0.16114162839217078,
+        "std": 0.0016697567426752005
+      },
+      {
+        "params": {
+          "max_iter": 400,
+          "learning_rate": 0.05,
+          "max_depth": null,
+          "max_leaf_nodes": 15,
+          "l2_regularization": 0.0,
+          "min_samples_leaf": 40
+        },
+        "mean": 0.16115998771446538,
+        "std": 0.00162867582223527
+      }
+    ],
+    "chosen_config": {
+      "max_iter": 600,
+      "learning_rate": 0.03,
+      "max_depth": null,
+      "max_leaf_nodes": 63,
+      "l2_regularization": 0.1,
+      "min_samples_leaf": 20
+    }
+  }
+}

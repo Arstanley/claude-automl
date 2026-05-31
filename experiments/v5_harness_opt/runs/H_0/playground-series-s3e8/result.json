@@ -1,0 +1,40 @@
+{
+  "target_column_chosen": "price",
+  "headline_metric": "rmse",
+  "headline_value": 588.2048013438665,
+  "all_metrics": {
+    "cv_rmse_per_config": [
+      {
+        "config": {
+          "learning_rate": 0.08,
+          "max_iter": 800,
+          "max_leaf_nodes": 63,
+          "min_samples_leaf": 30,
+          "l2_regularization": 0.0
+        },
+        "cv_rmse": 588.2048013438665
+      },
+      {
+        "config": {
+          "learning_rate": 0.05,
+          "max_iter": 1200,
+          "max_leaf_nodes": 127,
+          "min_samples_leaf": 50,
+          "l2_regularization": 1.0
+        },
+        "cv_rmse": 591.1800402741056
+      }
+    ],
+    "best_config": {
+      "learning_rate": 0.08,
+      "max_iter": 800,
+      "max_leaf_nodes": 63,
+      "min_samples_leaf": 30,
+      "l2_regularization": 0.0
+    }
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md"
+  ],
+  "interpretation_notes": "HistGradientBoostingRegressor on log1p(price) with ordered categorical encodings (cut/color/clarity) and engineered volume/density features. Small 2-config CV grid selected by 3-fold RMSE on 60k subsample; final fit on full 155k train."
+}

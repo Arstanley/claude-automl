@@ -1,0 +1,96 @@
+{
+  "target_column_chosen": "Rings",
+  "headline_metric": "RMSLE",
+  "headline_value": 0.14959691999844074,
+  "all_metrics": {
+    "cv_rmsle_best_mean": 0.14959691999844074,
+    "cv_rmsle_best_std": 0.0014764683129583841,
+    "cv_grid": [
+      {
+        "params": {
+          "max_iter": 600,
+          "learning_rate": 0.03,
+          "max_depth": null,
+          "max_leaf_nodes": 63,
+          "min_samples_leaf": 20,
+          "l2_regularization": 0.0
+        },
+        "mean_rmsle": 0.14959691999844074,
+        "std_rmsle": 0.0014764683129583841
+      },
+      {
+        "params": {
+          "max_iter": 400,
+          "learning_rate": 0.05,
+          "max_depth": null,
+          "max_leaf_nodes": 31,
+          "min_samples_leaf": 40,
+          "l2_regularization": 1.0
+        },
+        "mean_rmsle": 0.14961744675502156,
+        "std_rmsle": 0.0014710245799376385
+      },
+      {
+        "params": {
+          "max_iter": 400,
+          "learning_rate": 0.05,
+          "max_depth": null,
+          "max_leaf_nodes": 31,
+          "min_samples_leaf": 20,
+          "l2_regularization": 0.0
+        },
+        "mean_rmsle": 0.14971665959257427,
+        "std_rmsle": 0.0014879621278839998
+      }
+    ]
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md",
+    "skill_seed_bag_final_regressor.md"
+  ],
+  "interpretation_notes": "HistGradientBoostingRegressor on log1p(Rings) (matches RMSLE). Tuned across a 3-config grid by 3-fold CV; refit best config with 3 random_state seeds and averaged predictions in log space.",
+  "audit": {
+    "hyperparameter_grid": [
+      {
+        "max_iter": 400,
+        "learning_rate": 0.05,
+        "max_depth": null,
+        "max_leaf_nodes": 31,
+        "min_samples_leaf": 20,
+        "l2_regularization": 0.0
+      },
+      {
+        "max_iter": 600,
+        "learning_rate": 0.03,
+        "max_depth": null,
+        "max_leaf_nodes": 63,
+        "min_samples_leaf": 20,
+        "l2_regularization": 0.0
+      },
+      {
+        "max_iter": 400,
+        "learning_rate": 0.05,
+        "max_depth": null,
+        "max_leaf_nodes": 31,
+        "min_samples_leaf": 40,
+        "l2_regularization": 1.0
+      }
+    ],
+    "chosen_config": {
+      "max_iter": 600,
+      "learning_rate": 0.03,
+      "max_depth": null,
+      "max_leaf_nodes": 63,
+      "min_samples_leaf": 20,
+      "l2_regularization": 0.0
+    },
+    "seed_bag": [
+      0,
+      1,
+      2
+    ],
+    "elapsed_sec": 17.3,
+    "n_train": 72492,
+    "n_test": 18123
+  }
+}

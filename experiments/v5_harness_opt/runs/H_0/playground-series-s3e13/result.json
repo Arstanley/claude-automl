@@ -1,0 +1,40 @@
+{
+  "target_column_chosen": "prognosis",
+  "headline_metric": "MPA@3 (CV)",
+  "headline_value": 0.4510324483775811,
+  "all_metrics": {
+    "cv_mpa3_by_model": {
+      "logreg_C0.1": 0.4466076696165192,
+      "logreg_C0.5": 0.4365781710914455,
+      "logreg_C1.0": 0.42772861356932157,
+      "logreg_C2.0": 0.42477876106194684,
+      "logreg_C5.0": 0.40973451327433635,
+      "rf_n300_dNone": 0.42713864306784666,
+      "rf_n500_dNone": 0.4179941002949853,
+      "rf_n500_d10": 0.43598820058997056,
+      "ensemble_lr_rf": 0.4510324483775811
+    },
+    "cv_mpa3_std_by_model": {
+      "logreg_C0.1": 0.016005498485251395,
+      "logreg_C0.5": 0.02047971086455432,
+      "logreg_C1.0": 0.0286454829175462,
+      "logreg_C2.0": 0.02861508982366433,
+      "logreg_C5.0": 0.02828476348169469,
+      "rf_n300_dNone": 0.021648782456529524,
+      "rf_n500_dNone": 0.0234434412817764,
+      "rf_n500_d10": 0.023720189372241473,
+      "ensemble_lr_rf": 0.02314083617398844
+    },
+    "final_choice": "ensemble_lr_rf",
+    "best_logreg": "logreg_C0.1",
+    "best_rf": "rf_n500_d10",
+    "n_train": 565,
+    "n_test": 142,
+    "n_classes": 11,
+    "elapsed_sec": 54.992655992507935
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md"
+  ],
+  "interpretation_notes": "Multiclass (11 classes) on 565 rows with 64 binary symptom features and MPA@3 as the metric. Ran a small explicit grid over LogisticRegression (multinomial, C in {0.1,0.5,1,2,5}) and RandomForest (n_estimators/max_depth) with 5-fold stratified CV scoring MPA@3 directly, then optionally averaged the best of each family. Predictions are top-3 class labels per row."
+}

@@ -1,0 +1,61 @@
+{
+  "target_column_chosen": "NObeyesdad",
+  "headline_metric": "accuracy",
+  "headline_value": 0.9025653074110511,
+  "all_metrics": {
+    "cv_accuracy_mean": 0.9025653074110511,
+    "cv_accuracy_std": 0.003156726538973282,
+    "grid_results": [
+      {
+        "params": {
+          "max_iter": 800,
+          "learning_rate": 0.03,
+          "max_depth": null,
+          "max_leaf_nodes": 31
+        },
+        "mean": 0.9025653074110511,
+        "std": 0.003156726538973282
+      },
+      {
+        "params": {
+          "max_iter": 400,
+          "learning_rate": 0.05,
+          "max_depth": null,
+          "max_leaf_nodes": 31
+        },
+        "mean": 0.9017222422541972,
+        "std": 0.0033299507837369615
+      },
+      {
+        "params": {
+          "max_iter": 600,
+          "learning_rate": 0.05,
+          "max_depth": null,
+          "max_leaf_nodes": 63
+        },
+        "mean": 0.9000961353516137,
+        "std": 0.002375104336821259
+      },
+      {
+        "params": {
+          "max_iter": 400,
+          "learning_rate": 0.08,
+          "max_depth": null,
+          "max_leaf_nodes": 63
+        },
+        "mean": 0.9000362025829102,
+        "std": 0.0017308119004398363
+      }
+    ]
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md"
+  ],
+  "interpretation_notes": "Multi-class (7-way) tabular classification, n_train=16606, no constraint tokens in prompt -> applied skill_tune_when_n_train_supports_it with a 4-config HistGradientBoosting grid (sklearn-only environment; no XGBoost/LightGBM). Categoricals ordinal-encoded with HGB's native categorical_features handling; no NaNs so missing-indicator skill did not apply.",
+  "chosen_config": {
+    "max_iter": 800,
+    "learning_rate": 0.03,
+    "max_depth": null,
+    "max_leaf_nodes": 31
+  }
+}

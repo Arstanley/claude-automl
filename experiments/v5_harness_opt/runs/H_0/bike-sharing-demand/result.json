@@ -1,0 +1,115 @@
+{
+  "target_column_chosen": "count",
+  "headline_metric": "RMSLE",
+  "headline_value": 0.2696697256635401,
+  "all_metrics": {
+    "rmsle_cv_mean": 0.2696697256635401,
+    "rmsle_cv_std": 0.00991200339554177,
+    "rmsle_cv_folds": [
+      0.28234502524405264,
+      0.2580458455522355,
+      0.2775970549848663,
+      0.2583866139618298,
+      0.27197408857471617
+    ]
+  },
+  "skills_applied": [
+    "skill_verify_split_claim_before_holdout.md",
+    "skill_tune_when_n_train_supports_it.md",
+    "skill_stringify_low_cardinality_int_codes.md"
+  ],
+  "interpretation_notes": "Verified prompt's 'test = days 20+' claim is FALSE \u2014 both train and test span days 1-19 (random interleaving), so used random KFold rather than a temporal holdout. Modeled casual and registered counts separately on log1p (two-head approach) with a tuned GBM grid; summed predictions for total count.",
+  "audit": {
+    "split_audit": {
+      "train_date_range": [
+        "2011-01-01 01:00:00",
+        "2012-12-19 21:00:00"
+      ],
+      "test_date_range": [
+        "2011-01-01 00:00:00",
+        "2012-12-19 23:00:00"
+      ],
+      "train_day_max": 19,
+      "test_day_max": 19,
+      "train_day_min": 1,
+      "test_day_min": 1,
+      "ranges_overlap": true,
+      "claim_text_found": "20th to the end",
+      "claim_holds": false,
+      "stringified_columns": []
+    },
+    "hyperparameter_grid": [
+      {
+        "params": {
+          "n_estimators": 800,
+          "learning_rate": 0.03,
+          "max_depth": 6,
+          "subsample": 0.8
+        },
+        "mean_rmsle": 0.2696697256635401,
+        "std_rmsle": 0.00991200339554177
+      },
+      {
+        "params": {
+          "n_estimators": 500,
+          "learning_rate": 0.05,
+          "max_depth": 6,
+          "subsample": 0.8
+        },
+        "mean_rmsle": 0.2712304554180328,
+        "std_rmsle": 0.00997399077640583
+      },
+      {
+        "params": {
+          "n_estimators": 300,
+          "learning_rate": 0.05,
+          "max_depth": 5,
+          "subsample": 0.9
+        },
+        "mean_rmsle": 0.2767258413955572,
+        "std_rmsle": 0.010434817552140659
+      },
+      {
+        "params": {
+          "n_estimators": 500,
+          "learning_rate": 0.03,
+          "max_depth": 5,
+          "subsample": 0.9
+        },
+        "mean_rmsle": 0.2773268668100045,
+        "std_rmsle": 0.010660882796984772
+      }
+    ],
+    "chosen_config": {
+      "n_estimators": 800,
+      "learning_rate": 0.03,
+      "max_depth": 6,
+      "subsample": 0.8
+    },
+    "n_train": 8708,
+    "n_test": 2178,
+    "features": [
+      "season",
+      "holiday",
+      "workingday",
+      "weather",
+      "temp",
+      "atemp",
+      "humidity",
+      "windspeed",
+      "year",
+      "month",
+      "day",
+      "hour",
+      "dayofweek",
+      "dayofyear",
+      "hour_sin",
+      "hour_cos",
+      "month_sin",
+      "month_cos",
+      "dow_sin",
+      "dow_cos"
+    ],
+    "cv": "KFold(n_splits=5, shuffle=True, random_state=0)"
+  }
+}

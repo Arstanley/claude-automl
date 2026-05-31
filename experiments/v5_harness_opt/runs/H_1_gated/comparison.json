@@ -1,0 +1,274 @@
+{
+  "h1_gated_vs_h0": [
+    {
+      "task": "titanic",
+      "split": "train",
+      "h0": 0.8268156424581006,
+      "h1_gated": 0.8268156424581006,
+      "rel": 0.0,
+      "verdict": "tie",
+      "src": "H_0 (e1-no-fire)"
+    },
+    {
+      "task": "spaceship-titanic",
+      "split": "train",
+      "h0": 0.8131109833237493,
+      "h1_gated": 0.8131109833237493,
+      "rel": 0.0,
+      "verdict": "tie",
+      "src": "H_0 (e1-no-fire)"
+    },
+    {
+      "task": "playground-series-s3e2",
+      "split": "train",
+      "h0": 0.8838989055979845,
+      "h1_gated": 0.8838989055979845,
+      "rel": 0.0,
+      "verdict": "tie",
+      "src": "H_0 (e1-no-fire)"
+    },
+    {
+      "task": "playground-series-s3e3",
+      "split": "train",
+      "h0": 0.8188044831880448,
+      "h1_gated": 0.8188044831880448,
+      "rel": 0.0,
+      "verdict": "tie",
+      "src": "H_0 (e1-no-fire)"
+    },
+    {
+      "task": "playground-series-s3e9",
+      "split": "train",
+      "h0": 12.056761020300252,
+      "h1_gated": 12.056761020300252,
+      "rel": 0.0,
+      "verdict": "tie",
+      "src": "H_0 (e1-no-fire)"
+    },
+    {
+      "task": "playground-series-s3e22",
+      "split": "train",
+      "h0": 0.7125506072874493,
+      "h1_gated": 0.7125506072874493,
+      "rel": 0.0,
+      "verdict": "tie",
+      "src": "H_0 (e1-no-fire)"
+    },
+    {
+      "task": "playground-series-s4e2",
+      "split": "train",
+      "h0": 0.9036608863198459,
+      "h1_gated": 0.9036608863198459,
+      "rel": 0.0,
+      "verdict": "tie",
+      "src": "H_0 (e1-no-fire)"
+    },
+    {
+      "task": "bike-sharing-demand",
+      "split": "train",
+      "h0": 0.2604112240946281,
+      "h1_gated": 0.26953870198418245,
+      "rel": -3.505024762771989,
+      "verdict": "lose",
+      "src": "H_1_gated"
+    },
+    {
+      "task": "playground-series-s3e6",
+      "split": "train",
+      "h0": 170293.40385944908,
+      "h1_gated": 169945.0549828279,
+      "rel": 0.20455805611161781,
+      "verdict": "WIN",
+      "src": "H_1_gated"
+    },
+    {
+      "task": "nlp-getting-started",
+      "split": "train",
+      "h0": 0.7687348912167606,
+      "h1_gated": 0.7687348912167606,
+      "rel": 0.0,
+      "verdict": "tie",
+      "src": "H_0 (e1-no-fire)"
+    },
+    {
+      "task": "playground-series-s3e12",
+      "split": "train",
+      "h0": 0.8771929824561403,
+      "h1_gated": 0.8771929824561403,
+      "rel": 0.0,
+      "verdict": "tie",
+      "src": "H_0 (e1-no-fire)"
+    },
+    {
+      "task": "playground-series-s3e8",
+      "split": "train",
+      "h0": 579.6659880716129,
+      "h1_gated": 576.6220918435164,
+      "rel": 0.5251120974378207,
+      "verdict": "WIN",
+      "src": "H_1_gated"
+    },
+    {
+      "task": "playground-series-s3e10",
+      "split": "train",
+      "h0": 0.0328904714572276,
+      "h1_gated": 0.0328904714572276,
+      "rel": 0.0,
+      "verdict": "tie",
+      "src": "H_0 (e1-no-fire)"
+    },
+    {
+      "task": "playground-series-s3e11",
+      "split": "train",
+      "h0": 0.2964602109968943,
+      "h1_gated": 0.29812479848364054,
+      "rel": -0.5614876550039586,
+      "verdict": "lose",
+      "src": "H_1_gated"
+    },
+    {
+      "task": "playground-series-s3e16",
+      "split": "train",
+      "h0": 1.3666559624368546,
+      "h1_gated": 1.3599567780276374,
+      "rel": 0.4901880643956706,
+      "verdict": "WIN",
+      "src": "H_1_gated"
+    },
+    {
+      "task": "playground-series-s3e17",
+      "split": "train",
+      "h0": 0.9648865454634512,
+      "h1_gated": 0.9648865454634512,
+      "rel": 0.0,
+      "verdict": "tie",
+      "src": "H_0 (e1-no-fire)"
+    },
+    {
+      "task": "playground-series-s3e23",
+      "split": "train",
+      "h0": 0.7881218146243978,
+      "h1_gated": 0.7881218146243978,
+      "rel": 0.0,
+      "verdict": "tie",
+      "src": "H_0 (e1-no-fire)"
+    },
+    {
+      "task": "playground-series-s3e24",
+      "split": "train",
+      "h0": 0.8651325103878358,
+      "h1_gated": 0.8651325103878358,
+      "rel": 0.0,
+      "verdict": "tie",
+      "src": "H_0 (e1-no-fire)"
+    },
+    {
+      "task": "playground-series-s4e1",
+      "split": "train",
+      "h0": 0.8930353499714059,
+      "h1_gated": 0.8930353499714059,
+      "rel": 0.0,
+      "verdict": "tie",
+      "src": "H_0 (e1-no-fire)"
+    },
+    {
+      "task": "tabular-playground-series-aug-2022",
+      "split": "train",
+      "h0": 0.5924533224702638,
+      "h1_gated": 0.5924533224702638,
+      "rel": 0.0,
+      "verdict": "tie",
+      "src": "H_0 (e1-no-fire)"
+    },
+    {
+      "task": "playground-series-s3e7",
+      "split": "val",
+      "h0": 0.8941443840741071,
+      "h1_gated": 0.8941443840741071,
+      "rel": 0.0,
+      "verdict": "tie",
+      "src": "H_0 (e1-no-fire)"
+    },
+    {
+      "task": "playground-series-s4e3",
+      "split": "val",
+      "h0": 0.8881210024969292,
+      "h1_gated": 0.8881210024969292,
+      "rel": 0.0,
+      "verdict": "tie",
+      "src": "H_0 (e1-no-fire)"
+    },
+    {
+      "task": "playground-series-s3e14",
+      "split": "val",
+      "h0": 338.38057533969976,
+      "h1_gated": 338.38057533969976,
+      "rel": 0.0,
+      "verdict": "tie",
+      "src": "H_0 (e1-no-fire)"
+    },
+    {
+      "task": "playground-series-s3e5",
+      "split": "val",
+      "h0": 0.4285595992216288,
+      "h1_gated": 0.4285595992216288,
+      "rel": 0.0,
+      "verdict": "tie",
+      "src": "H_0 (e1-no-fire)"
+    },
+    {
+      "task": "playground-series-s3e13",
+      "split": "val",
+      "h0": 0.5985915492957746,
+      "h1_gated": 0.5985915492957746,
+      "rel": 0.0,
+      "verdict": "tie",
+      "src": "H_0 (e1-no-fire)"
+    },
+    {
+      "task": "playground-series-s3e25",
+      "split": "test",
+      "h0": 0.5273868811859197,
+      "h1_gated": 0.5116965490318963,
+      "rel": 2.9751085424690467,
+      "verdict": "WIN",
+      "src": "H_1_gated"
+    },
+    {
+      "task": "playground-series-s3e1",
+      "split": "test",
+      "h0": 0.5958711167140691,
+      "h1_gated": 0.5914957834468793,
+      "rel": 0.7342751048779869,
+      "verdict": "WIN",
+      "src": "H_1_gated"
+    },
+    {
+      "task": "tabular-playground-series-jul-2021",
+      "split": "test",
+      "h0": 0.12461414664430374,
+      "h1_gated": 0.12514604274258792,
+      "rel": -0.426834442643507,
+      "verdict": "lose",
+      "src": "H_1_gated"
+    },
+    {
+      "task": "playground-series-s3e18",
+      "split": "test",
+      "h0": 0.6464812282131875,
+      "h1_gated": 0.6283443559072355,
+      "rel": -2.805475474683256,
+      "verdict": "lose",
+      "src": "H_1_gated"
+    },
+    {
+      "task": "playground-series-s4e4",
+      "split": "test",
+      "h0": 0.15115379517609032,
+      "h1_gated": 0.15147803378232202,
+      "rel": -0.2145090739230057,
+      "verdict": "lose",
+      "src": "H_1_gated"
+    }
+  ]
+}

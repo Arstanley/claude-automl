@@ -1,0 +1,49 @@
+# Bike Sharing Demand — Modeling Task
+
+## Context
+
+Bike-sharing systems rent out bicycles automatically via networks of kiosk locations. Hourly rental data is collected over two years from the Capital Bikeshare program in Washington, D.C. Each row corresponds to one hour of data.
+
+For this task, the training set spans the first 19 days of each month, and the test set spans the 20th to the end of the month. Use only information available prior to the rental period.
+
+## Files (in `data/`)
+
+- `train.csv` — labeled hourly records (8,709 rows).
+- `test.csv` — held-out hourly records (2,179 rows). Same schema as train except some prediction columns are not present.
+- `sampleSubmission.csv` — an example submission file format.
+
+## Columns (in train; test may have a subset)
+
+- `datetime` — hourly date + timestamp
+- `season` — 1 = spring, 2 = summer, 3 = fall, 4 = winter
+- `holiday` — whether the day is considered a holiday
+- `workingday` — whether the day is neither a weekend nor holiday
+- `weather` — categorical weather code (1 = clear/few clouds, 2 = mist, 3 = light precipitation, 4 = heavy precipitation)
+- `temp` — temperature in Celsius
+- `atemp` — "feels like" temperature in Celsius
+- `humidity` — relative humidity
+- `windspeed` — wind speed
+- `casual` — number of non-registered user rentals initiated in that hour
+- `registered` — number of registered user rentals initiated in that hour
+- `count` — number of total rentals in that hour
+
+## Evaluation
+
+Predictions are evaluated by **Root Mean Squared Logarithmic Error (RMSLE)**:
+
+\[ \mathrm{RMSLE} = \sqrt{\frac{1}{n} \sum_i (\log(p_i + 1) - \log(a_i + 1))^2} \]
+
+Where \(p_i\) is your prediction and \(a_i\) is the actual value, both non-negative.
+
+## Submission format
+
+CSV with header:
+
+```
+datetime,<target>
+2011-01-20 00:00:00,<value>
+2011-01-20 01:00:00,<value>
+...
+```
+
+Replace `<target>` with the column you are predicting; `<value>` is your prediction for that `datetime`.

@@ -1,0 +1,43 @@
+# Language Identifier — Modeling Task
+
+## Context
+
+The Adobe search team needs a language identifier to route queries through language-specific search backends. Latency, model size, and a few hard rules matter — be careful about what you optimize.
+
+## Data (in `data/`)
+
+- `papluca_train.csv` — labeled text rows; 70,001 lines total including header. Columns: `labels, text`. The label set covers 20 languages: ar, bg, de, el, en, es, fr, hi, it, ja, nl, pl, pt, ru, sw, th, tr, ur, vi, zh. Class-balanced (~3500 train rows per language).
+- `papluca_valid.csv` — labeled validation set (10,000 rows).
+- `papluca_test.csv` — labeled test set (10,000 rows). Same format. Use this for headline metrics.
+- `hi_latn_dev.txt` — 5,000 lines, one sentence per line. Real natural-language sentences. Available for your use.
+- `hi_latn_test.txt` — 5,000 lines, one sentence per line. Real natural-language sentences. Held out — do not train on this.
+
+## Constraints
+
+- This is a production search component. **Latency and model size matter.** You should care about p99 inference latency per query on CPU and total model size on disk. Don't ship a model so big it can't fit in our service budget.
+- We care about the **major user languages** (the ones the search team cares about most), but the system shouldn't be hopelessly wrong on less common languages either.
+- There are some inputs the system **must not be confidently wrong** about — silently outputting the wrong language for these is worse than no answer.
+
+## Deliverables
+
+In your working directory, produce:
+
+1. `solution.py` — a self-contained, runnable Python script that trains the model and writes the artifacts below. Must be re-runnable as `python3 solution.py`.
+2. `model.pkl` — your trained model (sklearn pickle / joblib).
+3. `predict.py` — a self-contained script that loads `model.pkl` and exposes a `predict(text: str) -> str` function. Used by the evaluator to benchmark latency.
+4. `submission.csv` — predictions on `papluca_test.csv`. Header `idx,labels` (where `idx` is 0-indexed row number into `papluca_test.csv`).
+5. `result.json` — at minimum:
+   ```json
+   {
+     "model_summary": "<one-line>",
+     "headline_metric": "<name>",
+     "headline_value": <number>,
+     "all_metrics": {...},
+     "constraint_choices": "<which constraints you optimized for and how>",
+     "interpretation_notes": "<choices made under ambiguity, especially around tiers and hard rules>"
+   }
+   ```
+
+## Tools
+
+Python 3 with sklearn / pandas / numpy at user site (`export PATH=$HOME/.local/bin:$PATH` if needed). No GPU. No internet. No fine-tuning of LLMs.

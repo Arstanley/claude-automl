@@ -1,0 +1,23 @@
+{
+  "target_column_chosen": "outcome",
+  "headline_metric": "micro_f1_cv5",
+  "headline_value": 0.7054760806029842,
+  "all_metrics": {
+    "cv_micro_f1_per_model": {
+      "logreg": 0.6852535507357842,
+      "rf": 0.7054760806029842,
+      "gbm": 0.7004563400502487
+    },
+    "best_model": "rf",
+    "train_micro_f1_insample": 0.9757085020242915,
+    "n_train": 988,
+    "n_test": 247,
+    "n_classes": 3,
+    "classes": [
+      "died",
+      "euthanized",
+      "lived"
+    ]
+  },
+  "interpretation_notes": "Three-class horse survival classification (lived/died/euthanized). Target is `outcome` per the spec. Submission uses raw class labels in the original string form (matching sample_submission.csv). Headline metric is 5-fold stratified CV micro-F1 of the best model selected by CV (rf). hospital_number was dropped as an ID-like high-cardinality column. Missing values are imputed (median for numeric, most_frequent for categorical), categoricals are one-hot encoded, numerics are standardized."
+}

@@ -1,0 +1,72 @@
+{
+  "target_column_chosen": "price",
+  "headline_metric": "RMSE",
+  "headline_value": 578.1707219392543,
+  "all_metrics": {
+    "cv_rmse_best": 578.1707219392543,
+    "cv_rmse_all_configs": [
+      {
+        "params": {
+          "learning_rate": 0.05,
+          "max_iter": 600,
+          "max_leaf_nodes": 31,
+          "min_samples_leaf": 40,
+          "l2_regularization": 0.0
+        },
+        "cv_rmse": 578.3760577895397
+      },
+      {
+        "params": {
+          "learning_rate": 0.05,
+          "max_iter": 800,
+          "max_leaf_nodes": 63,
+          "min_samples_leaf": 40,
+          "l2_regularization": 0.0
+        },
+        "cv_rmse": 578.1707219392543
+      },
+      {
+        "params": {
+          "learning_rate": 0.03,
+          "max_iter": 1000,
+          "max_leaf_nodes": 63,
+          "min_samples_leaf": 30,
+          "l2_regularization": 0.1
+        },
+        "cv_rmse": 578.2672724940429
+      },
+      {
+        "params": {
+          "learning_rate": 0.05,
+          "max_iter": 800,
+          "max_leaf_nodes": 127,
+          "min_samples_leaf": 20,
+          "l2_regularization": 0.1
+        },
+        "cv_rmse": 578.5790384310106
+      }
+    ],
+    "n_train": 154858,
+    "n_test": 38715
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md",
+    "skill_seed_bag_final_regressor.md"
+  ],
+  "interpretation_notes": "HistGradientBoostingRegressor on log1p(price) with cut/color/clarity as native categoricals; 4-config grid tuned by 4-fold OOF RMSE; final fit seed-bagged over [0,1,2]. x/y/z==0 dimensions treated as missing.",
+  "audit": {
+    "seed_bag": [
+      0,
+      1,
+      2
+    ],
+    "best_params": {
+      "learning_rate": 0.05,
+      "max_iter": 800,
+      "max_leaf_nodes": 63,
+      "min_samples_leaf": 40,
+      "l2_regularization": 0.0
+    },
+    "elapsed_sec": 65.74
+  }
+}

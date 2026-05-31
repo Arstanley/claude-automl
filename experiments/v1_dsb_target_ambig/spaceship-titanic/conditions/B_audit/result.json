@@ -1,0 +1,33 @@
+{
+  "target_column_chosen": "Transported",
+  "target_column_justification": "Transported is the only column present in train.csv but absent from test.csv (set(train.columns) - set(test.columns) == ['Transported']). This structural schema diff \u2014 not the sample_submission header (which is unreliable; see Gap A) \u2014 is the load-bearing reason. Other booleans (CryoSleep, VIP) and categoricals (HomePlanet, Destination, Cabin) are all present in test, so they cannot be 'the missing column'.",
+  "headline_metric": "cv_group_accuracy",
+  "headline_value": 0.8024158757549612,
+  "all_metrics": {
+    "cv_per_row_accuracy_mean": 0.8106125970664366,
+    "cv_per_row_accuracy_std": 0.003922399107559934,
+    "cv_per_row_logloss_mean": 0.4041153550507544,
+    "cv_per_row_n_splits": 3,
+    "cv_group_accuracy_mean": 0.8024158757549612,
+    "cv_group_accuracy_std": 0.004497122741188316,
+    "cv_group_logloss_mean": 0.41142958636529464,
+    "cv_group_n_splits": 3,
+    "train_class_balance_true": 0.5033074489502445,
+    "test_pred_class_balance_true": 0.4968372627947096,
+    "n_train": 6954,
+    "n_test": 1739,
+    "n_features": 50
+  },
+  "audit_items_addressed": [
+    "Target=Transported justified by schema diff, not sample_submission (Section 1, Gap A)",
+    "Submission keyed on test.csv 1,739 IDs with header PassengerId,Transported (Gap F, Spirit #2)",
+    "Group-aware CV via GroupKFold on PassengerId prefix; both per-row and group CV reported (Gap B, Spirit #3)",
+    "No groupmate-label leakage features built (Spirit #4) \u2014 only label-free group features (GroupSize, PaxInGroup)",
+    "Per-column missingness policy: NA-as-category for HomePlanet/CryoSleep/Destination/VIP/Deck/Side; NA->0 + was_missing flag for spend; median + Age_isna flag for Age (Gap C, Spirit #5)",
+    "CryoSleep\u21d2zero-spend invariant used to impute CryoSleep when NA (Gap D, Spirit #6)",
+    "Cabin split into Deck/Num/Side; Deck=='T' (5 rows) folded into '__rare__' bucket (Gap E, Spirit #7)",
+    "Child flag (Age<=12) preserved (Gap G)",
+    "No group-majority-label baseline used (Gap H \u2014 only 46% homogeneous)"
+  ],
+  "interpretation_notes": "Headline value is group-aware 3-fold CV accuracy (0.8024 +- 0.0045). Per-row 3-fold CV gives 0.8106; the gap reflects group-level leakage flagged in Gap B (40.8% of test rows share a group with train). We report the group-aware number as the honest generalization estimate. Submission has 1739 rows matching test.csv exactly, with predicted True-rate 0.497 (train True-rate 0.503). sample_submission.csv was inspected only to confirm non-overlap: {'sample_submission_rows': 4277, 'passenger_id_overlap_with_test': 0, 'submission_rows': 1739}."
+}

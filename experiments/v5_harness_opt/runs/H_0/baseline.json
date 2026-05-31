@@ -1,0 +1,234 @@
+{
+  "harness": "H_0",
+  "rows": [
+    {
+      "task": "titanic",
+      "split": "train",
+      "score": 0.8268156424581006,
+      "higher_is_better": true
+    },
+    {
+      "task": "spaceship-titanic",
+      "split": "train",
+      "score": 0.8131109833237493,
+      "higher_is_better": true
+    },
+    {
+      "task": "playground-series-s3e2",
+      "split": "train",
+      "score": 0.8838989055979845,
+      "higher_is_better": true
+    },
+    {
+      "task": "playground-series-s3e3",
+      "split": "train",
+      "score": 0.8188044831880448,
+      "higher_is_better": true
+    },
+    {
+      "task": "playground-series-s3e9",
+      "split": "train",
+      "score": 12.056761020300252,
+      "higher_is_better": false
+    },
+    {
+      "task": "playground-series-s3e22",
+      "split": "train",
+      "score": 0.7125506072874493,
+      "higher_is_better": true
+    },
+    {
+      "task": "playground-series-s4e2",
+      "split": "train",
+      "score": 0.9036608863198459,
+      "higher_is_better": true
+    },
+    {
+      "task": "bike-sharing-demand",
+      "split": "train",
+      "score": 0.2604112240946281,
+      "higher_is_better": false
+    },
+    {
+      "task": "playground-series-s3e6",
+      "split": "train",
+      "score": 170293.40385944908,
+      "higher_is_better": false
+    },
+    {
+      "task": "nlp-getting-started",
+      "split": "train",
+      "score": 0.7687348912167606,
+      "higher_is_better": true
+    },
+    {
+      "task": "playground-series-s3e7",
+      "split": "val",
+      "score": 0.8941443840741071,
+      "higher_is_better": true
+    },
+    {
+      "task": "playground-series-s4e3",
+      "split": "val",
+      "score": 0.8881210024969292,
+      "higher_is_better": true
+    },
+    {
+      "task": "playground-series-s3e14",
+      "split": "val",
+      "score": 338.38057533969976,
+      "higher_is_better": false
+    },
+    {
+      "task": "playground-series-s3e5",
+      "split": "val",
+      "score": 0.4285595992216288,
+      "higher_is_better": true
+    },
+    {
+      "task": "playground-series-s3e13",
+      "split": "val",
+      "score": 0.5985915492957746,
+      "higher_is_better": true
+    },
+    {
+      "task": "playground-series-s3e25",
+      "split": "test",
+      "score": 0.5273868811859197,
+      "higher_is_better": false
+    },
+    {
+      "task": "playground-series-s3e1",
+      "split": "test",
+      "score": 0.5958711167140691,
+      "higher_is_better": false
+    },
+    {
+      "task": "tabular-playground-series-jul-2021",
+      "split": "test",
+      "score": 0.12461414664430374,
+      "higher_is_better": false
+    },
+    {
+      "task": "playground-series-s3e18",
+      "split": "test",
+      "score": 0.6464812282131875,
+      "higher_is_better": false
+    },
+    {
+      "task": "playground-series-s4e4",
+      "split": "test",
+      "score": 0.15115379517609032,
+      "higher_is_better": false
+    }
+  ],
+  "splits": {
+    "comment": "20-task stratified split for harness optimization (v5). Frozen 2026-05-28.",
+    "train": [
+      {
+        "name": "titanic",
+        "metric": "accuracy",
+        "modality": "binary"
+      },
+      {
+        "name": "spaceship-titanic",
+        "metric": "accuracy",
+        "modality": "binary"
+      },
+      {
+        "name": "playground-series-s3e2",
+        "metric": "auc",
+        "modality": "binary"
+      },
+      {
+        "name": "playground-series-s3e3",
+        "metric": "auc",
+        "modality": "binary"
+      },
+      {
+        "name": "playground-series-s3e9",
+        "metric": "auc",
+        "modality": "binary"
+      },
+      {
+        "name": "playground-series-s3e22",
+        "metric": "f1_micro",
+        "modality": "multiclass"
+      },
+      {
+        "name": "playground-series-s4e2",
+        "metric": "accuracy",
+        "modality": "multiclass"
+      },
+      {
+        "name": "bike-sharing-demand",
+        "metric": "rmsle",
+        "modality": "regression"
+      },
+      {
+        "name": "playground-series-s3e6",
+        "metric": "rmsle",
+        "modality": "regression"
+      },
+      {
+        "name": "nlp-getting-started",
+        "metric": "f1",
+        "modality": "binary_text"
+      }
+    ],
+    "val": [
+      {
+        "name": "playground-series-s3e7",
+        "metric": "auc",
+        "modality": "binary"
+      },
+      {
+        "name": "playground-series-s4e3",
+        "metric": "auc",
+        "modality": "multiclass"
+      },
+      {
+        "name": "playground-series-s3e14",
+        "metric": "rmsle",
+        "modality": "regression"
+      },
+      {
+        "name": "playground-series-s3e5",
+        "metric": "qwk",
+        "modality": "ordinal"
+      },
+      {
+        "name": "playground-series-s3e13",
+        "metric": "mpa3",
+        "modality": "multiclass_top3"
+      }
+    ],
+    "test": [
+      {
+        "name": "playground-series-s3e25",
+        "metric": "auc",
+        "modality": "binary"
+      },
+      {
+        "name": "playground-series-s3e1",
+        "metric": "rmse",
+        "modality": "regression"
+      },
+      {
+        "name": "tabular-playground-series-jul-2021",
+        "metric": "auc",
+        "modality": "binary"
+      },
+      {
+        "name": "playground-series-s3e18",
+        "metric": "multi",
+        "modality": "multi_output"
+      },
+      {
+        "name": "playground-series-s4e4",
+        "metric": "auc",
+        "modality": "binary"
+      }
+    ]
+  }
+}

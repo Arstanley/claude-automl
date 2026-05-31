@@ -1,0 +1,100 @@
+{
+  "final_comparison": [
+    {
+      "task": "cora",
+      "setting": "free",
+      "metric": "accuracy",
+      "amla": 0.831,
+      "h0": 0.82,
+      "h_A": 0.9037036895751953,
+      "h_B": null,
+      "best": 0.9037036895751953,
+      "best_from": "H_A",
+      "delta_vs_amla": 0.07270368957519535
+    },
+    {
+      "task": "cora",
+      "setting": "constraint",
+      "metric": "accuracy",
+      "amla": 0.843,
+      "h0": 0.9037037037037037,
+      "h_A": 0.9074074029922485,
+      "h_B": null,
+      "best": 0.9074074029922485,
+      "best_from": "H_A",
+      "delta_vs_amla": 0.06440740299224856
+    },
+    {
+      "task": "citeseer",
+      "setting": "free",
+      "metric": "accuracy",
+      "amla": 0.592,
+      "h0": 0.7150000333786011,
+      "h_A": 0.7635542154312134,
+      "h_B": null,
+      "best": 0.7635542154312134,
+      "best_from": "H_A",
+      "delta_vs_amla": 0.1715542154312134
+    },
+    {
+      "task": "citeseer",
+      "setting": "constraint",
+      "metric": "accuracy",
+      "amla": 0.632,
+      "h0": 0.7950000166893005,
+      "h_A": 0.7950000166893005,
+      "h_B": null,
+      "best": 0.7950000166893005,
+      "best_from": "H_0",
+      "delta_vs_amla": 0.16300001668930053
+    },
+    {
+      "task": "higher_ed_students",
+      "setting": "free",
+      "metric": "rand_score",
+      "amla": 0.76,
+      "h0": 0.8,
+      "h_A": null,
+      "h_B": null,
+      "best": 0.8,
+      "best_from": "H_0",
+      "delta_vs_amla": 0.040000000000000036
+    },
+    {
+      "task": "higher_ed_students",
+      "setting": "constraint",
+      "metric": "rand_score",
+      "amla": 0.769,
+      "h0": 0.8095238095238095,
+      "h_A": null,
+      "h_B": null,
+      "best": 0.8095238095238095,
+      "best_from": "H_0",
+      "delta_vs_amla": 0.04052380952380952
+    },
+    {
+      "task": "wine_quality_white",
+      "setting": "free",
+      "metric": "f1_macro",
+      "amla": null,
+      "h0": 0.4254279648576872,
+      "h_A": null,
+      "h_B": 0.43077059199758755,
+      "best": 0.43077059199758755,
+      "best_from": "H_B",
+      "delta_vs_amla": null
+    },
+    {
+      "task": "wine_quality_white",
+      "setting": "constraint",
+      "metric": "f1_macro",
+      "amla": null,
+      "h0": 0.41527211117162127,
+      "h_A": null,
+      "h_B": 0.4254279648576872,
+      "best": 0.4254279648576872,
+      "best_from": "H_B",
+      "delta_vs_amla": null
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "target_column_chosen": "Rings",
+  "headline_metric": "RMSLE",
+  "headline_value": 0.1492127049322843,
+  "all_metrics": {
+    "cv_rmsle_best": 0.1492127049322843,
+    "cv_rmsle_all": [
+      0.14939485049940002,
+      0.1497351612307544,
+      0.1492127049322843
+    ]
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md"
+  ],
+  "interpretation_notes": "Trained HistGradientBoostingRegressor on log1p(Rings) so squared-error loss aligns with the RMSLE metric. 5-fold CV picked the best of a 3-config capacity grid; refit on full train and predicted on test.",
+  "best_params": {
+    "max_iter": 800,
+    "learning_rate": 0.03,
+    "max_leaf_nodes": 31,
+    "min_samples_leaf": 40,
+    "l2_regularization": 0.1
+  },
+  "n_train": 72492,
+  "n_test": 18123,
+  "elapsed_sec": 34.6
+}

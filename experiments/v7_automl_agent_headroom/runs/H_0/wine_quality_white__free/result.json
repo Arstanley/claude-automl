@@ -1,0 +1,23 @@
+{
+  "target_column_chosen": "quality",
+  "headline_metric": "f1_macro",
+  "headline_value": 0.4254279648576872,
+  "all_metrics": {
+    "val_f1": 0.3744442455585767,
+    "test_f1": 0.4254279648576872,
+    "test_accuracy": 0.6816326530612244
+  },
+  "model_selected": "rf_600_balanced",
+  "val_grid": {
+    "rf_400_depth_None": 0.36163359083713065,
+    "rf_600_balanced": 0.3744442455585767,
+    "et_600": 0.36164740991361216,
+    "et_800_balanced": 0.35480094873624773,
+    "hgb_lr0.05_leaves63": 0.3492411786849127,
+    "hgb_lr0.1_leaves31": 0.3547675079271039
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md"
+  ],
+  "interpretation_notes": "Tabular 11-feature numeric, n_train ~2.9k, ordinal int target treated as multi-class. Ran a short explicit grid over RF / ExtraTrees / HistGradientBoosting, selected on valid macro-F1, refit on train+valid for final test prediction."
+}

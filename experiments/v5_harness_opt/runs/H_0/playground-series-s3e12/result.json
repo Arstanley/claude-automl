@@ -1,0 +1,16 @@
+{
+  "target_column_chosen": "target",
+  "headline_metric": "roc_auc_cv5",
+  "headline_value": 0.7643988816402609,
+  "all_metrics": {
+    "cv5_auc_logreg": 0.7643988816402609,
+    "cv5_auc_gbm_light": 0.7477166821994409,
+    "cv5_auc_gbm_mid": 0.7387573780677229,
+    "cv5_auc_mean_of_models": 0.7502909806358082,
+    "n_train": 331,
+    "n_test": 83,
+    "elapsed_sec": 3.72
+  },
+  "skills_applied": [],
+  "interpretation_notes": "n_train=331 < 500 so skill_tune_when_n_train_supports_it does not fire; other v4 skills also fail preconditions (no NaNs, no aux files, no split claim, no low-card int codes, single-axis metric). Used soft-average ensemble of logreg+2 GBMs; best single CV AUC = 0.7644 (logreg)."
+}

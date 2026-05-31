@@ -1,0 +1,16 @@
+{
+  "target_column_chosen": "EC1,EC2",
+  "headline_metric": "mean_roc_auc_oof",
+  "headline_value": 0.6180043911741733,
+  "all_metrics": {
+    "oof_auc_EC1": 0.6871967239218675,
+    "oof_auc_EC2": 0.5488120584264791,
+    "mean_oof_auc": 0.6180043911741733
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md",
+    "skill_seed_bag_final_regressor.md"
+  ],
+  "interpretation_notes": "Multi-label binary (EC1, EC2) on 31 numeric molecular descriptors. No missing values, no group structure, no listed auxiliary file path. Per-target HistGradientBoostingClassifier, small grid tuned by 5-fold OOF AUC, best config refit on full train with 2-seed bag for stability.",
+  "elapsed_sec": 39.792795181274414
+}

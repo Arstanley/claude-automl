@@ -1,0 +1,18 @@
+{
+  "target_column_chosen": "Survived",
+  "headline_metric": "accuracy",
+  "headline_value": 0.8216487737614498,
+  "all_metrics": {
+    "cv5_accuracy_mean": 0.8216487737614498,
+    "cv5_accuracy_std": 0.02098989863603722,
+    "cv5_accuracy_folds": [
+      0.8111888111888111,
+      0.8181818181818182,
+      0.823943661971831,
+      0.795774647887324,
+      0.8591549295774648
+    ],
+    "holdout_accuracy": 0.8741258741258742
+  },
+  "interpretation_notes": "Target column is unambiguous: Survived (the only column in train.csv but not test.csv) with accuracy as the stated metric. Used standard Titanic feature engineering (Title from Name, FamilySize, IsAlone, HasCabin, CabinDeck) plus a GradientBoostingClassifier; headline value is mean 5-fold stratified CV accuracy."
+}

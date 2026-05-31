@@ -1,0 +1,53 @@
+{
+  "target_column_chosen": "defects",
+  "headline_metric": "roc_auc_3fold_cv",
+  "headline_value": 0.7914313109918165,
+  "all_metrics": {
+    "cv_auc_mean": 0.7914313109918165,
+    "cv_auc_std": 0.0015808790488520067,
+    "fold_aucs": [
+      0.7935106605291287,
+      0.7896803015783492,
+      0.7911029708679718
+    ],
+    "best_config_index": 0,
+    "all_configs": [
+      {
+        "params": {
+          "learning_rate": 0.06,
+          "max_leaf_nodes": 31,
+          "max_iter": 300,
+          "min_samples_leaf": 30,
+          "l2_regularization": 0.0
+        },
+        "cv_auc_mean": 0.7914313109918165,
+        "cv_auc_std": 0.0015808790488520067,
+        "fold_aucs": [
+          0.7935106605291287,
+          0.7896803015783492,
+          0.7911029708679718
+        ]
+      },
+      {
+        "params": {
+          "learning_rate": 0.08,
+          "max_leaf_nodes": 63,
+          "max_iter": 300,
+          "min_samples_leaf": 50,
+          "l2_regularization": 1.0
+        },
+        "cv_auc_mean": 0.7899406183996938,
+        "cv_auc_std": 0.0015411112917909026,
+        "fold_aucs": [
+          0.7911335506345887,
+          0.7877645255754768,
+          0.790923778989016
+        ]
+      }
+    ]
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md"
+  ],
+  "interpretation_notes": "21 numeric features, no NaNs, n=81K, ~23% positive. Applied tune_when_n_train_supports_it: 2-config HistGradientBoosting grid selected by 3-fold stratified CV AUC, then refit on full train. Skipped probe-group/missing-indicator/stringify skills as their preconditions did not hold."
+}

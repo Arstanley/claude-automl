@@ -1,0 +1,40 @@
+{
+  "target_column_chosen": "Survived",
+  "target_column_justification": "'Survived' is the unique column in train.csv that is absent from test.csv (set(train.columns) - set(test.columns) == ['Survived']). It is binary {0,1}, matches 'classification accuracy', and the example file gender_submission.csv uses the same column header. Chosen by data-structure diff, not by Titanic folklore.",
+  "headline_metric": "cv_accuracy_5fold_stratified",
+  "headline_value": 0.82025,
+  "all_metrics": {
+    "cv_accuracy_mean": 0.82025,
+    "cv_accuracy_std": 0.02186,
+    "cv_accuracy_folds": [
+      0.8042,
+      0.81818,
+      0.82394,
+      0.79577,
+      0.85915
+    ],
+    "train_fit_accuracy": 0.92837,
+    "baseline_majority_class_accuracy": 0.6236,
+    "baseline_gender_only_accuracy": 0.78792,
+    "n_train": 712,
+    "n_test": 179,
+    "submission_rows": 179,
+    "passenger_id_min": 6,
+    "passenger_id_max": 890
+  },
+  "audit_items_addressed": [
+    "1 target picked by structural set-diff (train cols - test cols)",
+    "2a submission PassengerIds taken from test.csv, NOT gender_submission.csv (overlap verified empty)",
+    "2b row counts verified at load time (712/179, not the prompt's 713/180)",
+    "2c header is literally 'PassengerId,Survived' (re-read file to confirm)",
+    "2d predictions cast to int 0/1, not float/bool/proba",
+    "2e accuracy reported with majority-class AND gender-only baselines on same CV",
+    "2f Age missingness: median impute + Age_missing flag + Age_estimated flag (xx.5 signal preserved)",
+    "2f Cabin: deck-letter + Has_cabin flag, raw string discarded",
+    "2f Embarked: most-frequent impute handles the 2 train NaNs",
+    "2f Fare: median imputer kept defensively even though this split has no NaN",
+    "2f Title extracted from Name (declared to partially encode Sex/Age)",
+    "2g no family-survival or ticket-group features pooled across train/test \u2014 leakage risk avoided"
+  ],
+  "interpretation_notes": "Model is a GradientBoostingClassifier over a small mixed numeric/categorical feature set. CV accuracy 0.8203 +/- 0.0219 beats the gender-only baseline (0.7879) and the majority-class baseline (0.6236) on the same folds, which is the minimum bar the audit (2e) demands. Test-set accuracy is not computable here (labels withheld); the headline is CV on train. The spec's row counts (713/180) are stale \u2014 the actual files contain 712/179 rows, verified at load time."
+}

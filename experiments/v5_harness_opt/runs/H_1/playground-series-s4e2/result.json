@@ -1,0 +1,36 @@
+{
+  "target_column_chosen": "NObeyesdad",
+  "headline_metric": "accuracy",
+  "headline_value": 0.9041912561724678,
+  "all_metrics": {
+    "cv_accuracy_hgb": 0.9032879682042635,
+    "cv_accuracy_et": 0.8451162230519089,
+    "cv_accuracy_blend": 0.9041912561724678,
+    "blend_weight_hgb": 0.7000000000000001
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md",
+    "skill_blend_two_model_families.md"
+  ],
+  "skills_evaluated_not_applied": [
+    "skill_probe_group_structure_in_ids.md: 0 overlap between train/test ids, ids are plain ints (no compound format).",
+    "skill_train_on_listed_auxiliary_files.md: prompt mentions original dataset but no such file is supplied in DATA_DIR.",
+    "skill_verify_split_claim_before_holdout.md: prompt makes no structural split claim (temporal/group).",
+    "skill_stringify_low_cardinality_int_codes.md: no int-coded categoricals; all categoricals already strings.",
+    "skill_multi_axis_constraint_budgets.md: prompt names no explicit latency/size/accuracy/hard-rule constraints.",
+    "skill_missing_indicator_when_missingness_signals_class.md: 0 NaNs across all columns.",
+    "skill_tune_decision_threshold_for_f1.md: multiclass accuracy, not F1/F-beta/MCC.",
+    "skill_log_target_for_skewed_nonnegative_regression.md: classification, not regression."
+  ],
+  "interpretation_notes": "7-class obesity classification (n_train=16606). Tuned HistGradientBoosting with a 4-config grid and blended with ExtraTrees; final shipped: blend HGB=0.70 ET=0.30. All preprocessing (OHE for 8 categorical cols) inside a CV pipeline to avoid leakage.",
+  "best_hgb_params": {
+    "learning_rate": 0.1,
+    "max_iter": 200,
+    "max_leaf_nodes": 31,
+    "min_samples_leaf": 40,
+    "l2_regularization": 1.0
+  },
+  "n_train": 16606,
+  "n_test": 4152,
+  "elapsed_sec": 24.94767737388611
+}

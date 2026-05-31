@@ -1,0 +1,18 @@
+{
+  "target_column_chosen": "Transported",
+  "headline_metric": "accuracy_cv5_mean",
+  "headline_value": 0.8057239499557796,
+  "all_metrics": {
+    "accuracy_cv5_mean": 0.8057239499557796,
+    "accuracy_cv5_std": 0.008224963589281679,
+    "accuracy_cv5_folds": [
+      0.790079079798706,
+      0.8130841121495327,
+      0.805176132278936,
+      0.8102084831056794,
+      0.8100719424460432
+    ],
+    "train_accuracy": 0.8283002588438308
+  },
+  "interpretation_notes": "Spec says 'predict the missing target column'; only Transported is absent from test.csv, so it is the label. Metric is classification accuracy per the spec. Headline value is the mean of stratified-free 5-fold CV accuracy on train (no held-out test labels available)."
+}

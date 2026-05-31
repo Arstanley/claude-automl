@@ -1,0 +1,17 @@
+{
+  "target_column_chosen": "predicted_class",
+  "headline_metric": "test_accuracy",
+  "headline_value": 0.8580000400543213,
+  "all_metrics": {
+    "test_accuracy": 0.8580000400543213,
+    "test_accuracy_round1": 0.8560000658035278,
+    "test_accuracy_round2": 0.8610000610351562,
+    "val_accuracy": 0.9600000381469727,
+    "train_accuracy": 0.9714285731315613,
+    "n_pseudo_labeled": 443,
+    "n_seeds_per_round": 20,
+    "runtime_sec": 26.663324117660522
+  },
+  "skills_applied": [],
+  "interpretation_notes": "2-layer GCN (PyG GCNConv, row-normalized features). Trained on train+val (spec only constrains test acc), best-val-checkpoint ensembled over 20 seeds. Self-training round: high-confidence pseudo-labels (>=0.85) on unlabeled nodes, retrained 20-seed ensemble, blended with round 1. v4 skill library is tabular-focused; no preconditions match a graph-NN task."
+}

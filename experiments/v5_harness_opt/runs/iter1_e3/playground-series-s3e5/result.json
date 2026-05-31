@@ -1,0 +1,104 @@
+{
+  "target_column_chosen": "quality",
+  "headline_metric": "quadratic_weighted_kappa",
+  "headline_value": 0.49872666646621955,
+  "all_metrics": {
+    "ridge_cv_qwk": 0.491439627296222,
+    "best_hgb_cv_qwk": 0.49872666646621955,
+    "chosen_model": "hgb",
+    "n_train": 1644,
+    "n_test": 412
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md"
+  ],
+  "interpretation_notes": "Regression-then-round on ordinal quality (3..8) yields higher QWK than multiclass on n=1644. Family-comparison rule under shared 5-fold CV: Ridge baseline vs 4-config HistGradientBoostingRegressor (skill_tune_when_n_train_supports_it). Chose 'hgb' (rel_diff=0.0146, threshold 0.005).",
+  "audit": {
+    "family_comparison": {
+      "ridge_cv_qwk": 0.491439627296222,
+      "hgb_cv_qwk": 0.49872666646621955,
+      "rel_diff": 0.014611288427046927,
+      "blend_threshold": 0.005,
+      "blended": false,
+      "chosen": "hgb",
+      "hgb_grid": [
+        {
+          "cfg": {
+            "learning_rate": 0.03,
+            "max_iter": 400,
+            "max_leaf_nodes": 15,
+            "min_samples_leaf": 20,
+            "l2_regularization": 0.0
+          },
+          "cv": 0.49872666646621955,
+          "fold_scores": [
+            0.4508643318799126,
+            0.48511032248109853,
+            0.4241420266299931,
+            0.5769996151042904,
+            0.5565170362358032
+          ]
+        },
+        {
+          "cfg": {
+            "learning_rate": 0.05,
+            "max_iter": 200,
+            "max_leaf_nodes": 31,
+            "min_samples_leaf": 20,
+            "l2_regularization": 0.0
+          },
+          "cv": 0.4839481662115821,
+          "fold_scores": [
+            0.4657150272514924,
+            0.43171944517142113,
+            0.4145586240955733,
+            0.5669610129956681,
+            0.5407867215437556
+          ]
+        },
+        {
+          "cfg": {
+            "learning_rate": 0.05,
+            "max_iter": 300,
+            "max_leaf_nodes": 31,
+            "min_samples_leaf": 30,
+            "l2_regularization": 1.0
+          },
+          "cv": 0.47349680134823063,
+          "fold_scores": [
+            0.4778008024337552,
+            0.44476683937823835,
+            0.4256346758750106,
+            0.5221118777333944,
+            0.49716981132075466
+          ]
+        },
+        {
+          "cfg": {
+            "learning_rate": 0.08,
+            "max_iter": 200,
+            "max_leaf_nodes": 63,
+            "min_samples_leaf": 20,
+            "l2_regularization": 0.0
+          },
+          "cv": 0.47348554531749965,
+          "fold_scores": [
+            0.44201163188504966,
+            0.43157840564047145,
+            0.43448162188890715,
+            0.5263200465898796,
+            0.5330360205831903
+          ]
+        }
+      ],
+      "ridge_fold_scores": [
+        0.4632219583083542,
+        0.4724158110336756,
+        0.44967148942040736,
+        0.5489860955331232,
+        0.5229027821855495
+      ]
+    },
+    "runtime_sec": 11.44
+  }
+}

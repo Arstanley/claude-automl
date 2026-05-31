@@ -1,0 +1,39 @@
+{
+  "comment": "v6 frozen split: 20 train / 5 val / 5 test. Augments v5's 10 train with 10 more DSBench tabular tasks (mix of binary classification and regression, n_train ranging 332 to 288K). Frozen 2026-05-29.",
+  "train": [
+    {"name": "titanic", "metric": "accuracy", "modality": "binary"},
+    {"name": "spaceship-titanic", "metric": "accuracy", "modality": "binary"},
+    {"name": "playground-series-s3e2", "metric": "auc", "modality": "binary"},
+    {"name": "playground-series-s3e3", "metric": "auc", "modality": "binary"},
+    {"name": "playground-series-s3e9", "metric": "rmse", "modality": "regression"},
+    {"name": "playground-series-s3e22", "metric": "f1_micro", "modality": "multiclass"},
+    {"name": "playground-series-s4e2", "metric": "accuracy", "modality": "multiclass"},
+    {"name": "bike-sharing-demand", "metric": "rmsle", "modality": "regression"},
+    {"name": "playground-series-s3e6", "metric": "rmse", "modality": "regression"},
+    {"name": "nlp-getting-started", "metric": "f1", "modality": "binary_text"},
+    {"name": "playground-series-s3e12", "metric": "auc", "modality": "binary"},
+    {"name": "playground-series-s3e8", "metric": "rmse", "modality": "regression"},
+    {"name": "playground-series-s3e10", "metric": "logloss", "modality": "binary"},
+    {"name": "playground-series-s3e11", "metric": "rmsle", "modality": "regression"},
+    {"name": "playground-series-s3e16", "metric": "mae", "modality": "regression"},
+    {"name": "playground-series-s3e17", "metric": "auc", "modality": "binary"},
+    {"name": "playground-series-s3e23", "metric": "auc", "modality": "binary"},
+    {"name": "playground-series-s3e24", "metric": "auc", "modality": "binary"},
+    {"name": "playground-series-s4e1", "metric": "auc", "modality": "binary"},
+    {"name": "tabular-playground-series-aug-2022", "metric": "auc", "modality": "binary"}
+  ],
+  "val": [
+    {"name": "playground-series-s3e7", "metric": "auc", "modality": "binary"},
+    {"name": "playground-series-s4e3", "metric": "auc", "modality": "multiclass"},
+    {"name": "playground-series-s3e14", "metric": "mae", "modality": "regression"},
+    {"name": "playground-series-s3e5", "metric": "qwk", "modality": "ordinal"},
+    {"name": "playground-series-s3e13", "metric": "mpa3", "modality": "multiclass_top3"}
+  ],
+  "test": [
+    {"name": "playground-series-s3e25", "metric": "medae", "modality": "regression"},
+    {"name": "playground-series-s3e1", "metric": "rmse", "modality": "regression"},
+    {"name": "tabular-playground-series-jul-2021", "metric": "rmsle", "modality": "multi_regression"},
+    {"name": "playground-series-s3e18", "metric": "mean_auc", "modality": "multi_label"},
+    {"name": "playground-series-s4e4", "metric": "rmsle", "modality": "regression"}
+  ]
+}

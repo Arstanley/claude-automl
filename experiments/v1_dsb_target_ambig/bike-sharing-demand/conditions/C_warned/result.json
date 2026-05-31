@@ -1,0 +1,21 @@
+{
+  "target_column_chosen": "count",
+  "target_column_justification": "test.csv omits casual, registered, AND count, so all three are 'prediction columns'. The sampleSubmission.csv header is `datetime,count`, count equals casual+registered exactly on train, and RMSLE on hourly TOTAL rentals is the canonical evaluation for this dataset. We therefore predict `count`. To improve accuracy we additionally fit two sub-models on log1p(casual) and log1p(registered) and sum their expm1 outputs; this remains structurally a `count` prediction.",
+  "headline_metric": "RMSLE",
+  "headline_value": 0.3061427118306545,
+  "all_metrics": {
+    "cv_rmsle_direct_count": 0.3120308586878721,
+    "cv_rmsle_casual_plus_registered": 0.3061427118306545,
+    "cv_split": "time-based, last 20% of train (sorted by datetime)",
+    "strategy_used_for_submission": "casual+registered decomposition"
+  },
+  "anticipated_probes": [
+    "Did you predict `count` rather than `casual` or `registered`? Yes \u2014 count is the sampleSubmission header and the canonical RMSLE target; we justify on structural grounds.",
+    "Submission row alignment: 2178 rows, in test.csv order, header `datetime,count`.",
+    "Metric choice: RMSLE (as in spec). Models trained on log1p(target) so the objective aligns with the evaluation metric; predictions clipped to >= 0 before scoring.",
+    "RMSLE constraints: predictions are non-negative (expm1 of unrestricted reals can be slightly negative for very low log-preds \u2192 we clip to 0). Inputs to log1p never see negative values.",
+    "Temporal-leakage handling: we excluded `casual` and `registered` from features (they are absent from test and would be label leakage). Validation uses a time-based holdout (last 20% by datetime) per the spec's 'use only information available prior to the rental period' guidance.",
+    "Feature engineering uses only `datetime` decomposition plus columns present in both train and test \u2014 no test-time features depend on future information."
+  ],
+  "interpretation_notes": "Spec says train spans days 1-19 and test days 20-end, but in this provided synthetic split both train and test fall on days 1-19 (datetimes interleaved with zero overlap). We still respect the spec's intent by (a) excluding label-derived columns from features and (b) using a time-based CV split. The sampleSubmission has 6493 data rows while test.csv has 2178; we follow the spec instruction 'one row per test.csv row' and emit 2178 prediction rows, NOT 6493."
+}

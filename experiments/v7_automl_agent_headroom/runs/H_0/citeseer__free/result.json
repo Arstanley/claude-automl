@@ -1,0 +1,13 @@
+{
+  "target_column_chosen": "label",
+  "headline_metric": "accuracy",
+  "headline_value": 0.7150000333786011,
+  "all_metrics": {
+    "val_acc": 0.7300000190734863,
+    "test_acc": 0.7150000333786011,
+    "val_acc_mean_10seed": 0.7196000397205353,
+    "test_acc_mean_10seed": 0.7103000342845917
+  },
+  "skills_applied": [],
+  "interpretation_notes": "2-layer GCN with row-normalized features on the standard Planetoid Citeseer split; trained 10 seeds with early stopping on val acc and reported the seed with best validation accuracy."
+}

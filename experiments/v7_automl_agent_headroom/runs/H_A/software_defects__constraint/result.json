@@ -1,0 +1,18 @@
+{
+  "target_column_chosen": "defects",
+  "headline_metric": "f1_oof",
+  "headline_value": 0.5604811329905908,
+  "all_metrics": {
+    "oof_f1_at_0.5": 0.49177907522985037,
+    "oof_f1_at_best_threshold": 0.5604811329905908,
+    "best_threshold": 0.26999999999999996,
+    "pos_rate_train": 0.22768701633705932,
+    "pos_rate_pred": 0.2811870485923451,
+    "per_instance_ms_single_model": 0.12785029411315918,
+    "wall_time_s": 50.36367845535278
+  },
+  "skills_applied": [
+    "skill_multi_axis_constraint_budgets.md"
+  ],
+  "interpretation_notes": "HistGradientBoosting 3-fold CV averaged on test, with OOF threshold tuning for F1 (class imbalance 23% positive => default 0.5 threshold is suboptimal; tuned 0.27 lifts OOF F1 0.492 -> 0.560). skill_tune_when_n_train_supports_it deliberately suppressed because the prompt mentions latency/training-time budgets -- single conservative config used instead of a grid. Per-instance predict ~0.13 ms (single model), ~0.4 ms for 3-fold ensemble, well under the 5 ms budget."
+}

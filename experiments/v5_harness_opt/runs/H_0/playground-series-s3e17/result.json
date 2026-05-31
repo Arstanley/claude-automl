@@ -1,0 +1,41 @@
+{
+  "target_column_chosen": "Machine failure",
+  "headline_metric": "roc_auc",
+  "headline_value": 0.9618669636775659,
+  "all_metrics": {
+    "cv_mean_auc": 0.9618669636775659,
+    "cv_fold_aucs": [
+      0.9623437275717007,
+      0.9623870103619049,
+      0.9608701530990919
+    ],
+    "grid": [
+      {
+        "params": {
+          "learning_rate": 0.05,
+          "max_iter": 400,
+          "max_leaf_nodes": 31,
+          "min_samples_leaf": 50,
+          "l2_regularization": 0.0
+        },
+        "mean_auc": 0.9618669636775659
+      },
+      {
+        "params": {
+          "learning_rate": 0.03,
+          "max_iter": 600,
+          "max_leaf_nodes": 63,
+          "min_samples_leaf": 40,
+          "l2_regularization": 1.0
+        },
+        "mean_auc": 0.9599966425422878
+      }
+    ]
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md",
+    "skill_stringify_low_cardinality_int_codes.md"
+  ],
+  "interpretation_notes": "HistGradientBoosting on 109K rows with Type one-hot and the 5 failure-mode flags + 5 sensors. Dropped high-card Product ID (random split; no group signal warranted). Tuned a 2-config grid (lr/leaves/min_samples_leaf) via 3-fold stratified CV; refit on full train.",
+  "runtime_seconds": 13.17
+}

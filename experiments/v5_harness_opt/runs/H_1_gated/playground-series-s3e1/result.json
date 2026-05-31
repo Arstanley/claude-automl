@@ -1,0 +1,54 @@
+{
+  "target_column_chosen": "MedHouseVal",
+  "headline_metric": "RMSE",
+  "headline_value": 0.5624538454871715,
+  "all_metrics": {
+    "oof_rmse_seed0_only": 0.5624538454871715,
+    "oof_rmse_3seed_bag": 0.5624538454871715,
+    "best_grid_cv_rmse": 0.5624112478733985
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md",
+    "skill_seed_bag_final_regressor.md"
+  ],
+  "interpretation_notes": "Clean 8-feature tabular regression (n_train=29709, no NaN, no id overlap). Applied a 3-config HistGradientBoosting grid via 5-fold KFold, then seed-bagged 3 random_states. Bag was retained because OOF RMSE bag <= seed-0 OOF.",
+  "audit": {
+    "hyperparameter_grid": [
+      {
+        "max_iter": 300,
+        "learning_rate": 0.05,
+        "max_depth": null,
+        "max_leaf_nodes": 31,
+        "min_samples_leaf": 20
+      },
+      {
+        "max_iter": 700,
+        "learning_rate": 0.03,
+        "max_depth": null,
+        "max_leaf_nodes": 63,
+        "min_samples_leaf": 30
+      },
+      {
+        "max_iter": 500,
+        "learning_rate": 0.05,
+        "max_depth": null,
+        "max_leaf_nodes": 63,
+        "min_samples_leaf": 20
+      }
+    ],
+    "chosen_config": {
+      "max_iter": 300,
+      "learning_rate": 0.05,
+      "max_depth": null,
+      "max_leaf_nodes": 31,
+      "min_samples_leaf": 20
+    },
+    "seed_bag": [
+      0,
+      1,
+      2
+    ],
+    "final_strategy": "seed_bag_3",
+    "elapsed_sec": 44.03
+  }
+}

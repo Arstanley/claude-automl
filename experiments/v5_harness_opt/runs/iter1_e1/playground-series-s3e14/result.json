@@ -1,0 +1,72 @@
+{
+  "target_column_chosen": "yield",
+  "headline_metric": "MAE",
+  "headline_value": 344.66887753821703,
+  "all_metrics": {
+    "cv_mae_best": 344.66887753821703,
+    "cv_mae_all": [
+      {
+        "cfg": {
+          "learning_rate": 0.03,
+          "max_iter": 800,
+          "max_leaf_nodes": 31,
+          "min_samples_leaf": 20,
+          "l2_regularization": 1.0
+        },
+        "mae": 344.66887753821703
+      },
+      {
+        "cfg": {
+          "learning_rate": 0.05,
+          "max_iter": 500,
+          "max_leaf_nodes": 31,
+          "min_samples_leaf": 20,
+          "l2_regularization": 0.0
+        },
+        "mae": 345.31096701231894
+      },
+      {
+        "cfg": {
+          "learning_rate": 0.05,
+          "max_iter": 500,
+          "max_leaf_nodes": 31,
+          "min_samples_leaf": 50,
+          "l2_regularization": 0.0
+        },
+        "mae": 345.8960027448712
+      },
+      {
+        "cfg": {
+          "learning_rate": 0.05,
+          "max_iter": 800,
+          "max_leaf_nodes": 63,
+          "min_samples_leaf": 20,
+          "l2_regularization": 0.0
+        },
+        "mae": 347.7275918521604
+      }
+    ]
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md",
+    "skill_seed_bag_final_regressor.md"
+  ],
+  "interpretation_notes": "HistGradientBoostingRegressor with loss='absolute_error' (matches MAE metric); small 4-config grid tuned via KFold(5) CV; final predictions are mean of 3 seed-bagged refits. All features numeric and low-cardinality with no NaNs \u2014 no preprocessing needed.",
+  "audit": {
+    "seed_bag": [
+      0,
+      1,
+      2
+    ],
+    "best_cfg": {
+      "learning_rate": 0.03,
+      "max_iter": 800,
+      "max_leaf_nodes": 31,
+      "min_samples_leaf": 20,
+      "l2_regularization": 1.0
+    },
+    "n_train": 12231,
+    "n_test": 3058,
+    "elapsed_s": 46.04696202278137
+  }
+}

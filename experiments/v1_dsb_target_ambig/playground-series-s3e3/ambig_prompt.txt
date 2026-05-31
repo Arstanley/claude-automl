@@ -1,0 +1,32 @@
+# Tabular Playground Series S3E3 — Modeling Task
+
+## Context
+
+Synthetic tabular dataset generated from a deep learning model trained on an Employee Attrition dataset. Feature distributions are close to, but not exactly the same as, the original. Each row corresponds to one employee record.
+
+## Files (in `data/`)
+
+- `train.csv` — labeled records (1,342 rows).
+- `test.csv` — held-out records (337 rows). Same schema as train except the target prediction column is missing — you must predict it.
+- `sample_submission.csv` — an example submission file format.
+
+## Columns
+
+Examples of columns present include: `Age`, `Attrition`, `BusinessTravel`, `DailyRate`, `Department`, `DistanceFromHome`, `Education`, `EducationField`, `EmployeeCount`, `EmployeeNumber`, `EnvironmentSatisfaction`, `Gender`, `HourlyRate`, `JobInvolvement`, `JobLevel`, `JobRole`, `JobSatisfaction`, `MaritalStatus`, `MonthlyIncome`, `MonthlyRate`, `NumCompaniesWorked`, `Over18`, `OverTime`, `PercentSalaryHike`, `PerformanceRating`, `RelationshipSatisfaction`, `StandardHours`, `StockOptionLevel`, `TotalWorkingYears`, `TrainingTimesLastYear`, `WorkLifeBalance`, `YearsAtCompany`, `YearsInCurrentRole`, `YearsSinceLastPromotion`, `YearsWithCurrManager`. (Inspect `train.csv` for the full schema.)
+
+## Evaluation
+
+Predictions are evaluated on **area under the ROC curve (AUC)** between predicted probability and the observed target.
+
+## Submission format
+
+CSV with header:
+
+```
+EmployeeNumber,<target>
+1677,0.78
+1678,0.34
+...
+```
+
+Replace `<target>` with the column you are predicting (probabilities in `[0, 1]`).

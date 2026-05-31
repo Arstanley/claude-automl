@@ -1,0 +1,37 @@
+{
+  "target_column_chosen": "Survived",
+  "target_column_justification": "Structural check: train.csv has the columns ['Age', 'Cabin', 'Embarked', 'Fare', 'Name', 'Parch', 'PassengerId', 'Pclass', 'Sex', 'SibSp', 'Survived', 'Ticket'] and test.csv has ['Age', 'Cabin', 'Embarked', 'Fare', 'Name', 'Parch', 'PassengerId', 'Pclass', 'Sex', 'SibSp', 'Ticket']; the only column in train but absent from test is 'Survived'. The spec also explicitly defines Survived (1=survived, 0=not) and asks the user to predict the missing target column. Alternative candidates (e.g., Sex) are present in test.csv and are therefore NOT held out, so cannot be the target.",
+  "headline_metric": "accuracy",
+  "headline_value": 0.831429,
+  "all_metrics": {
+    "cv_accuracy_logistic_regression_mean": 0.831429,
+    "cv_accuracy_logistic_regression_std": 0.0265,
+    "cv_accuracy_random_forest_mean": 0.827223,
+    "cv_accuracy_random_forest_std": 0.019822,
+    "selected_model": "logistic_regression",
+    "selected_model_cv_accuracy_mean": 0.831429,
+    "selected_model_cv_accuracy_std": 0.0265,
+    "baseline_majority_class_train_accuracy": 0.623596,
+    "baseline_all_females_survive_train_accuracy": 0.787921,
+    "n_train": 712,
+    "n_test": 179,
+    "train_passengerid_range": [
+      1,
+      891
+    ],
+    "test_passengerid_range": [
+      6,
+      890
+    ]
+  },
+  "anticipated_probes": [
+    "Target-column choice on structural grounds: confirmed by set-diff of train vs test columns; only 'Survived' is missing. We assert this in code.",
+    "Submission row alignment: rows ordered by test.csv's own PassengerId (in original test.csv order), not gender_submission.csv. gender_submission.csv covers PassengerIds 892-1309 (the classic Kaggle public leaderboard test set) but THIS test.csv has PassengerIds 6-890, i.e. a re-split of the original 891-row training set. We use test.csv.",
+    "Choice of metric: classification accuracy, exactly as the spec states.",
+    "Baseline framing: we report majority-class (0.623) and the all-females-survive heuristic (0.787 on train) so the headline model score has context.",
+    "Data quirks: Age has ~20% missing, Cabin >75% missing, Embarked has 2 missing in train. Handled with median impute for numerics, most-frequent for categoricals, and a HasCabin indicator instead of trying to use the noisy Cabin string. Title is extracted from Name to recover signal lost when imputing Age.",
+    "Row count: spec says 713/180 but files are 712/179 (off by one each). We use the actual file lengths; one row per test row, header included.",
+    "Headline_value is the CV estimate (out-of-fold mean accuracy), not train accuracy, so it is not optimistically biased by overfitting."
+  ],
+  "interpretation_notes": "Only Survived is structurally missing from test.csv, so that is the target. The provided gender_submission.csv is for a different PassengerId range and would mis-align rows if copied verbatim; we ignore its rows and use only its column-name convention (PassengerId, Survived). Models compared by 5-fold stratified CV accuracy; the better of logistic regression and random forest is selected and refit on the full training set before predicting test."
+}

@@ -1,0 +1,101 @@
+{
+  "target_column_chosen": "yield",
+  "headline_metric": "MAE",
+  "headline_value": 345.1286086712823,
+  "all_metrics": {
+    "holdout_mae_best_cfg": 345.1286086712823,
+    "grid": [
+      {
+        "params": {
+          "max_iter": 600,
+          "learning_rate": 0.03,
+          "max_depth": 7,
+          "min_samples_leaf": 30,
+          "l2_regularization": 0.1,
+          "loss": "absolute_error"
+        },
+        "holdout_mae": 345.1286086712823
+      },
+      {
+        "params": {
+          "max_iter": 400,
+          "learning_rate": 0.05,
+          "max_depth": 6,
+          "min_samples_leaf": 20,
+          "l2_regularization": 0.0,
+          "loss": "absolute_error"
+        },
+        "holdout_mae": 345.19409415065854
+      },
+      {
+        "params": {
+          "max_iter": 400,
+          "learning_rate": 0.05,
+          "max_depth": 6,
+          "min_samples_leaf": 20,
+          "l2_regularization": 0.0,
+          "loss": "squared_error"
+        },
+        "holdout_mae": 350.5678780834503
+      }
+    ]
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md",
+    "skill_verify_split_claim_before_holdout.md"
+  ],
+  "interpretation_notes": "Tabular regression on Wild Blueberry yield (n_train=12231, no NaNs, 16 numeric features). Compared 3 HistGradientBoosting configs on a single 80/20 holdout (MAE-loss vs squared-loss). Final = 3-seed bag of best config refit on full train. Used single 80/20 holdout (not 5-fold CV) to stay under the 3-minute budget given host contention.",
+  "audit": {
+    "n_train": 12231,
+    "n_test": 3058,
+    "n_features": 16,
+    "grid": [
+      {
+        "params": {
+          "max_iter": 600,
+          "learning_rate": 0.03,
+          "max_depth": 7,
+          "min_samples_leaf": 30,
+          "l2_regularization": 0.1,
+          "loss": "absolute_error"
+        },
+        "holdout_mae": 345.1286086712823,
+        "fit_sec": 1.4
+      },
+      {
+        "params": {
+          "max_iter": 400,
+          "learning_rate": 0.05,
+          "max_depth": 6,
+          "min_samples_leaf": 20,
+          "l2_regularization": 0.0,
+          "loss": "absolute_error"
+        },
+        "holdout_mae": 345.19409415065854,
+        "fit_sec": 1.4
+      },
+      {
+        "params": {
+          "max_iter": 400,
+          "learning_rate": 0.05,
+          "max_depth": 6,
+          "min_samples_leaf": 20,
+          "l2_regularization": 0.0,
+          "loss": "squared_error"
+        },
+        "holdout_mae": 350.5678780834503,
+        "fit_sec": 0.4
+      }
+    ],
+    "chosen_params": {
+      "max_iter": 600,
+      "learning_rate": 0.03,
+      "max_depth": 7,
+      "min_samples_leaf": 30,
+      "l2_regularization": 0.1,
+      "loss": "absolute_error"
+    },
+    "n_seeds": 3,
+    "runtime_sec": 9.4
+  }
+}

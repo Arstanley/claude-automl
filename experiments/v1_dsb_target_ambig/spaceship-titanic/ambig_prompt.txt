@@ -1,0 +1,41 @@
+# Spaceship Titanic — Modeling Task
+
+## Context
+
+It is the year 2912. The Spaceship Titanic, an interstellar passenger liner with ~13,000 passengers en route to newly habitable exoplanets, collided with a spacetime anomaly hidden in a dust cloud. Roughly half the passengers were affected by the anomaly. The data consists of personal records recovered from the ship's damaged computer system. Each row is one passenger.
+
+## Files (in `data/`)
+
+- `train.csv` — labeled passenger records (6,955 rows).
+- `test.csv` — held-out passenger records (1,740 rows). Same schema as train except the target prediction column is missing — you must predict it.
+- `sample_submission.csv` — an example submission file format.
+
+## Columns
+
+- `PassengerId` — unique ID of form `gggg_pp` (group / number-within-group). Group members are often family but not always.
+- `HomePlanet` — planet the passenger departed from (planet of permanent residence)
+- `CryoSleep` — whether the passenger elected suspended animation for the duration; cryosleep passengers are confined to their cabins
+- `Cabin` — cabin number, form `deck/num/side` where `side` is `P` (Port) or `S` (Starboard)
+- `Destination` — planet the passenger is debarking to
+- `Age` — age of the passenger
+- `VIP` — whether the passenger paid for VIP service
+- `RoomService`, `FoodCourt`, `ShoppingMall`, `Spa`, `VRDeck` — amount billed at each luxury amenity
+- `Name` — first and last names of the passenger
+- `Transported` — whether the passenger was transported to another dimension
+
+## Evaluation
+
+Predictions are evaluated on **classification accuracy** on the test set.
+
+## Submission format
+
+CSV with header:
+
+```
+PassengerId,<target>
+0013_01,<value>
+0018_01,<value>
+...
+```
+
+Replace `<target>` with the column you are predicting; `<value>` is your prediction for that `PassengerId`.

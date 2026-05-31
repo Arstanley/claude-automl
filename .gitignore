@@ -8,3 +8,42 @@ __pycache__/
 
 # Smoke test artifacts
 /tmp/automl-ui-smoke.log
+
+# Experiment artifacts: keep findings/code/result.json, exclude bulk data + cloned repos
+# Cloned upstream repos (they have their own git histories)
+experiments/DSBench/
+experiments/DSAgent/
+experiments/AutoMLAgent/
+
+# Large dataset CSVs and binary models (datasets are public, re-downloadable; models regenerable)
+experiments/**/data/*.csv
+experiments/**/data/*.parquet
+experiments/**/data/*.txt
+experiments/**/data/*.zip
+experiments/**/data/*.tar*
+experiments/**/eval/answer.csv
+experiments/**/model.pkl
+experiments/**/*.pkl
+experiments/**/*.pt
+experiments/**/*.npy
+experiments/**/*.npz
+
+# Transient runtime + cache
+experiments/**/*.log
+experiments/**/run.log
+experiments/**/.cache/
+experiments/**/processed/
+experiments/**/raw/
+
+# PyG dataset caches (re-downloadable)
+experiments/**/Cora/
+experiments/**/Citeseer/
+experiments/**/Planetoid/
+
+# Aux throwaway experiments
+experiments/amla_eval/
+experiments/dsb_data/
+
+# Secrets — never commit
+*.env
+.secrets/

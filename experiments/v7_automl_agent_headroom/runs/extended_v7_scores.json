@@ -1,0 +1,34 @@
+{
+  "software_defects": {
+    "free": {
+      "binary": 0.5467378863029378,
+      "macro": 0.6947507180174606,
+      "weighted": 0.7769057300490512
+    },
+    "constraint": {
+      "binary": 0.5484033444142238,
+      "macro": 0.7013760443439585,
+      "weighted": 0.786284047641075
+    }
+  },
+  "crab_age": {
+    "free": {
+      "rmsle": 0.16188285358779242,
+      "nps": 0.8606719661212727
+    },
+    "constraint": {
+      "rmsle": 0.16252469988653284,
+      "nps": 0.8601967769782475
+    }
+  },
+  "autoML_agent_NPS": {
+    "software_defects": {
+      "free": 0.664,
+      "constraint": 0.573
+    },
+    "crab_age": {
+      "free": 0.859,
+      "constraint": 0.861
+    }
+  }
+}

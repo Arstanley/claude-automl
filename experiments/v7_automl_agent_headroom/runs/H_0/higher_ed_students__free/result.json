@@ -1,0 +1,13 @@
+{
+  "target_column_chosen": "OUTPUT Grade",
+  "headline_metric": "rand_score",
+  "headline_value": 0.8,
+  "all_metrics": {
+    "train_rand": 0.7606422703510082,
+    "test_rand": 0.8
+  },
+  "skills_applied": [
+    "skill_stringify_low_cardinality_int_codes.md"
+  ],
+  "interpretation_notes": "All features are low-cardinality int questionnaire codes; stringified and one-hot encoded, then PCA(20) + KMeans(k=8). Selected seed by max train silhouette (unsupervised). 'OUTPUT Grade' used only for Rand Index scoring."
+}

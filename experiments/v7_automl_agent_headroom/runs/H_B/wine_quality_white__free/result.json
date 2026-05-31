@@ -1,0 +1,45 @@
+{
+  "target_column_chosen": "quality",
+  "headline_metric": "macro_f1",
+  "headline_value": 0.43077059199758755,
+  "all_metrics": {
+    "val_macro_f1_by_model": {
+      "hgb_cls_balanced": 0.33711606831981494,
+      "hgb_reg_rounded": 0.32743896063843064,
+      "rf_balanced": 0.3744442455585767,
+      "et_balanced": 0.35480094873624773,
+      "hgb_cls_balanced_deep": 0.32685118161466775,
+      "ens_cls_only": 0.3782921409564502,
+      "ens_cls_reg": 0.3984861607721807,
+      "ens_hgb_reg": 0.3623019062431109,
+      "ens_hgb_reg_heavy": 0.3707536674497027
+    },
+    "best_model": "ens_cls_reg",
+    "best_val_macro_f1": 0.3984861607721807,
+    "test_macro_f1": 0.43077059199758755,
+    "test_per_class_f1": {
+      "3": 0.0,
+      "4": 0.41379310344827586,
+      "5": 0.702247191011236,
+      "6": 0.72544080604534,
+      "7": 0.5942028985507246,
+      "8": 0.5797101449275363,
+      "9": 0.0
+    },
+    "val_per_class_f1": {
+      "3": 0.0,
+      "4": 0.36363636363636365,
+      "5": 0.68,
+      "6": 0.7132667617689016,
+      "7": 0.72,
+      "8": 0.3125,
+      "9": 0.0
+    }
+  },
+  "skills_applied": [
+    "skill_ordinal_target_and_rare_class_macro_f1.md",
+    "skill_tune_when_n_train_supports_it.md"
+  ],
+  "interpretation_notes": "Treated quality as ordinal: trained HGB-regressor (rounded) alongside class-balanced HGB/RF/ExtraTrees classifiers (sample_weight='balanced'), then selected by val macro-F1 across single models AND probability-blend ensembles (cls + Gaussian-softened regression). lightgbm/xgboost unavailable so fell back to sklearn. Refit the chosen pipeline on train+valid before scoring test.",
+  "runtime_seconds": 45.54
+}

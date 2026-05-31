@@ -1,0 +1,161 @@
+{
+  "target_column_chosen": "Attrition",
+  "headline_metric": "roc_auc",
+  "headline_value": 0.8244725738396625,
+  "all_metrics": {
+    "cv_roc_auc_mean": 0.8278234313325166,
+    "cv_roc_auc_std": 0.04611690217353822,
+    "oof_roc_auc": 0.8244725738396625
+  },
+  "skills_applied": [
+    "skill_probe_group_structure_in_ids.md",
+    "skill_stringify_low_cardinality_int_codes.md",
+    "skill_tune_when_n_train_supports_it.md"
+  ],
+  "interpretation_notes": "Binary classification with mild imbalance (~12% positive). Sklearn GradientBoostingClassifier with a 4-config grid + 5-fold StratifiedKFold CV. Low-cardinality int codes (Education, JobLevel, etc.) were stringified and one-hot encoded so the model treats them as categories rather than ordinal magnitudes; constant cols (EmployeeCount, StandardHours, Over18) dropped.",
+  "audit": {
+    "group_leakage_probe": {
+      "Age": 1.0,
+      "BusinessTravel": 1.0,
+      "DailyRate": 0.789272030651341,
+      "Department": 1.0,
+      "DistanceFromHome": 1.0,
+      "Education": 1.0,
+      "EducationField": 1.0,
+      "EmployeeCount": 1.0,
+      "EnvironmentSatisfaction": 1.0,
+      "Gender": 1.0,
+      "HourlyRate": 1.0,
+      "JobInvolvement": 1.0,
+      "JobLevel": 1.0,
+      "JobRole": 1.0,
+      "JobSatisfaction": 1.0,
+      "MaritalStatus": 1.0,
+      "MonthlyIncome": 0.5993150684931506,
+      "MonthlyRate": 0.5993031358885017,
+      "NumCompaniesWorked": 1.0,
+      "Over18": 1.0,
+      "OverTime": 1.0,
+      "PercentSalaryHike": 1.0,
+      "PerformanceRating": 1.0,
+      "RelationshipSatisfaction": 1.0,
+      "StandardHours": 1.0,
+      "StockOptionLevel": 1.0,
+      "TotalWorkingYears": 0.9714285714285714,
+      "TrainingTimesLastYear": 1.0,
+      "WorkLifeBalance": 1.0,
+      "YearsAtCompany": 1.0,
+      "YearsInCurrentRole": 1.0,
+      "YearsSinceLastPromotion": 1.0,
+      "YearsWithCurrManager": 1.0
+    },
+    "dropped_constant_cols": [
+      "EmployeeCount",
+      "Over18",
+      "StandardHours"
+    ],
+    "stringified_columns": [
+      "Education",
+      "EnvironmentSatisfaction",
+      "JobInvolvement",
+      "JobLevel",
+      "JobSatisfaction",
+      "NumCompaniesWorked",
+      "PercentSalaryHike",
+      "PerformanceRating",
+      "RelationshipSatisfaction",
+      "StockOptionLevel",
+      "TrainingTimesLastYear",
+      "WorkLifeBalance",
+      "YearsInCurrentRole",
+      "YearsSinceLastPromotion",
+      "YearsWithCurrManager"
+    ],
+    "cat_cols": [
+      "BusinessTravel",
+      "Department",
+      "Education",
+      "EducationField",
+      "EnvironmentSatisfaction",
+      "Gender",
+      "JobInvolvement",
+      "JobLevel",
+      "JobRole",
+      "JobSatisfaction",
+      "MaritalStatus",
+      "NumCompaniesWorked",
+      "OverTime",
+      "PercentSalaryHike",
+      "PerformanceRating",
+      "RelationshipSatisfaction",
+      "StockOptionLevel",
+      "TrainingTimesLastYear",
+      "WorkLifeBalance",
+      "YearsInCurrentRole",
+      "YearsSinceLastPromotion",
+      "YearsWithCurrManager"
+    ],
+    "num_cols": [
+      "Age",
+      "DailyRate",
+      "DistanceFromHome",
+      "HourlyRate",
+      "MonthlyIncome",
+      "MonthlyRate",
+      "TotalWorkingYears",
+      "YearsAtCompany"
+    ],
+    "constraint_tokens_in_prompt": [],
+    "should_tune": true,
+    "hyperparameter_grid_results": [
+      {
+        "params": {
+          "n_estimators": 300,
+          "learning_rate": 0.05,
+          "max_depth": 3,
+          "subsample": 0.9
+        },
+        "mean": 0.8278234313325166,
+        "std": 0.04611690217353822
+      },
+      {
+        "params": {
+          "n_estimators": 100,
+          "learning_rate": 0.1,
+          "max_depth": 3,
+          "subsample": 1.0
+        },
+        "mean": 0.8173131890567579,
+        "std": 0.046063155536821554
+      },
+      {
+        "params": {
+          "n_estimators": 500,
+          "learning_rate": 0.03,
+          "max_depth": 4,
+          "subsample": 0.9
+        },
+        "mean": 0.8064805362733087,
+        "std": 0.05032041816579804
+      },
+      {
+        "params": {
+          "n_estimators": 300,
+          "learning_rate": 0.05,
+          "max_depth": 5,
+          "subsample": 0.8
+        },
+        "mean": 0.7971680617939295,
+        "std": 0.06087439516041796
+      }
+    ],
+    "chosen_config": {
+      "n_estimators": 300,
+      "learning_rate": 0.05,
+      "max_depth": 3,
+      "subsample": 0.9
+    }
+  },
+  "n_train": 1341,
+  "n_test": 336
+}

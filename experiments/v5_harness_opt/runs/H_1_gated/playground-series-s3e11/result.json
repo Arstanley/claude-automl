@@ -1,0 +1,62 @@
+{
+  "target_column_chosen": "cost",
+  "headline_metric": "RMSLE",
+  "headline_value": 0.30259194863164085,
+  "all_metrics": {
+    "RMSLE_subsample_cv": 0.30259194863164085,
+    "grid_rmsle": [
+      0.30259194863164085,
+      0.3030186536453359,
+      0.3035903606120781
+    ]
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md",
+    "skill_seed_bag_final_regressor.md"
+  ],
+  "interpretation_notes": "Tabular regression with RMSLE: trained HistGradientBoostingRegressor on log1p(cost) (RMSLE = RMSE on log1p). Selected one of 3 configs via 3-fold CV on an 80k subsample for speed under the 4-min budget, then refit on full train with 3 random seeds (seed bag) and averaged predictions for variance reduction.",
+  "audit": {
+    "n_train": 288268,
+    "n_test": 72068,
+    "hyperparameter_grid": [
+      {
+        "max_iter": 400,
+        "learning_rate": 0.05,
+        "max_depth": null,
+        "max_leaf_nodes": 31,
+        "l2_regularization": 0.0,
+        "min_samples_leaf": 20
+      },
+      {
+        "max_iter": 600,
+        "learning_rate": 0.03,
+        "max_depth": null,
+        "max_leaf_nodes": 63,
+        "l2_regularization": 1.0,
+        "min_samples_leaf": 40
+      },
+      {
+        "max_iter": 500,
+        "learning_rate": 0.05,
+        "max_depth": null,
+        "max_leaf_nodes": 63,
+        "l2_regularization": 1.0,
+        "min_samples_leaf": 20
+      }
+    ],
+    "chosen_config": {
+      "max_iter": 400,
+      "learning_rate": 0.05,
+      "max_depth": null,
+      "max_leaf_nodes": 31,
+      "l2_regularization": 0.0,
+      "min_samples_leaf": 20
+    },
+    "seed_bag": [
+      0,
+      1,
+      2
+    ],
+    "elapsed_sec": 39.54842162132263
+  }
+}

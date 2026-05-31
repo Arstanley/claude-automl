@@ -1,0 +1,43 @@
+# Titanic Passenger Data — Modeling Task
+
+## Context
+
+This is the legendary Titanic dataset from Kaggle. The data is about passenger records from the RMS Titanic, which sank in 1912. Each row corresponds to one passenger.
+
+## Files (in `data/`)
+
+- `train.csv` — labeled passenger records used for training (713 rows).
+- `test.csv` — held-out passenger records (180 rows). The same columns as `train.csv`, except the target prediction column is missing — you must predict it.
+- `gender_submission.csv` — an example submission file format.
+
+## Columns (present in both train and test where applicable)
+
+- `PassengerId` — unique passenger ID
+- `Survived` — 1 if survived, 0 if not
+- `Pclass` — ticket class (1 = upper, 2 = middle, 3 = lower)
+- `Name` — passenger name
+- `Sex` — male / female
+- `Age` — age in years (fractional for infants; estimated ages are xx.5)
+- `SibSp` — number of siblings / spouses aboard
+- `Parch` — number of parents / children aboard
+- `Ticket` — ticket number
+- `Fare` — passenger fare
+- `Cabin` — cabin number (often missing)
+- `Embarked` — port of embarkation (C = Cherbourg, Q = Queenstown, S = Southampton)
+
+## Evaluation
+
+Predictions are evaluated by **classification accuracy** on the test set.
+
+## Submission format
+
+Produce a CSV with a header row:
+
+```
+PassengerId,<target>
+892,<value>
+893,<value>
+...
+```
+
+Replace `<target>` with the column you are predicting. Each row of the submission is one prediction for one `PassengerId` from `test.csv`.

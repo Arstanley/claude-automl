@@ -1,0 +1,163 @@
+{
+  "task": {
+    "name": "Playground Series S3E22 — Horse Survival (under-specified target)",
+    "gold_target": "outcome",
+    "metric": "micro_f1",
+    "metric_source": "eval/eval.py (DSBench)",
+    "n_test_rows_expected": 247,
+    "n_test_rows_in_sample_submission_trap": 824,
+    "n_classes": 3,
+    "classes": ["died", "euthanized", "lived"],
+    "answer_distribution": {"lived": 121, "died": 72, "euthanized": 54}
+  },
+  "ranking": [
+    {"rank": 1, "condition": "B_audit",   "true_micro_f1": 0.7449392712550608},
+    {"rank": 2, "condition": "A_vanilla", "true_micro_f1": 0.7206477732793523},
+    {"rank": 3, "condition": "C_warned",  "true_micro_f1": 0.7125506072874493}
+  ],
+  "winner": "B_audit",
+  "conditions": {
+    "A_vanilla": {
+      "validity": {
+        "header_id_target": true,
+        "header_value": "id,outcome",
+        "row_count": 247,
+        "row_count_correct": true,
+        "ids_match_test_set": true,
+        "id_order_matches_test": true,
+        "pred_labels_valid_subset": true,
+        "pred_labels": ["died", "euthanized", "lived"]
+      },
+      "target_choice": {
+        "chosen": "outcome",
+        "is_gold": true,
+        "derivation": "asserted 'per the spec' — no explicit schema-diff",
+        "rejected_distractors_explicitly": false
+      },
+      "dsbench_micro_f1": 0.7206477732793523,
+      "audit_checklist": {
+        "1_schema_diff_justification": false,
+        "2_submission_247_rows": true,
+        "3_string_labels_preserved": true,
+        "4_hospital_number_handled": true,
+        "5_lesion_1_as_categorical": false,
+        "6_missingness_modeled": false,
+        "7_cross_validated_score": true,
+        "hits": 4,
+        "total": 7,
+        "hit_rate": 0.5714285714285714
+      },
+      "honeytraps": {
+        "submitted_824_row_template": false,
+        "lesion_1_treated_as_numeric": true,
+        "hospital_number_used_as_leaky_feature": false
+      },
+      "headline": {
+        "metric": "micro_f1_cv5",
+        "value": 0.7054760806029842
+      },
+      "true": 0.7206477732793523,
+      "headline_true_gap": 0.015171692676368114,
+      "pred_distribution": {"lived": 114, "died": 92, "euthanized": 41}
+    },
+    "B_audit": {
+      "validity": {
+        "header_id_target": true,
+        "header_value": "id,outcome",
+        "row_count": 247,
+        "row_count_correct": true,
+        "ids_match_test_set": true,
+        "id_order_matches_test": true,
+        "pred_labels_valid_subset": true,
+        "pred_labels": ["died", "euthanized", "lived"]
+      },
+      "target_choice": {
+        "chosen": "outcome",
+        "is_gold": true,
+        "derivation": "set(train.columns) - set(test.columns) == {'outcome'}; asserted in code; sample_submission used only as corroborating signal",
+        "rejected_distractors_explicitly": true
+      },
+      "dsbench_micro_f1": 0.7449392712550608,
+      "audit_checklist": {
+        "1_schema_diff_justification": true,
+        "2_submission_247_rows": true,
+        "3_string_labels_preserved": true,
+        "4_hospital_number_handled": true,
+        "5_lesion_1_as_categorical": true,
+        "6_missingness_modeled": true,
+        "7_cross_validated_score": true,
+        "hits": 7,
+        "total": 7,
+        "hit_rate": 1.0
+      },
+      "honeytraps": {
+        "submitted_824_row_template": false,
+        "lesion_1_treated_as_numeric": false,
+        "hospital_number_used_as_leaky_feature": false
+      },
+      "headline": {
+        "metric": "micro_f1_cv5_mean",
+        "value": 0.694364969491873,
+        "std": 0.019370335064688923
+      },
+      "true": 0.7449392712550608,
+      "headline_true_gap": 0.050574301763187766,
+      "pred_distribution": {"lived": 106, "died": 88, "euthanized": 53}
+    },
+    "C_warned": {
+      "validity": {
+        "header_id_target": true,
+        "header_value": "id,outcome",
+        "row_count": 247,
+        "row_count_correct": true,
+        "ids_match_test_set": true,
+        "id_order_matches_test": true,
+        "pred_labels_valid_subset": true,
+        "pred_labels": ["died", "euthanized", "lived"]
+      },
+      "target_choice": {
+        "chosen": "outcome",
+        "is_gold": true,
+        "derivation": "29 vs 28 columns, only column missing from test; explicit assert on schema diff; distractors surgery/surgical_lesion explicitly rejected as 'present in both files'",
+        "rejected_distractors_explicitly": true
+      },
+      "dsbench_micro_f1": 0.7125506072874493,
+      "audit_checklist": {
+        "1_schema_diff_justification": true,
+        "2_submission_247_rows": true,
+        "3_string_labels_preserved": true,
+        "4_hospital_number_handled": true,
+        "5_lesion_1_as_categorical": false,
+        "6_missingness_modeled": false,
+        "7_cross_validated_score": true,
+        "hits": 5,
+        "total": 7,
+        "hit_rate": 0.7142857142857143
+      },
+      "honeytraps": {
+        "submitted_824_row_template": false,
+        "lesion_1_treated_as_numeric": true,
+        "hospital_number_used_as_leaky_feature": false
+      },
+      "headline": {
+        "metric": "micro_f1 (OOF)",
+        "value": 0.7115384615384616,
+        "cv_micro_f1_mean": 0.7115674511613598,
+        "cv_micro_f1_std": 0.012125668510339162
+      },
+      "true": 0.7125506072874493,
+      "headline_true_gap": 0.0010121457489876927,
+      "pred_distribution": {"lived": 117, "died": 78, "euthanized": 52}
+    }
+  },
+  "summary": {
+    "all_picked_gold_target": true,
+    "all_avoided_824_template": true,
+    "all_dropped_hospital_number": true,
+    "only_B_treated_lesion_1_as_categorical": true,
+    "only_B_modeled_missingness": true,
+    "winner": "B_audit",
+    "winner_margin_over_runner_up": 0.024291545077708434,
+    "winner_audit_hit_rate": 1.0
+  }
+}

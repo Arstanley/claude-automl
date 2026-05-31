@@ -1,0 +1,57 @@
+{
+  "target_column_chosen": "OUTPUT Grade",
+  "headline_metric": "rand_score",
+  "headline_value": 0.8095238095238095,
+  "all_metrics": {
+    "ri_train": 0.7806198655713219,
+    "ri_valid": 0.7815384615384615,
+    "ari_train": 0.05490623398763402,
+    "nmi_train": 0.22739733190680486,
+    "ri_test": 0.8095238095238095,
+    "ari_test": 0.06666666666666667
+  },
+  "skills_applied": [
+    "skill_stringify_low_cardinality_int_codes.md",
+    "skill_multi_axis_constraint_budgets.md"
+  ],
+  "interpretation_notes": "Unsupervised clustering with k=8. Stringified all 29 low-cardinality int-coded feature columns and one-hot encoded them, leaving the two 4-point GPA columns as scaled numeric. Compared KMeans / Agglomerative / GaussianMixture / Spectral over raw and PCA projections, selected by Rand Index against OUTPUT Grade on train. Best: spectral_nearest_neighbors.",
+  "audit": {
+    "stringified_columns": [
+      "Student Age",
+      "Sex",
+      "Graduated high-school type",
+      "Scholarship type",
+      "Additional work",
+      "Regular artistic or sports activity",
+      "Do you have a partner",
+      "Total salary if available",
+      "Transportation to the university",
+      "Accomodation type in Cyprus",
+      "Mother's education",
+      "Father's education",
+      "Number of sisters/brothers (if available)",
+      "Parental status",
+      "Mother's occupation",
+      "Father's occupation",
+      "Weekly study hours",
+      "Reading frequency (non-scientific books/journals)",
+      "Reading frequency (scientific books/journals)",
+      "Attendance to the seminars/conferences related to the department",
+      "Impact of your projects/activities on your success",
+      "Attendance to classes",
+      "Preparation to midterm exams 1",
+      "Preparation to midterm exams 2",
+      "Taking notes in classes",
+      "Listening in classes",
+      "Discussion improves my interest and success in the course",
+      "Flip-classroom",
+      "Course ID"
+    ],
+    "best_method": "spectral_nearest_neighbors",
+    "n_train": 104,
+    "n_valid": 26,
+    "n_test": 15,
+    "feature_dim": 109,
+    "n_candidates_tried": 68
+  }
+}

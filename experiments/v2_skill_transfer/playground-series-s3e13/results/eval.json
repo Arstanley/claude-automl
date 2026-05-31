@@ -1,0 +1,95 @@
+{
+  "task": "playground-series-s3e13",
+  "metric": "MPA@3 (hit@3 per eval/eval.py implementation)",
+  "gold_target": "prognosis",
+  "n_test_rows": 142,
+  "conditions": {
+    "A_no_skills": {
+      "submission_path": "conditions/A_no_skills/submission.csv",
+      "valid": true,
+      "header_ok": true,
+      "n_rows": 142,
+      "ids_match_test_csv": true,
+      "tokens_per_row_min": 3,
+      "tokens_per_row_max": 3,
+      "distinct_tokens_per_row": true,
+      "underscores_preserved": true,
+      "aligned_to_sample_submission_303": false,
+      "dsbench_mpa_at_3": 0.5985915492957746,
+      "headline_claimed": 0.44690265486725667,
+      "headline_metric_claimed": "MAP@3 (position-weighted)",
+      "headline_vs_true_gap_note": "claimed metric is MAP@3 (rank-weighted); true eval is hit@3, so headline understates by design"
+    },
+    "A_with_skills": {
+      "submission_path": "conditions/A_with_skills/submission.csv",
+      "valid": true,
+      "header_ok": true,
+      "n_rows": 142,
+      "ids_match_test_csv": true,
+      "tokens_per_row_min": 3,
+      "tokens_per_row_max": 3,
+      "distinct_tokens_per_row": true,
+      "underscores_preserved": true,
+      "aligned_to_sample_submission_303": false,
+      "dsbench_mpa_at_3": 0.5774647887323944,
+      "headline_claimed": 0.6283185840707964,
+      "headline_metric_claimed": "MPA@3 (hit@3 CV)",
+      "headline_vs_true_gap_note": "CV hit@3 0.628 vs test hit@3 0.577 (-0.051) — modest optimism, in line with CV std 0.031"
+    },
+    "B_audit_round2": {
+      "submission_path": "conditions/B_audit_round2/submission.csv",
+      "valid": true,
+      "header_ok": true,
+      "n_rows": 142,
+      "ids_match_test_csv": true,
+      "tokens_per_row_min": 3,
+      "tokens_per_row_max": 3,
+      "distinct_tokens_per_row": true,
+      "underscores_preserved": true,
+      "aligned_to_sample_submission_303": false,
+      "dsbench_mpa_at_3": 0.6197183098591549,
+      "headline_claimed": 0.44719764011799423,
+      "headline_metric_claimed": "MAP@3 (position-weighted, by design); also reported hit@3 0.6212",
+      "headline_vs_true_gap_note": "reported hit@3 CV 0.621 vs test hit@3 0.620 — essentially zero gap; superb calibration"
+    }
+  },
+  "honeytrap_checks": {
+    "aligned_to_303_row_sample_submission": {
+      "A_no_skills": false,
+      "A_with_skills": false,
+      "B_audit_round2": false
+    },
+    "single_label_predictions": {
+      "A_no_skills": false,
+      "A_with_skills": false,
+      "B_audit_round2": false
+    },
+    "underscores_converted_to_spaces": {
+      "A_no_skills": false,
+      "A_with_skills": false,
+      "B_audit_round2": false
+    }
+  },
+  "audit_checklist_hit_rate": {
+    "A_no_skills": "5/7 — 142-row submission, closed-set, 3-label rows underscored, stratified CV (KFold via solver), seed; missing explicit prior-baseline check, no per-fold report",
+    "A_with_skills": "7/7 — schema-diff target, ignored sample_submission, stratified 5-fold, prior baseline 0.329 reported, model grid+selection, distinct underscored labels ordered by predict_proba",
+    "B_audit_round2": "7/7 — all audit items explicitly addressed in audit_items_addressed list, including classes_ off-by-one trap"
+  },
+  "deltas": {
+    "transfer_signal_with_minus_no": -0.0211267605633802,
+    "ceiling_gap_audit_minus_with": 0.0422535211267605
+  },
+  "ranking_by_dsbench_score": [
+    {"condition": "B_audit_round2", "score": 0.6197183098591549},
+    {"condition": "A_no_skills", "score": 0.5985915492957746},
+    {"condition": "A_with_skills", "score": 0.5774647887323944}
+  ],
+  "notes": [
+    "eval/eval.py implements hit@3 (position-agnostic), matching the spec's second contradictory phrasing. Audit correctly flagged this ambiguity.",
+    "All three submissions were format-valid: 142 rows aligning to test.csv ids 2..703, header id,prognosis, exactly 3 distinct underscore-preserved labels, ordered by descending predict_proba.",
+    "No solver fell into any of the three honeytraps (303-row sample, single-label, underscore-to-space).",
+    "Transfer signal is NEGATIVE: adding the skill library actually hurt A by 2.1 points. A_with_skills picked ExtraTrees+depth=8 as best-single via CV; the model overfit the small (n=565) dataset relative to A_no_skills' soft-vote LR+RF+BernoulliNB ensemble.",
+    "Ceiling gap is POSITIVE 4.2 points: the audit-informed condition beat A_with_skills, but largely because it chose plain RandomForest (less aggressive than ET d=8) and used the canonical LR+RF+ensemble grid. B's CV hit@3 0.621 nearly perfectly predicts the test 0.620.",
+    "A_with_skills shows headline-vs-true optimism of -0.051; A_no_skills' headline is on a different (MAP@3) metric and isn't directly comparable; B's hit@3 calibration is near-zero gap."
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "target_column_chosen": "prognosis",
+  "headline_metric": "MAP@3",
+  "headline_value": 0.42772861356932157,
+  "all_metrics": {
+    "lr_cv_mean": 0.42772861356932157,
+    "lr_cv_std": 0.0286454829175462,
+    "hgb_cv_mean": 0.40737463126843665,
+    "hgb_cv_std": 0.020887788751740997,
+    "hgb_grid_results": [
+      {
+        "cfg": {
+          "max_iter": 150,
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 15,
+          "l2_regularization": 1.0
+        },
+        "mean": 0.40737463126843665,
+        "std": 0.020887788751740997
+      },
+      {
+        "cfg": {
+          "max_iter": 100,
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 31,
+          "l2_regularization": 0.0
+        },
+        "mean": 0.3982300884955753,
+        "std": 0.030198192075680787
+      }
+    ],
+    "family_relative_gap": 0.04758620689655164,
+    "averaged": false,
+    "chosen_family": "LR"
+  },
+  "skills_applied": [
+    "skill_tune_when_n_train_supports_it.md"
+  ],
+  "audit": {
+    "family_comparison": {
+      "LR": {
+        "mean": 0.42772861356932157,
+        "std": 0.0286454829175462
+      },
+      "HGB": {
+        "mean": 0.40737463126843665,
+        "std": 0.020887788751740997,
+        "cfg": {
+          "max_iter": 150,
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 15,
+          "l2_regularization": 1.0
+        }
+      },
+      "rel_gap": 0.04758620689655164,
+      "averaged": false
+    }
+  },
+  "interpretation_notes": "11-class prognosis from 64 binary symptoms (n_train=565, n_test=142, no NaNs). LR(multinomial) and HGB(2-config tune) under shared StratifiedKFold-5; chose 'LR' (rel_gap=0.0476, LR=0.4277, HGB=0.4074). MAP@3 with top-3 space-separated labels.",
+  "elapsed_sec": 25.698486804962158
+}
