@@ -116,3 +116,7 @@ Example:
 ## State writing pattern
 
 Always: read state.json → modify → write to state.json.tmp → mv to state.json. Append a thought entry: `{ts, phase: "planning", agent: "automl-planner", message: "..."}`.
+
+
+## Tabular task playbook (learned)
+For tabular ML tasks, the plan SHOULD include: an explicit feature-engineering step (transforms + ratio/interaction features), an eval_protocol using k-fold out-of-fold cross-validation (not a single split) for model selection, and at least one attempt that ENSEMBLES >=2 diverse model families (e.g. gradient boosting + linear/bagging). Prefer these over a single untuned model.
