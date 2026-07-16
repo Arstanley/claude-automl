@@ -38,6 +38,20 @@
     },
     "notes": {"type": ["string", "null"]},
     "failure_note": {"type": ["string", "null"]},
+    "reflection": {
+      "type": ["object", "null"],
+      "description": "Result of the solve→reflect repair pass (Phase 3.5). Gated on val: kept only if no regression.",
+      "properties": {
+        "status": {"type": "string", "enum": ["reflecting", "accepted", "rejected", "not_needed"]},
+        "diagnosis": {"type": "string", "description": "The concrete failure mode found"},
+        "change": {"type": "string", "description": "Minimum edit made to fix it"},
+        "val_before": {"type": ["number", "null"]},
+        "val_after": {"type": ["number", "null"]},
+        "delta": {"type": ["number", "null"]},
+        "kept": {"type": "boolean"}
+      },
+      "additionalProperties": true
+    },
     "eval": {
       "type": ["object", "null"],
       "properties": {

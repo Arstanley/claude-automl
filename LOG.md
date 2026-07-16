@@ -98,6 +98,19 @@ For any experiment, e.g. v7 langid-from-scratch:
 4. **Staged GEPA refinement** (per `NEXT_STEPS.md`): refine per pipeline stage (planning / data / execution / verification) instead of single global Optimizer. Future work.
 5. **AutoML-Agent head-to-head with their exact code.** We compare against their *published numbers* (Table 7 NPS), not against running their code on our infra. A true controlled comparison needs their Azure setup + dataset replication — see `experiments/AutoMLAgent/configs.py` for the wiring we prepped but couldn't run (no Kaggle creds, Azure firewall).
 
+## Harness update: solve→reflect repair phase (Phase 3.5)
+
+Added a gated **solve→reflect** repair step to the harness (`agents/automl-reflector.md`, wired into `SKILL.md` as Phase 3.5 between training and evaluation), ported from the sibling **promptReflect** line (`/sensei-fs-3/users/bni/promptReflect`). After a trainer produces a solution (*solve*), a reflector diagnoses failed/degenerate attempts, writes a revised solution, re-runs on **val only**, and keeps the revision **only if val does not regress**.
+
+Provenance / why it's gated, from promptReflect's held-out results (13 datasets, val-selected, no test-peeking):
+
+| backbone | reflection Δ (recovery) | co-opt Δ (prompt-pair tuning) |
+|---|---|---|
+| Qwen3-235B | +0.70 | +0.111 |
+| gemini-2.5-flash | +0.43 | +0.058 |
+
+Two takeaways that shaped the design: (1) **reflection is the large lever** — its value is *recovering* crashed/silently-failing attempts (directly relevant to cases like v3 langid's silent 0% on Hi-Latn); (2) it carries a real **break/fix tradeoff**, so the val-gate (keep-only-if-no-regression) is mandatory — an ungated reflect step is net-negative. **Co-optimizing** the (solve, reflect) prompt pair is a smaller, noisier follow-on gain that can later layer onto the existing v5/v6 per-edit gating. Note: promptReflect uses a *different* harness/benchmark (Qwen3/gemini on SELA+expansion, not Opus on DSBench/AutoML-Agent tasks) — this is a method transfer, not an apples-to-apples v-round. Not yet A/B'd inside this skill; that's the next experiment (reflect vs no-reflect on a v3/v7 setting).
+
 ## Acknowledgments
 
 This work used:

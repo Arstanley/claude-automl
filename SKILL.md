@@ -117,6 +117,16 @@ Each trainer:
 
 If training needs GPUs and none are local, the trainer is allowed to use the **vast-gpu** or **serverless-modal** skills.
 
+### Phase 3.5: Reflect & repair (solve→reflect)
+
+Trainers produce the *solve*. Before evaluation, spawn an **automl-reflector** subagent for every attempt that **failed** or whose val primary metric is **degenerate / well below target** (0, NaN, ≈ majority-class — the silent-failure case). Batch these up to `MAX_PARALLEL_TRAINERS` at a time; skip healthy attempts entirely.
+
+Each reflector reads the attempt's code + val metrics + errors, diagnoses the concrete failure mode, writes a **revised** solution, re-runs it **on val only**, and **keeps the revision only if val does not regress** — otherwise it reverts. This gate is not optional: reflection has a real break rate (the break/fix tradeoff), so an ungated reflect step is net-negative. It writes `state.attempts[i].reflection` = `{status, diagnosis, val_before, val_after, kept}`.
+
+Why this phase earns its keep: across the promptReflect experiments (Qwen3-235B and gemini-2.5-flash), a gated solve→reflect step is a large **recovery** lever — it rescues crashed/silently-failing attempts (the class of bug like langid scoring 0% on an unseen script) — while the gate holds the break rate down. Empirically the recovery (reflection) is the big effect; jointly **co-optimizing** the trainer (solve) and reflector (reflect) prompts against held-out reward is a smaller, noisier follow-on gain (see `experiments/` and the promptReflect line) and can be layered on later with the existing per-edit gating machinery.
+
+In `checkpointed` mode this is transparent (no user gate); just report which attempts were repaired.
+
 ### Phase 4: Evaluation
 
 Spawn **automl-evaluator** subagent. It loads each completed attempt's model, runs the eval protocol from `state.plan.eval_protocol` (including stratified slices, latency benchmarks, model size checks), and writes per-attempt eval results into `state.attempts[i].eval`.
@@ -161,6 +171,7 @@ The UI shows gate widgets when `status == "pending"`. UI buttons POST to the ser
 - `awaiting_plan_approval` → re-prompt user for Gate 1
 - `data_ready` → re-prompt for Gate 2 or proceed
 - `training_in_progress` → check which attempts are incomplete, respawn trainers
+- `reflect_in_progress` → respawn reflectors for failed/degenerate attempts lacking a `reflection` entry
 - `eval_in_progress` → respawn evaluator
 - `done` → just print the report path
 
